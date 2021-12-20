@@ -9,7 +9,8 @@
 const cors = require('cors');
 const express = require('express');
 const app = express();
-const port = 3000;
+
+
 const mEC7Bearing = require('./ge_modules/mEC7_Bearing');
 
 app.use(cors());
@@ -54,16 +55,40 @@ const products = [
 
   app.get('/EC7_Bearing/calc_EC7_D1', (req, res) => {
     var datetime = new Date().toLocaleString();
-    console.log(`${datetime} recieved request for calc_EC7_D1 (${res.query})`);
+    var s = JSON.stringify(req.query)
+    var ip = req.header('x-forwarded-for') || req.socket.remoteAddress;
+    console.log(`datetime: '${datetime}', func: 'calc_EC7_D1 (${s})', ip:'${ip}'`);
     var r = mEC7Bearing.calc_EC7_D1_data(req.query)
     res.json(r);
   })
   app.get('/EC7_Bearing/calc_EC7_D2', (req, res) => {
     var datetime = new Date().toLocaleString();
-    console.log(`${datetime} recieved request for calc_EC7_D2 (${res.query})`);
+    var s = JSON.stringify(req.query)
+    var ip = req.header('x-forwarded-for') || req.socket.remoteAddress;
+    console.log(`datetime: '${datetime}', func: 'calc_EC7_D2 (${s})', ip:'${ip}'`);
     var r = mEC7Bearing.calc_EC7_D2_data(req.query)
     res.json(r);
   })
-  
 
-  app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+ const port = 3000;
+ const http_port = 80;
+ const https_port = 433;
+
+ // app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+ 
+ // Start http and https servers
+
+  var https = require('https')
+  var http = require('http')
+  
+  // load certificates
+  // const options = {
+  //   key: fs.readFileSync('key.pem'),
+  //   cert: fs.readFileSync('cert.pem')
+  // };
+  // https.createServer(options, app).listen(443)
+  
+  http.createServer(app).listen(http_port, () => console.log(`ge-app http listening on port ${http_port}`))
+  https.createServer(app).listen(https_port, () => console.log(`ge-app https listening on port ${https_port}`))
+  
+  

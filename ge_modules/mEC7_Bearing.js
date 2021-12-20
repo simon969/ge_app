@@ -16,12 +16,12 @@
 //' ==========================================================================================
 
 // export default
+const constPI = 3.14159
 
 class cEC7_DrainedBearingResistanceD2 {
  
         constructor (data) {
-        this._const_PI = 3.14159;
-        this._Htheta_rad = this.const_PI / 2.00;
+        this._Htheta_rad = constPI / 2.00;
         
         if (data != null) {
             this._H = data.H
@@ -151,7 +151,7 @@ class cEC7_DrainedBearingResistanceD2 {
     // ' Calculations for D2
     
     calc_D2_nq()    {
-        this._nq = Math.exp(this._const_PI * Math.tan(this._phi_rad)) * (Math.tan(this._const_PI / 4 + this._phi_rad / 2)) ^ 2;
+        this._nq = Math.exp(constPI * Math.tan(this._phi_rad)) * (Math.tan(constPI / 4 + this._phi_rad / 2)) ^ 2;
         return this._nq;
     }
     
@@ -304,7 +304,6 @@ class cEC7_DrainedBearingResistanceD2 {
 class cEC7_UndrainedBearingResistanceD1 {
  
         constructor (data) {
-        this._const_PI = 3.14159;
         this._Htheta_rad = this.const_PI / 2.00;
         
         if (data != null) {
@@ -419,7 +418,7 @@ class cEC7_UndrainedBearingResistanceD1 {
         
     // Undrained D1 Calculations
     calc_D1_nc()    {
-        this._nc = this._const_PI + 2;
+        this._nc = constPI + 2;
         return this._nc;
     }
     
@@ -434,12 +433,12 @@ class cEC7_UndrainedBearingResistanceD1 {
         this.calc_D1_bc();
         this.calc_D1_sc();
         this.calc_D1_ic();
-        this._q_nc = (this._const_PI + 2) * this._Cu * this._bc * this._Sc * this._Ic;
+        this._q_nc = (constPI + 2) * this._Cu * this._bc * this._Sc * this._Ic;
         return this._q_nc
     }
     
     calc_D1_bc() {
-        this._bc = 1 - 2 * this._alpha_rad / (this._const_PI + 2);
+        this._bc = 1 - 2 * this._alpha_rad / (constPI + 2);
         return this._bc;
     }
     
@@ -629,7 +628,7 @@ static calc_EC7_D1_bc(alpha_rad) {
 
 static calc_EC7_D1_data (data) { 
 
-    var ec7 = new cEC7_UndrainedBearingResistanceD1();
+    var ec7 = new cEC7_UndrainedBearingResistanceD1(data);
 
     ec7.calc_D1();
 
@@ -895,8 +894,10 @@ static calc_EC7_D2_qng(B, L, a, H, v, c, phi_rad, Htheta_rad, alpha_rad, G) {
 static calc_EC7_D2_data (data) { 
 
     var ec7 = new cEC7_DrainedBearingResistanceD2(data);
+    
+    ec7.calc_D2();
 
-    return ec7.calc_D2();
+    return ec7;
 }
 static calc_EC7_D2(B, L, a, H, v, c, phi_rad, Htheta_rad, alpha_rad, q, G) {
 
