@@ -460,6 +460,7 @@ class cEC7_UndrainedBearingResistanceD1 {
     }
     
     }
+    
     module.exports =    
 
     class mEC7_Bearing {
