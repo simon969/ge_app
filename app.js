@@ -87,11 +87,12 @@ const products = [
   // https.createServer(options, app).listen(443)
   // https.createServer(app).listen(https_port, () => console.log(`ge-app https listening on port ${https_port}`))
   
-  console.log(process.env.PORT)
+  // console.log(process.env.PORT)
   
-  var http = require('http')
+  // var http = require('http')
   // app.listen(http_port, () => console.log(`Example app listening on port ${http_port}!`));
-  http.createServer(app).listen(port, () => console.log(`ge-app listening on port ${port}`))
- 
+  // http.createServer(app).listen(port, () => console.log(`ge-app listening on port ${port}`))
+
+  app.listen(port, () => console.log(`ge-app listening on port ${port}!`));
   
   
