@@ -117,36 +117,36 @@ class cEC7_DrainedBearingResistanceD2 {
 
              return dict;
         }
-            // 'Input variables
-            set c (dNewValue) {this.c = dNewValue;}
-            set phi_rad (dNewValue) {this.phi_rad = dNewValue;}
-            set q (dNewValue) {this.q = dNewValue;}
-            set G (dNewValue) {this.G = dNewValue;}
-            set L (dNewValue) {this.L = dNewValue;}
-            set B (dNewValue) {this.B = dNewValue;}
-            set a (dNewValue) {this.a = dNewValue;}
-            set H (dNewValue) {this.H = dNewValue;}
-            set V (dNewValue) {this.V = dNewValue;}
-            set alpha_rad (dNewValue) {this.alpha_rad = dNewValue;}
-            set Htheta_rad (dNewValue) {this.Htheta_rad = dNewValue;}
+            // // 'Input variables
+            // set c (dNewValue) {this.c = dNewValue;}
+            // set phi_rad (dNewValue) {this.phi_rad = dNewValue;}
+            // set q (dNewValue) {this.q = dNewValue;}
+            // set G (dNewValue) {this.G = dNewValue;}
+            // set L (dNewValue) {this.L = dNewValue;}
+            // set B (dNewValue) {this.B = dNewValue;}
+            // set a (dNewValue) {this.a = dNewValue;}
+            // set H (dNewValue) {this.H = dNewValue;}
+            // set V (dNewValue) {this.V = dNewValue;}
+            // set alpha_rad (dNewValue) {this.alpha_rad = dNewValue;}
+            // set Htheta_rad (dNewValue) {this.Htheta_rad = dNewValue;}
             
-            // ' Output Variables
-            get sc() {return this.Sc;}
-            get nc() {return this.nc;}
-            get bc() {return this.bc;}
-            get ic() {return this.Ic;}
-            get sq() {return this.sq;}
-            get Nq() {return this.nq;}
-            get bq() {return this.bq;}
-            get iq() {return this.iq;}
-            get sg() {return this.sg;}
-            get Ng() {return this.ng;}
-            get bg() {return this.bg;}
-            get ig() {return this.ig;}
-            get q_nc() {return this.q_nc;}
-            get q_ng() {return this.q_ng;}
-            get q_nq() {return this.q_nq;}
-            get q_ult() {return this.q_ult}
+            // // ' Output Variables
+            // get sc() {return this.Sc;}
+            // get nc() {return this.nc;}
+            // get bc() {return this.bc;}
+            // get ic() {return this.Ic;}
+            // get sq() {return this.sq;}
+            // get Nq() {return this.nq;}
+            // get bq() {return this.bq;}
+            // get iq() {return this.iq;}
+            // get sg() {return this.sg;}
+            // get Ng() {return this.ng;}
+            // get bg() {return this.bg;}
+            // get ig() {return this.ig;}
+            // get q_nc() {return this.q_nc;}
+            // get q_ng() {return this.q_ng;}
+            // get q_nq() {return this.q_nq;}
+            // get q_ult() {return this.q_ult}
     
     // ' Calculations for D2
     
@@ -385,35 +385,35 @@ class cEC7_UndrainedBearingResistanceD1 {
             return dict;
         }
             // 'Input variables
-            set Cu (dNewValue) {this.cu = dNewValue;}
-            set phi_rad (dNewValue) {this.phi_rad = dNewValue;}
-            set q (dNewValue) {this.q = dNewValue;}
-            set G (dNewValue) {this.G = dNewValue;}
-            set L (dNewValue) {this.L = dNewValue;}
-            set B (dNewValue) {this.B = dNewValue;}
-            set a (dNewValue) {this.a = dNewValue;}
-            set H (dNewValue) {this.H = dNewValue;}
-            set V (dNewValue) {this.V = dNewValue;}
-            set alpha_rad (dNewValue) {this.alpha_rad = dNewValue;}
-            set Htheta_rad (dNewValue) {this.Htheta_rad = dNewValue;}
+            // set Cu (dNewValue) {this.cu = dNewValue;}
+            // set phi_rad (dNewValue) {this.phi_rad = dNewValue;}
+            // set q (dNewValue) {this.q = dNewValue;}
+            // set G (dNewValue) {this.G = dNewValue;}
+            // set L (dNewValue) {this.L = dNewValue;}
+            // set B (dNewValue) {this.B = dNewValue;}
+            // set a (dNewValue) {this.a = dNewValue;}
+            // set H (dNewValue) {this.H = dNewValue;}
+            // set V (dNewValue) {this.V = dNewValue;}
+            // set alpha_rad (dNewValue) {this.alpha_rad = dNewValue;}
+            // set Htheta_rad (dNewValue) {this.Htheta_rad = dNewValue;}
             
-            // ' Output Variables
-            get sc() {return this.Sc;}
-            get nc() {return this.nc;}
-            get bc() {return this.bc;}
-            get ic() {return this.Ic;}
-            get sq() {return this.sq;}
-            get Nq() {return this.nq;}
-            get bq() {return this.bq;}
-            get iq() {return this.iq;}
-            get sg() {return this.sg;}
-            get Ng() {return this.ng;}
-            get bg() {return this.bg;}
-            get ig() {return this.ig;}
-            get q_nc() {return this.q_nc;}
-            get q_ng() {return this.q_ng;}
-            get q_nq() {return this.q_nq;}
-            get q_ult() {return this.q_ult}
+            // // ' Output Variables
+            // get sc() {return this.Sc;}
+            // get nc() {return this.nc;}
+            // get bc() {return this.bc;}
+            // get ic() {return this.Ic;}
+            // get sq() {return this.sq;}
+            // get Nq() {return this.nq;}
+            // get bq() {return this.bq;}
+            // get iq() {return this.iq;}
+            // get sg() {return this.sg;}
+            // get Ng() {return this.ng;}
+            // get bg() {return this.bg;}
+            // get ig() {return this.ig;}
+            // get q_nc() {return this.q_nc;}
+            // get q_ng() {return this.q_ng;}
+            // get q_nq() {return this.q_nq;}
+            // get q_ult() {return this.q_ult}
     
         
     // Undrained D1 Calculations
