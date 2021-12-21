@@ -70,25 +70,28 @@ const products = [
     res.json(r);
   })
 
- const port = 3000;
- const http_port = 80;
- const https_port = 433;
-
+  const port = process.env.PORT || 3000
+// const http_port = 80;
+ 
  // app.listen(port, () => console.log(`Example app listening on port ${port}!`));
  
  // Start http and https servers
 
-  var https = require('https')
-  var http = require('http')
-  
+  //var https = require('https')
+  //const https_port = 433;
   // load certificates
   // const options = {
   //   key: fs.readFileSync('key.pem'),
   //   cert: fs.readFileSync('cert.pem')
   // };
   // https.createServer(options, app).listen(443)
+  // https.createServer(app).listen(https_port, () => console.log(`ge-app https listening on port ${https_port}`))
   
-  http.createServer(app).listen(http_port, () => console.log(`ge-app http listening on port ${http_port}`))
-  https.createServer(app).listen(https_port, () => console.log(`ge-app https listening on port ${https_port}`))
+  console.log(process.env.PORT)
+  
+  var http = require('http')
+  // app.listen(http_port, () => console.log(`Example app listening on port ${http_port}!`));
+  http.createServer(app).listen(port, () => console.log(`ge-app listening on port ${port}`))
+ 
   
   
