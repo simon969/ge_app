@@ -21,20 +21,20 @@ const constPI = 3.14159
 class cEC7_DrainedBearingResistanceD2 {
  
         constructor (data) {
-        this._Htheta_rad = constPI / 2.00;
+        this.Htheta_rad = constPI / 2.00;
         
         if (data != null) {
-            this._H = data.H
-            this._Htheta_rad = data.Htheta_rad
-            this._q = data.q
-            this._B = data.B
-            this._g = data.g
-            this._phi_rad = data.phi_rad
-            this._q = data.q
-            this._c = data.c
-            this._a = data.a
-            this._L = data.L
-            this._alpha_rad = data.alpha_rad
+            this.H = data.H
+            this.Htheta_rad = data.Htheta_rad
+            this.q = data.q
+            this.B = data.B
+            this.g = data.g
+            this.phi_rad = data.phi_rad
+            this.q = data.q
+            this.c = data.c
+            this.a = data.a
+            this.L = data.L
+            this.alpha_rad = data.alpha_rad
         }
 
             
@@ -118,134 +118,134 @@ class cEC7_DrainedBearingResistanceD2 {
              return dict;
         }
             // 'Input variables
-            set c (dNewValue) {this._c = dNewValue;}
-            set phi_rad (dNewValue) {this._phi_rad = dNewValue;}
-            set q (dNewValue) {this._q = dNewValue;}
-            set G (dNewValue) {this._G = dNewValue;}
-            set L (dNewValue) {this._L = dNewValue;}
-            set B (dNewValue) {this._B = dNewValue;}
-            set a (dNewValue) {this._a = dNewValue;}
-            set H (dNewValue) {this._H = dNewValue;}
-            set V (dNewValue) {this._V = dNewValue;}
-            set alpha_rad (dNewValue) {this._alpha_rad = dNewValue;}
-            set Htheta_rad (dNewValue) {this._Htheta_rad = dNewValue;}
+            set c (dNewValue) {this.c = dNewValue;}
+            set phi_rad (dNewValue) {this.phi_rad = dNewValue;}
+            set q (dNewValue) {this.q = dNewValue;}
+            set G (dNewValue) {this.G = dNewValue;}
+            set L (dNewValue) {this.L = dNewValue;}
+            set B (dNewValue) {this.B = dNewValue;}
+            set a (dNewValue) {this.a = dNewValue;}
+            set H (dNewValue) {this.H = dNewValue;}
+            set V (dNewValue) {this.V = dNewValue;}
+            set alpha_rad (dNewValue) {this.alpha_rad = dNewValue;}
+            set Htheta_rad (dNewValue) {this.Htheta_rad = dNewValue;}
             
             // ' Output Variables
-            get sc() {return this._Sc;}
-            get nc() {return this._nc;}
-            get bc() {return this._bc;}
-            get ic() {return this._Ic;}
-            get sq() {return this._sq;}
-            get Nq() {return this._nq;}
-            get bq() {return this._bq;}
-            get iq() {return this._iq;}
-            get sg() {return this._sg;}
-            get Ng() {return this._ng;}
-            get bg() {return this._bg;}
+            get sc() {return this.Sc;}
+            get nc() {return this.nc;}
+            get bc() {return this.bc;}
+            get ic() {return this.Ic;}
+            get sq() {return this.sq;}
+            get Nq() {return this.nq;}
+            get bq() {return this.bq;}
+            get iq() {return this.iq;}
+            get sg() {return this.sg;}
+            get Ng() {return this.ng;}
+            get bg() {return this.bg;}
             get ig() {return this.ig;}
-            get q_nc() {return this._q_nc;}
-            get q_ng() {return this._q_ng;}
-            get q_nq() {return this._q_nq;}
-            get q_ult() {return this._q_ult}
+            get q_nc() {return this.q_nc;}
+            get q_ng() {return this.q_ng;}
+            get q_nq() {return this.q_nq;}
+            get q_ult() {return this.q_ult}
     
     // ' Calculations for D2
     
     calc_D2_nq()    {
-        this._nq = Math.exp(constPI * Math.tan(this._phi_rad)) * (Math.tan(constPI / 4 + this._phi_rad / 2)) ^ 2;
-        return this._nq;
+        this.nq = Math.exp(constPI * Math.tan(this.phi_rad)) * (Math.tan(constPI / 4 + this.phi_rad / 2)) ^ 2;
+        return this.nq;
     }
     
     calc_D2_nc()    {
-        this._nc = (this._nq - 1) / Math.tan(this._phi_rad);
-        return this._nc;
+        this.nc = (this.nq - 1) / Math.tan(this.phi_rad);
+        return this.nc;
     }
     
     calc_D2_ng()    {
-        this._ng = 2 * (this._nq - 1) * Math.tan(this._phi_rad);
-        return this._ng;
+        this.ng = 2 * (this.nq - 1) * Math.tan(this.phi_rad);
+        return this.ng;
     }
     
     calc_D2_bq()    {
-        this._bq = (1 - this._alpha_rad * Math.tan(this._phi_rad)) ^ 2;
-        return this._bq;
+        this.bq = (1 - this.alpha_rad * Math.tan(this.phi_rad)) ^ 2;
+        return this.bq;
     }
     
     calc_D2_bc()    {
-        this._bc = this._bq - (1 - this._bq) / (this._nc * Math.tan(this._phi_rad));
-        return this._bc;
+        this.bc = this.bq - (1 - this.bq) / (this.nc * Math.tan(this.phi_rad));
+        return this.bc;
     }
     
     calc_D2_bg()    {
-        this._bg = (1 - this._alpha_rad * Math.tan(this._phi_rad)) ^ 2;
-        return this._bg;
+        this.bg = (1 - this.alpha_rad * Math.tan(this.phi_rad)) ^ 2;
+        return this.bg;
     }
     
     calc_D2_sq()    {
-        this._sq = 1 + (this._B / this._L) * Math.sin(this._phi_rad);
-        return this._sq;
+        this.sq = 1 + (this.B / this.L) * Math.sin(this.phi_rad);
+        return this.sq;
     }
     
     calc_D2_sg()    {
-        this._sg = 1 - 0.3 * (this._B / this._L);
-        return this._sg;
+        this.sg = 1 - 0.3 * (this.B / this.L);
+        return this.sg;
     }
     
     calc_D2_sc()    {
-        this._Sc = (this._sq * this._nq - 1) / (this._nq - 1);
-        return this._Sc;
+        this.Sc = (this.sq * this.nq - 1) / (this.nq - 1);
+        return this.Sc;
     }
     
     calc_D2_ic()    {
-        if (this._iq > 0 ) {
-        this._Ic = this._iq - (1 - this._iq) / (this._nc * Math.tan(this._phi_rad))
+        if (this.iq > 0 ) {
+        this.Ic = this.iq - (1 - this.iq) / (this.nc * Math.tan(this.phi_rad))
         } else {
-        this._Ic = 1
+        this.Ic = 1
         }
     
-        return this._Ic;
+        return this.Ic;
     }
     
     calc_D2_iq() {
     
-    var H_temp = (this._V + this._a * this._c / Math.tan(this._phi_rad));
+    var H_temp = (this.V + this.a * this.c / Math.tan(this.phi_rad));
     
         if (H_temp = 0) {
-        this._iq = 1;
+        this.iq = 1;
         } else {
-            if (1 - this._H / H_temp > 0) {
-                this._iq = (1 - this._H / H_temp) ^ this._M;
+            if (1 - this.H / H_temp > 0) {
+                this.iq = (1 - this.H / H_temp) ^ this.M;
             } else {
-                this._iq = 0;
+                this.iq = 0;
             }
         }
     
-    return this._iq
+    return this.iq
     }
     
     
     calc_D2_ig()    {
     
-    var H_temp = (this._V + this._a * this._c / Math.tan(this._phi_rad));
+    var H_temp = (this.V + this.a * this.c / Math.tan(this.phi_rad));
     
     if (H_temp == 0) {
-        this._ig = 1;
+        this.ig = 1;
     } else {
-        if (1 - this._H / H_temp > 0) {
-        this._ig = (1 - this._H / H_temp) ^ (this._M + 1);
+        if (1 - this.H / H_temp > 0) {
+        this.ig = (1 - this.H / H_temp) ^ (this.M + 1);
         } else {
-        this._ig = 0;
+        this.ig = 0;
         }
     }
     
-    return this._ig;
+    return this.ig;
     
     }
     
     calc_D2_m(){
-        this._mb = (2 + (this._B / this._L)) / (1 + (this._B / this._L));
-        this._ml = (2 + (this._L / this._B)) / (1 + (this._L / this._B));
-        this._M = this._ml * Math.cos(this._Htheta_rad) ^ 2 + this._mb * Math.sin(this._Htheta_rad) ^ 2;
-        return this._M;
+        this.mb = (2 + (this.B / this.L)) / (1 + (this.B / this.L));
+        this.ml = (2 + (this.L / this.B)) / (1 + (this.L / this.B));
+        this.M = this.ml * Math.cos(this.Htheta_rad) ^ 2 + this.mb * Math.sin(this.Htheta_rad) ^ 2;
+        return this.M;
     }
     
     
@@ -264,8 +264,8 @@ class cEC7_DrainedBearingResistanceD2 {
         this.calc_D2_sc();
         this.calc_D2_ic();
     
-        this._q_nc = this._c * this._nc * this._bc * this._Sc * this._Ic;
-        return this._q_nc;
+        this.q_nc = this.c * this.nc * this.bc * this.Sc * this.Ic;
+        return this.q_nc;
     }
     
     calc_D2_qnq() {
@@ -274,8 +274,8 @@ class cEC7_DrainedBearingResistanceD2 {
         this.calc_D2_sq();
         this.calc_D2_m();
         this.calc_D2_iq();
-        this._q_nq = this._q * this._nq * this._bq * this._sq * this._iq;
-        return this._q_nq;
+        this.q_nq = this.q * this.nq * this.bq * this.sq * this.iq;
+        return this.q_nq;
     }
     
     
@@ -286,16 +286,16 @@ class cEC7_DrainedBearingResistanceD2 {
         this. calc_D2_sg();
         this.calc_D2_m();
         this.calc_D2_ig();
-        this._q_ng = 0.5 * this._G * this._B * this._ng * this._bg * this._sg * this._ig;
-        return this._q_ng;
+        this.q_ng = 0.5 * this.G * this.B * this.ng * this.bg * this.sg * this.ig;
+        return this.q_ng;
     }
     
     calc_D2() {
         this.calc_D2_qng();
         this.calc_D2_qnq();
         this.calc_D2_qnc();
-        this._q_ult = this._q_nc + this._q_nq + this._q_ng
-        return this._q_ult;
+        this.q_ult = this.q_nc + this.q_nq + this.q_ng
+        return this.q_ult;
     }
        
     
@@ -304,19 +304,19 @@ class cEC7_DrainedBearingResistanceD2 {
 class cEC7_UndrainedBearingResistanceD1 {
  
         constructor (data) {
-        this._Htheta_rad = this.const_PI / 2.00;
+        this.Htheta_rad = this.const_PI / 2.00;
         
         if (data != null) {
-            this._H = data.H
-            this._Htheta_rad = data.Htheta_rad
-            this._q = data.q
-            this._B = data.B
-            this._g = data.g
-            this._q = data.q
-            this._Cu = data.Cu
-            this._a = data.a
-            this._L = data.L
-            this._alpha_rad = data.alpha_rad
+            this.H = data.H
+            this.Htheta_rad = data.Htheta_rad
+            this.q = data.q
+            this.B = data.B
+            this.g = data.g
+            this.q = data.q
+            this.Cu = data.Cu
+            this.a = data.a
+            this.L = data.L
+            this.alpha_rad = data.alpha_rad
         }
 
             
@@ -385,47 +385,47 @@ class cEC7_UndrainedBearingResistanceD1 {
             return dict;
         }
             // 'Input variables
-            set Cu (dNewValue) {this._cu = dNewValue;}
-            set phi_rad (dNewValue) {this._phi_rad = dNewValue;}
-            set q (dNewValue) {this._q = dNewValue;}
-            set G (dNewValue) {this._G = dNewValue;}
-            set L (dNewValue) {this._L = dNewValue;}
-            set B (dNewValue) {this._B = dNewValue;}
-            set a (dNewValue) {this._a = dNewValue;}
-            set H (dNewValue) {this._H = dNewValue;}
-            set V (dNewValue) {this._V = dNewValue;}
-            set alpha_rad (dNewValue) {this._alpha_rad = dNewValue;}
-            set Htheta_rad (dNewValue) {this._Htheta_rad = dNewValue;}
+            set Cu (dNewValue) {this.cu = dNewValue;}
+            set phi_rad (dNewValue) {this.phi_rad = dNewValue;}
+            set q (dNewValue) {this.q = dNewValue;}
+            set G (dNewValue) {this.G = dNewValue;}
+            set L (dNewValue) {this.L = dNewValue;}
+            set B (dNewValue) {this.B = dNewValue;}
+            set a (dNewValue) {this.a = dNewValue;}
+            set H (dNewValue) {this.H = dNewValue;}
+            set V (dNewValue) {this.V = dNewValue;}
+            set alpha_rad (dNewValue) {this.alpha_rad = dNewValue;}
+            set Htheta_rad (dNewValue) {this.Htheta_rad = dNewValue;}
             
             // ' Output Variables
-            get sc() {return this._Sc;}
-            get nc() {return this._nc;}
-            get bc() {return this._bc;}
-            get ic() {return this._Ic;}
-            get sq() {return this._sq;}
-            get Nq() {return this._nq;}
-            get bq() {return this._bq;}
-            get iq() {return this._iq;}
-            get sg() {return this._sg;}
-            get Ng() {return this._ng;}
-            get bg() {return this._bg;}
+            get sc() {return this.Sc;}
+            get nc() {return this.nc;}
+            get bc() {return this.bc;}
+            get ic() {return this.Ic;}
+            get sq() {return this.sq;}
+            get Nq() {return this.nq;}
+            get bq() {return this.bq;}
+            get iq() {return this.iq;}
+            get sg() {return this.sg;}
+            get Ng() {return this.ng;}
+            get bg() {return this.bg;}
             get ig() {return this.ig;}
-            get q_nc() {return this._q_nc;}
-            get q_ng() {return this._q_ng;}
-            get q_nq() {return this._q_nq;}
-            get q_ult() {return this._q_ult}
+            get q_nc() {return this.q_nc;}
+            get q_ng() {return this.q_ng;}
+            get q_nq() {return this.q_nq;}
+            get q_ult() {return this.q_ult}
     
         
     // Undrained D1 Calculations
     calc_D1_nc()    {
-        this._nc = constPI + 2;
-        return this._nc;
+        this.nc = constPI + 2;
+        return this.nc;
     }
     
     calc_D1()   {
         this.calc_D1_qnc();
-        this._q_ult = this._q_nc + this._q;
-        return this._q_ult;
+        this.q_ult = this.q_nc + this.q;
+        return this.q_ult;
     }
     
     calc_D1_qnc() {
@@ -433,29 +433,29 @@ class cEC7_UndrainedBearingResistanceD1 {
         this.calc_D1_bc();
         this.calc_D1_sc();
         this.calc_D1_ic();
-        this._q_nc = (constPI + 2) * this._Cu * this._bc * this._Sc * this._Ic;
-        return this._q_nc
+        this.q_nc = (constPI + 2) * this.Cu * this.bc * this.Sc * this.Ic;
+        return this.q_nc
     }
     
     calc_D1_bc() {
-        this._bc = 1 - 2 * this._alpha_rad / (constPI + 2);
-        return this._bc;
+        this.bc = 1 - 2 * this.alpha_rad / (constPI + 2);
+        return this.bc;
     }
     
     calc_D1_sc() {
-        this._Sc = (1 + 0.2 * this._B / this._L);
-        return this._Sc;
+        this.Sc = (1 + 0.2 * this.B / this.L);
+        return this.Sc;
     }
     
     calc_D1_ic() {
         
-        if (this._H < this._a * this._c) {
-            this._Ic = 0.5 * (1 + (1 - this._H / (this._a * this._c)) ^ 0.5);
+        if (this.H < this.a * this.c) {
+            this.Ic = 0.5 * (1 + (1 - this.H / (this.a * this.c)) ^ 0.5);
         } else  {
-            this._Ic = 0.5;
+            this.Ic = 0.5;
         }
         
-        return this._Ic;
+        return this.Ic;
     }
     
     }
