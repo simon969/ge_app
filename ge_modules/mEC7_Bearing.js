@@ -21,24 +21,32 @@ const constPI = 3.14159
 class cEC7_DrainedBearingResistanceD2 {
  
         constructor (data) {
-        this.Htheta_rad = constPI / 2.00;
-        
-        if (data != null) {
-            this.H = data.H
-            this.Htheta_rad = data.Htheta_rad
-            this.q = data.q
-            this.B = data.B
-            this.g = data.g
-            this.phi_rad = data.phi_rad
-            this.q = data.q
-            this.c = data.c
-            this.a = data.a
-            this.L = data.L
-            this.alpha_rad = data.alpha_rad
-        }
+
+            // this.htheta_rad = constPI / 2.00;
+            // this.hload = 0;
+            // this.vload = 0;
+            // this.alpha_rad = 0;
+
+            if (data != undefined || data != null) {
+            
+                if (data.breadth != undefined) this.breadth = parseFloat(data.breadth)
+                if (data.length != undefined) this.length = parseFloat(data.length) 
+                if (data.area != undefined) this.area = parseFloat(data.area)
+                
+                if (data.hload != undefined) this.hload =parseFloat (data.hload)
+                if (data.vload != undefined) this.vload = parseFloat (data.vload) 
+                if (data.htheta_rad  != undefined) this.htheta_rad = parseFloat(data.htheta_rad)
+                if (data.alpha_rad  != undefined) this.alpha_rad = parseFloat(data.alpha_rad)
+            
+                if (data.density  != undefined) this.density = parseFloat(data.density)
+                if (data.phi_rad  != undefined) this.phi_rad = parseFloat(data.phi_rad)
+                if (data.cohesion  != undefined) this.cohesion = parseFloat(data.cohesion)
+                if (data.surcharge  != undefined) this.surcharge = parseFloat(data.surcharge)
+            
+            }
 
             
-    }
+        }
         references () {
             var dict = {
                 id: 0,
@@ -67,18 +75,20 @@ class cEC7_DrainedBearingResistanceD2 {
                description:""
             };
 
-            dict["L"] = {param: "L", description: "Effective length of foundation"}
-            dict["B"] = {param: "B", description: "Effective breadth of foundation"}
-            dict["a"] = {param: "a", description: "Effective bearing area of foundation"}
-
-            dict["H"] = {param: "H", description: "Horizontal load on foundation"}
-            dict["Htheta_rad"] = {param: "Htheta_rad", description: "Angle of horizontal load in plan (from length)"}
+            dict["length"] = {param: "length", description: "Effective length of foundation"}
+            dict["breadth"] = {param: "breadth", description: "Effective breadth of foundation"}
+            dict["area"] = {param: "area", description: "Effective bearing area of foundation"}
             
-            dict["c"] = {param: "c", description: "Drained cohesion"}
+            dict["vload"] = {param: "vload", description: "Vertical load on foundation"}
+            
+            dict["hload"] = {param: "hload", description: "Horizontal load on foundation"}
+            dict["htheta_rad"] = {param: "htheta_rad", description: "Angle of horizontal load in plan (from length)"}
+            
+            dict["cohesion"] = {param: "cohesion", description: "Drained cohesion"}
             dict["phi_rad"] = {param: "phi_rad", description: "Friction"}
                 
-            dict["g"] = {param: "g", description: "Effective density of soil"}
-            dict["q"] = {param: "q", description: "Effective surcharge pressure"}
+            dict["density"] = {param: "density", description: "Effective density of soil"}
+            dict["surcharge"] = {param: "surcharge", description: "Effective surcharge pressure"}
             dict["alpha_rad"] = {param:"alpha_rad", description: "Angle of inclination of base of foundation (0=horizontal)"}
             
             return dict;
@@ -118,22 +128,25 @@ class cEC7_DrainedBearingResistanceD2 {
              return dict;
         }
             // // 'Input variables
-            // set c (dNewValue) {this.c = dNewValue;}
-            // set phi_rad (dNewValue) {this.phi_rad = dNewValue;}
-            // set q (dNewValue) {this.q = dNewValue;}
-            // set G (dNewValue) {this.G = dNewValue;}
-            // set L (dNewValue) {this.L = dNewValue;}
-            // set B (dNewValue) {this.B = dNewValue;}
-            // set a (dNewValue) {this.a = dNewValue;}
-            // set H (dNewValue) {this.H = dNewValue;}
-            // set V (dNewValue) {this.V = dNewValue;}
-            // set alpha_rad (dNewValue) {this.alpha_rad = dNewValue;}
-            // set Htheta_rad (dNewValue) {this.Htheta_rad = dNewValue;}
+            // /**
+            // * @param {string} dNewValue
+            // */
+            // set cohesion (dNewValue) {this.cohesion = parseFloat(dNewValue);}
+            // set phi_rad (dNewValue) {this.phi_rad = parseFloat(dNewValue);}
+            // set surcharge (dNewValue) {this.surcharge = parseFloat(dNewValue);}
+            // set density (dNewValue) {this.density = parseFloat(dNewValue);}
+            // set length (dNewValue) {this.length = parseFloat(dNewValue);}
+            // set breadth (dNewValue) {this.breadth = parseFloat(dNewValue);}
+            // set area (dNewValue) {this.area = parseFloat(dNewValue);}
+            // set hload (dNewValue) {this.hload = parseFloat(dNewValue);}
+            // set vload (dNewValue) {this.vload = parseFloat(dNewValue);}
+            // set alpha_rad (dNewValue) {this.alpha_rad = parseFloat(dNewValue);}
+            // set htheta_rad (dNewValue) {this.htheta_rad = parseFloat(dNewValue);}
             
             // // ' Output Variables
             // get sc() {return this.Sc;}
             // get nc() {return this.nc;}
-            // get bc() {return this.bc;}
+            // get bc() {return this.breadthc;}
             // get ic() {return this.Ic;}
             // get sq() {return this.sq;}
             // get Nq() {return this.nq;}
@@ -143,15 +156,15 @@ class cEC7_DrainedBearingResistanceD2 {
             // get Ng() {return this.ng;}
             // get bg() {return this.bg;}
             // get ig() {return this.ig;}
-            // get q_nc() {return this.q_nc;}
-            // get q_ng() {return this.q_ng;}
-            // get q_nq() {return this.q_nq;}
-            // get q_ult() {return this.q_ult}
+            // get q_nc() {return this.surcharge_nc;}
+            // get q_ng() {return this.surcharge_ng;}
+            // get q_nq() {return this.surcharge_nq;}
+            // get q_ult() {return this.surcharge_ult}
     
     // ' Calculations for D2
     
     calc_D2_nq()    {
-        this.nq = Math.exp(constPI * Math.tan(this.phi_rad)) * (Math.tan(constPI / 4 + this.phi_rad / 2)) ^ 2;
+        this.nq = Math.exp(constPI * Math.tan(this.phi_rad)) * Math.pow(Math.tan(constPI / 4 + this.phi_rad / 2), 2);
         return this.nq;
     }
     
@@ -166,7 +179,7 @@ class cEC7_DrainedBearingResistanceD2 {
     }
     
     calc_D2_bq()    {
-        this.bq = (1 - this.alpha_rad * Math.tan(this.phi_rad)) ^ 2;
+        this.bq = Math.pow((1 - this.alpha_rad * Math.tan(this.phi_rad)), 2);
         return this.bq;
     }
     
@@ -176,44 +189,45 @@ class cEC7_DrainedBearingResistanceD2 {
     }
     
     calc_D2_bg()    {
-        this.bg = (1 - this.alpha_rad * Math.tan(this.phi_rad)) ^ 2;
+        this.bg = Math.pow((1 - this.alpha_rad * Math.tan(this.phi_rad)), 2);
         return this.bg;
     }
     
     calc_D2_sq()    {
-        this.sq = 1 + (this.B / this.L) * Math.sin(this.phi_rad);
+        this.sq = 1 + (this.breadth/ this.length) * Math.sin(this.phi_rad);
         return this.sq;
     }
     
     calc_D2_sg()    {
-        this.sg = 1 - 0.3 * (this.B / this.L);
+        this.sg = 1 - 0.3 * (this.breadth/ this.length);
         return this.sg;
     }
     
     calc_D2_sc()    {
-        this.Sc = (this.sq * this.nq - 1) / (this.nq - 1);
-        return this.Sc;
+        this.sc = (this.sq * this.nq - 1) / (this.nq - 1);
+        return this.sc;
     }
     
     calc_D2_ic()    {
         if (this.iq > 0 ) {
-        this.Ic = this.iq - (1 - this.iq) / (this.nc * Math.tan(this.phi_rad))
+        this.ic = this.iq - (1 - this.iq) / (this.nc * Math.tan(this.phi_rad))
         } else {
-        this.Ic = 1
+        this.ic = 1
         }
     
-        return this.Ic;
+        return this.ic;
     }
     
     calc_D2_iq() {
     
-    var H_temp = (this.V + this.a * this.c / Math.tan(this.phi_rad));
-    
-        if (H_temp = 0) {
+    this.Hmax = (this.vload + this.area * this.cohesion / Math.tan(this.phi_rad));
+   
+        if (this.Hmax == 0) {
         this.iq = 1;
-        } else {
-            if (1 - this.H / H_temp > 0) {
-                this.iq = (1 - this.H / H_temp) ^ this.M;
+        } else { 
+            var test = 1 - this.hload / this.Hmax 
+            if (test > 0) {
+                this.iq = Math.pow(test,this.M);
             } else {
                 this.iq = 0;
             }
@@ -225,13 +239,14 @@ class cEC7_DrainedBearingResistanceD2 {
     
     calc_D2_ig()    {
     
-    var H_temp = (this.V + this.a * this.c / Math.tan(this.phi_rad));
+    this.Hmax = (this.vload + this.area * this.cohesion / Math.tan(this.phi_rad));
     
-    if (H_temp == 0) {
+    if (this.Hmax == 0) {
         this.ig = 1;
     } else {
-        if (1 - this.H / H_temp > 0) {
-        this.ig = (1 - this.H / H_temp) ^ (this.M + 1);
+        var test = 1 - this.hload / this.Hmax 
+        if (test > 0) {
+        this.ig = Math.pow(test, this.M + 1);
         } else {
         this.ig = 0;
         }
@@ -242,9 +257,9 @@ class cEC7_DrainedBearingResistanceD2 {
     }
     
     calc_D2_m(){
-        this.mb = (2 + (this.B / this.L)) / (1 + (this.B / this.L));
-        this.ml = (2 + (this.L / this.B)) / (1 + (this.L / this.B));
-        this.M = this.ml * Math.cos(this.Htheta_rad) ^ 2 + this.mb * Math.sin(this.Htheta_rad) ^ 2;
+        this.mb = (2 + (this.breadth/ this.length)) / (1 + (this.breadth/ this.length));
+        this.ml = (2 + (this.length / this.breadth)) / (1 + (this.length / this.breadth));
+        this.M = this.ml * Math.pow(Math.cos(this.htheta_rad), 2) + this.mb * Math.pow(Math.sin(this.htheta_rad),2);
         return this.M;
     }
     
@@ -264,7 +279,7 @@ class cEC7_DrainedBearingResistanceD2 {
         this.calc_D2_sc();
         this.calc_D2_ic();
     
-        this.q_nc = this.c * this.nc * this.bc * this.Sc * this.Ic;
+        this.q_nc = this.cohesion * this.nc * this.bc * this.sc * this.ic;
         return this.q_nc;
     }
     
@@ -274,7 +289,7 @@ class cEC7_DrainedBearingResistanceD2 {
         this.calc_D2_sq();
         this.calc_D2_m();
         this.calc_D2_iq();
-        this.q_nq = this.q * this.nq * this.bq * this.sq * this.iq;
+        this.q_nq = this.surcharge * this.nq * this.bq * this.sq * this.iq;
         return this.q_nq;
     }
     
@@ -283,10 +298,10 @@ class cEC7_DrainedBearingResistanceD2 {
         this.calc_D2_nq();
         this.calc_D2_ng();
         this.calc_D2_bg();
-        this. calc_D2_sg();
+        this.calc_D2_sg();
         this.calc_D2_m();
         this.calc_D2_ig();
-        this.q_ng = 0.5 * this.G * this.B * this.ng * this.bg * this.sg * this.ig;
+        this.q_ng = 0.5 * this.density * this.breadth* this.ng * this.bg * this.sg * this.ig;
         return this.q_ng;
     }
     
@@ -304,19 +319,19 @@ class cEC7_DrainedBearingResistanceD2 {
 class cEC7_UndrainedBearingResistanceD1 {
  
         constructor (data) {
-        this.Htheta_rad = this.const_PI / 2.00;
-        
+       
         if (data != null) {
-            this.H = data.H
-            this.Htheta_rad = data.Htheta_rad
-            this.q = data.q
-            this.B = data.B
-            this.g = data.g
-            this.q = data.q
-            this.Cu = data.Cu
-            this.a = data.a
-            this.L = data.L
-            this.alpha_rad = data.alpha_rad
+            
+            if (data.breadth != undefined) this.breadth = parseFloat(data.breadth)
+            if (data.length != undefined) this.length = parseFloat(data.length) 
+            if (data.area != undefined) this.area = parseFloat(data.area)
+            
+            if (data.hload != undefined) this.hload = parseFloat(data.hload);
+            if (data.alpha_rad != undefined) this.alpha_rad = parseFloat (data.alpha_rad);
+            
+            if (data.surcharge != undefined) this.surcharge = parseFloat (data.surcharge)
+            if (data.cu != undefined)  this.cu = parseFloat (data.cu)
+           
         }
 
             
@@ -349,16 +364,14 @@ class cEC7_UndrainedBearingResistanceD1 {
                description:""
             };
 
-            dict["L"] = {param: "L", description: "Effective length of foundation"}
-            dict["B"] = {param: "B", description: "Effective breadth of foundation"}
-            dict["a"] = {param: "a", description: "Effective bearing area of foundation"}
+            dict["length"] = {param: "length", description: "Effective length of foundation"}
+            dict["breadth"] = {param: "breadth", description: "Effective breadth of foundation"}
+            dict["area"] = {param: "area", description: "Effective bearing area of foundation"}
 
-            dict["H"] = {param: "H", description: "Horizontal load on foundation"}
-            dict["Htheta_rad"] = {param: "Htheta_rad", description: "Angle of horizontal load in plan (from length)"}
-            
-            dict["Cu"] = {param: "Cu", description: "Undrained cohesion"}
-            dict["g"] = {param: "g", description: "Effective density of soil"}
-            dict["q"] = {param: "q", description: "Effective surcharge pressure"}
+            dict["hload"] = {param: "hload", description: "Horizontal load on foundation"}
+                     
+            dict["cu"] = {param: "cu", description: "Undrained cohesion"}
+            dict["surcharge"] = {param: "surcharge", description: "Effective surcharge pressure"}
             dict["alpha_rad"] = {param:"alpha_rad", description: "Angle of inclination of base of foundation (0=horizontal)"}
             
             return dict;
@@ -385,17 +398,14 @@ class cEC7_UndrainedBearingResistanceD1 {
             return dict;
         }
             // 'Input variables
-            // set Cu (dNewValue) {this.cu = dNewValue;}
-            // set phi_rad (dNewValue) {this.phi_rad = dNewValue;}
-            // set q (dNewValue) {this.q = dNewValue;}
-            // set G (dNewValue) {this.G = dNewValue;}
-            // set L (dNewValue) {this.L = dNewValue;}
-            // set B (dNewValue) {this.B = dNewValue;}
-            // set a (dNewValue) {this.a = dNewValue;}
-            // set H (dNewValue) {this.H = dNewValue;}
-            // set V (dNewValue) {this.V = dNewValue;}
-            // set alpha_rad (dNewValue) {this.alpha_rad = dNewValue;}
-            // set Htheta_rad (dNewValue) {this.Htheta_rad = dNewValue;}
+            set _cu (dNewValue) {this.cu = parseFloat(dNewValue);}
+            set _surcharge (dNewValue) {this.surcharge = parseFloat(dNewValue);}
+            set _density (dNewValue) {this.density = parseFloat(dNewValue);}
+            set _length (dNewValue) {this.length =  parseFloat(dNewValue);}
+            set _breadth (dNewValue) {this.breadth=  parseFloat(dNewValue);}
+            set _area (dNewValue) {this.area = parseFloat(dNewValue);}
+            set _hload (dNewValue) {this.hload =  parseFloat(dNewValue);}
+            set _alpha_rad (dNewValue) {this.alpha_rad = parseFloat(dNewValue);}
             
             // // ' Output Variables
             // get sc() {return this.Sc;}
@@ -410,10 +420,10 @@ class cEC7_UndrainedBearingResistanceD1 {
             // get Ng() {return this.ng;}
             // get bg() {return this.bg;}
             // get ig() {return this.ig;}
-            // get q_nc() {return this.q_nc;}
-            // get q_ng() {return this.q_ng;}
-            // get q_nq() {return this.q_nq;}
-            // get q_ult() {return this.q_ult}
+            // get q_nc() {return this.surcharge_nc;}
+            // get q_ng() {return this.surcharge_ng;}
+            // get q_nq() {return this.surcharge_nq;}
+            // get q_ult() {return this.surcharge_ult}
     
         
     // Undrained D1 Calculations
@@ -424,16 +434,18 @@ class cEC7_UndrainedBearingResistanceD1 {
     
     calc_D1()   {
         this.calc_D1_qnc();
-        this.q_ult = this.q_nc + this.q;
+        this.q_ult = this.q_nc + this.surcharge;
         return this.q_ult;
     }
     
     calc_D1_qnc() {
+        
         this.calc_D1_nc();
         this.calc_D1_bc();
         this.calc_D1_sc();
         this.calc_D1_ic();
-        this.q_nc = (constPI + 2) * this.Cu * this.bc * this.Sc * this.Ic;
+
+        this.q_nc = (constPI + 2) * this.cu * this.bc * this.sc * this.ic;
         return this.q_nc
     }
     
@@ -443,73 +455,26 @@ class cEC7_UndrainedBearingResistanceD1 {
     }
     
     calc_D1_sc() {
-        this.Sc = (1 + 0.2 * this.B / this.L);
-        return this.Sc;
+        this.sc = (1 + 0.2 * this.breadth/ this.length);
+        return this.sc;
     }
     
     calc_D1_ic() {
         
-        if (this.H < this.a * this.c) {
-            this.Ic = 0.5 * (1 + (1 - this.H / (this.a * this.c)) ^ 0.5);
+        if (this.hload < this.area * this.cu) {
+            this.ic = 0.5 * (1 + Math.pow(1 - this.hload / (this.area * this.cu), 0.5));
         } else  {
-            this.Ic = 0.5;
+            this.ic = 0.5;
         }
         
-        return this.Ic;
+        return this.ic;
     }
     
     }
+    module.exports = class mEC7_Bearing {
+
+// "Function for Calculating Bearing Capacity in accordance with EC7 Annex D"
     
-    module.exports =    
-
-    class mEC7_Bearing {
-
-    // "Function for Calculating Bearing Capcity in accordance with EC7 Annex D"
-
-
-    static check() {
-
-        var ec7 = new cEC7_Bearing_Capacity();
-
-        ec7.H = 375;
-        ec7.c = 0.001;
-        ec7.a = 12;
-        ec7.L = 10;
-        ec7.B = 1;
-        ec7.Htheta_rad = 0;
-        ec7.phi_rad = 0.5159;
-        
-        ec7.calc_D2_m;
-        ec7.calc_D2_iq;
-          
-        return ec7.iq;
-    
-    }
-
-static Check_EC7_Bearing() {
-        
-        var ec7 = new cEC7_Bearing_Capacity();
-
-        ec7.c = 0;
-        ec7.phi_rad = 0.5235;
-        ec7.G = 8;
-        ec7.q = 8 * 1.8;
-    
-        ec7.v = 2816.15;
-        ec7.H = 230.4;
-    
-        ec7.B = 3.263;
-        ec7.L = 3.292;
-        ec7.a = 10.75;
-    
-        ec7.calc_D2;
-    
-        console.log (ec7.q_nc, ec7.q_nq, ec7.q_ng, ec7.q_ult);
-        
-        ec7 = Nothing
-}
-
-
 static init_functions (name  = "Geotech EC7 Bearing Resistance") {
 
 // If Len(catName) = 0 Then catName = "Geotech EC7 Bearing Resistance"
@@ -568,31 +533,116 @@ static calc_EC7_D1_nc() {
         return ec7.calc_D1_nc();
 }
 
+// /**
+//  * 
+//  * @param {object} data 
+//  * @returns {number}
+//  */
 
-static calc_EC7_D1_ic(  H, Cu, a) {
+static calc_EC7_D1_ic_data (data) {
+
+        /// Attribute calc_EC7_D1_ic.VB_Description = "calculate inclination of load factor caused by H for EC7 Eq D1"
+        // Attribute calc_EC7_D1_ic.VB_ProcData.VB_Invoke_Func = " \n21"
+        var arr_data = [];
+        var result = [];
+
+        if (Array.isArray (data)) {
+            arr_data = data;
+        } else {
+           // var obj = JSON.parse(data);
+            arr_data = this.split_to_D1_data (data);
+        }
+        var count = arr_data.length;
+        for (var i = 0; i < count; i++) {
+                var ec7 = new cEC7_UndrainedBearingResistanceD1(arr_data[i]);
+                ec7.calc_D1_ic();
+                result[i] = ec7
+        }
+            
+        return result;
+       
+
+}
+
+// /**
+//  * 
+//  * @param {number} area
+//  * @param {number} cu 
+//  * @param {number} hload 
+//  * @returns {number}
+//  */
+static split_to_D1_data (data) {
+        var res = []
+        
+        var a_length = []
+        var a_breadth = []
+        var a_area = []
+        var a_cu = []
+        var a_hload = []
+        var a_alpha_rad = []
+        var a_surcharge = []
+
+        if (data.length !== undefined)  a_length = data.length.split(",");
+        if (data.breadth !== undefined)  a_breadth = data.breadth.split(",");
+        if (data.area !== undefined)  a_area = data.area.split(",");
+        if (data.cu !== undefined) a_cu = data.cu.split(",");
+        if (data.hload !== undefined) a_hload = data.hload.split(",");
+        if (data.alpha_rad !== undefined) a_alpha_rad = data.alpha_rad.split(",");
+        if (data.surcharge !== undefined) a_surcharge = data.surcharge.split(",");
+
+        var count = Math.max(a_length.length,a_breadth.length,a_area.length,
+            a_cu.length,a_hload.length,a_alpha_rad.length, a_surcharge.length);
+        
+        for (var i = 0; i < count; i++) {
+            var obj = new Object();
+            if (a_length.length>0) { if (a_length.length==1) {obj.length = a_length[0]} else {obj.length = a_length[i]}}
+            if (a_breadth.length>0)  { if (a_breadth.length==1) {obj.breadth = a_breadth[0]} else {obj.breadth = a_breadth[i]}}
+            if (a_area.length>0)  { if (a_area.length==1) {obj.area = a_area[0]} else {obj.area = a_area[i]}}
+            if (a_cu.length>0)  { if (a_cu.length==1) {obj.cu = a_cu[0]} else {obj.cu = a_cu[i]}}
+            if (a_hload.length>0)  { if (a_hload.length==1) {obj.hload = a_hload[0]} else {obj.hload = a_hload[i]}}
+            if (a_alpha_rad.length>0)  { if (a_alpha_rad.length==1) {obj.alpha_rad = a_alpha_rad[0]} else {obj.alpha_rad = a_alpha_rad[i]}}
+            if (data.surcharge !== undefined) a_surcharge = data.surcharge.split(",");
+            res.push(obj)
+        }
+
+        return res;
+
+}
+
+static calc_EC7_D1_ic(area, cu, hload) {
 
         // Attribute calc_EC7_D1_ic.VB_Description = "calculate inclination of load factor caused by H for EC7 Eq D1"
         // Attribute calc_EC7_D1_ic.VB_ProcData.VB_Invoke_Func = " \n21"
-
+        
         var ec7 = new cEC7_UndrainedBearingResistanceD1();
-        ec7.H = H
-        ec7.c = Cu
-        ec7.a = a
+        ec7.area = area
+        ec7.cu = cu
+        ec7.hload = hload
         return ec7.calc_D1_ic();
+       
 }
-
-static calc_EC7_D1_sc(B, L) {
+/**
+ * 
+ * @param {number} breadth 
+ * @param {number} length 
+ * @returns {number}
+ */
+static calc_EC7_D1_sc(breadth, length) {
 
         // Attribute calc_EC7_D1_sc.VB_Description = "calculate shape factor sc for EC7 Eq D1"
         // Attribute calc_EC7_D1_sc.VB_ProcData.VB_Invoke_Func = " \n21"
 
         var ec7 = new cEC7_UndrainedBearingResistanceD1();
-        ec7.L = L
-        ec7.B = B
+        ec7.length = length
+        ec7.breadth = breadth
         return ec7.calc_D1_sc();
 }
 
-
+/**
+ * 
+ * @param {number} alpha_rad 
+ * @returns {number}
+ */
 static calc_EC7_D1_bc(alpha_rad) {
         
         // Attribute calc_EC7_D1_bc.VB_Description = "calculate inclined foundation factor for EC7 Eq D1"
@@ -626,47 +676,165 @@ static calc_EC7_D1_bc(alpha_rad) {
 //     }
 // }
 
-static calc_EC7_D1_data (data) { 
+static calc_EC7_D1_data (data, funct = 'calc_D1') { 
+    
+    var a_res = []
+    var a_data = []
 
-    var ec7 = new cEC7_UndrainedBearingResistanceD1(data);
+    if (Array.isArray(data)) {
+        // its already an array
+       a_data = data;
+    } else {
+        // try spliting the data
+        var test = this.split_to_D1_data(data)
+        if (test.length > 0) {
+            a_data = test;
+        } else {
+            // try assigning as single data;
+            a_data[0] = data;
+        }
+    }
 
-    ec7.calc_D1();
+    for(var i = 0; i < a_data.length; i++) {
+            var ec7 = new cEC7_UndrainedBearingResistanceD1(a_data[i]);
+            if (funct=='calc_D1') ec7.calc_D1();
+            if (funct=='calc_D1_ic') ec7.calc_D1_ic();
+            if (funct=='calc_D1_sc') ec7.calc_D1_sc();
+            if (funct=='calc_D1_bc') ec7.calc_D1_bc();
+            if (funct=='calc_D1_qnc') ec7.calc_D1_qnc();
+            if (funct=='calc_D1_nc') ec7.calc_D1_nc();
+            a_res.push (ec7);
+    } 
+    
+    return a_res;
 
-    return ec7;
 }
-
-static calc_EC7_D1 (H, Cu, a, B, L, q, alpha_rad ) {
+/**
+ * 
+ * @param {number} breadth 
+ * @param {number} length 
+ * @param {number} area 
+ * @param {number} cu 
+ * @param {number} surcharge 
+ * @param {number} hload 
+ * @param {number} alpha_rad 
+ * @param {string} [resp] - 'value'
+ * @returns {}
+ */
+static calc_EC7_D1 (breadth, length, area, cu, surcharge, hload, alpha_rad, resp) {
 
         // Attribute calc_EC7_D1.VB_Description = "calculate design undrained bearing resistance for EC7 Eq D1"
         // Attribute calc_EC7_D1.VB_ProcData.VB_Invoke_Func = " \n21"
 
         var ec7 = new cEC7_UndrainedBearingResistanceD1();
-        ec7.H = H
-        ec7.q = q
-        ec7.B = B
-        ec7.c = Cu
-        ec7.a = a
-        ec7.L = L
-        ec7.alpha_rad = alpha_rad
-        return ec7.calc_D1();
-}
+        
+        ec7.breadth = breadth
+        ec7.length = length
+        ec7.area = area
+        
+        ec7.cu = cu
+        ec7.surcharge = surcharge
 
-static calc_EC7_D1_qnc(H, Cu, a, B, L, alpha_rad ) {
+        ec7.hload = hload
+        ec7.alpha_rad = alpha_rad
+        
+        if (resp == 'value') {
+            return ec7.calc_D1();
+        }
+        
+        return ec7;
+
+}
+/**
+ * 
+ * @param {number} breadth 
+ * @param {number} length 
+ * @param {number} area 
+ * @param {number} cu 
+ * @param {number} hload 
+ * @param {number} alpha_rad 
+ * @returns {number}
+ */
+static calc_EC7_D1_qnc(breadth, length, area, cu, hload, alpha_rad ) {
 
         // Attribute calc_EC7_D1_qnc.VB_Description = "calculate design undrained bearing resistance for cohesive component nc_q EC7 Eq D1"
         // Attribute calc_EC7_D1_qnc.VB_ProcData.VB_Invoke_Func = " \n21"
 
         var ec7 = new cEC7_UndrainedBearingResistanceD1();
-        ec7.H = H
-        ec7.c = Cu
-        ec7.B = B
-        ec7.a = a
-        ec7.L = L
+
+        ec7.breadth = breadth
+        ec7.length = length
+        ec7.area = area
+
+        ec7.cu = cu
+        
+        ec7.hload = hload
         ec7.alpha_rad = alpha_rad
+        
         return ec7.calc_D1_qnc();
 }
 
+static split_to_D2_data (data) {
 
+    var res = []
+    
+    var a_length = []
+    var a_breadth = []
+    var a_area = []
+    
+    var a_c = []
+    var a_phi_rad = []
+    
+    var a_hload = []
+    var a_vload = []
+    var a_htheta_rad = [] 
+   
+    var a_alpha_rad = []
+    var a_density = []
+    var a_surcharge = []
+
+
+    if (data.length !== undefined)  a_length = data.length.split(",");
+    if (data.breadth !== undefined)  a_breadth = data.breadth.split(",");
+    if (data.area !== undefined)  a_area = data.area.split(",");
+    if (data.c !== undefined) a_c = data.c.split(",");
+    if (data.phi_rad !== undefined) a_phi_rad = data.phi_rad.split(",");
+    if (data.hload !== undefined) a_hload = data.hload.split(",");
+    if (data.vload !== undefined) a_vload = data.vload.split(",");
+    if (data.htheta_rad !== undefined) a_htheta_rad = data.htheta_rad.split(",");
+    if (data.alpha_rad !== undefined) a_alpha_rad = data.alpha_rad.split(",");
+    if (data.density !== undefined) a_density = data.density.split(",");
+    if (data.surcharge !== undefined) a_surcharge = data.surcharge.split(",");
+
+    var count = Math.max(a_length.length,a_breadth.length,a_area.length,
+                         a_c.length,a_phi_rad.length,
+                         a_hload.length,a_vload.length,a_htheta_rad.length,
+                         a_alpha_rad.length,a_density.length, a_surcharge.length);
+    
+    for (var i = 0; i < count; i++) {
+        var obj = new Object();
+        if (a_length.length>0) { if (a_length.length==1) {obj.length = a_length[0]} else {obj.length = a_length[i]}}
+        if (a_breadth.length>0)  { if (a_breadth.length==1) {obj.breadth = a_breadth[0]} else {obj.breadth = a_breadth[i]}}
+        if (a_area.length>0)  { if (a_area.length==1) {obj.area = a_area[0]} else {obj.area = a_area[i]}}
+        if (a_c.length>0)  { if (a_c.length==1) {obj.c = a_c[0]} else {obj.c = a_c[i]}}
+        if (a_phi_rad.length>0)  { if (a_phi_rad.length==1) {obj.phi_rad = a_phi_rad[0]} else {obj.phi_rad = a_phi_rad[i]}}
+        if (a_hload.length>0)  { if (a_hload.length==1) {obj.hload = a_hload[0]} else {obj.hload = a_hload[i]}}
+        if (a_htheta_rad.length>0)  { if (a_htheta_rad.length==1) {obj.htheta_rad = a_htheta_rad[0]} else {obj.htheta_rad = a_htheta_rad[i]}}
+        if (a_vload.length>0)  { if (a_vload.length==1) {obj.vload = a_vload[0]} else {obj.vload = a_vload[i]}}
+        if (a_alpha_rad.length>0)  { if (a_alpha_rad.length==1) {obj.alpha_rad = a_alpha_rad[0]} else {obj.alpha_rad = a_alpha_rad[i]}}
+        if (a_density.length>0)  { if (a_density.length==1) {obj.density = a_density[0]} else {obj.density = a_density[i]}}
+        if (a_surcharge.length>0)  { if (a_surcharge.length==1) {obj.surcharge = a_surcharge[0]} else {obj.surcharge = a_surcharge[i]}}
+        res.push(obj)
+    }
+
+    return res;
+
+}
+/**
+ * 
+ * @param {number} phi_rad 
+ * @returns {number}
+ */
 
 static calc_EC7_D2_nc(phi_rad ) {
         // Attribute calc_EC7_D2_nc.VB_Description = "calculate nc factor for EC7 Eq D2"
@@ -677,47 +845,78 @@ static calc_EC7_D2_nc(phi_rad ) {
         ec7.calc_D2_nq
         return ec7.calc_D2_nc();
 }
-
-static calc_EC7_D2_ic(v, H, c, a, phi_rad, Htheta_rad, B, L ) {
+/**
+ * 
+ * @param {number} breadth 
+ * @param {number} length 
+ * @param {number} area 
+ * @param {number} cohesion 
+ * @param {number} phi_rad 
+ * @param {number} vload 
+ * @param {number} hload 
+ * @param {number} htheta_rad 
+ * @returns {number}
+ */
+static calc_EC7_D2_ic(breadth, length, area, cohesion,  phi_rad, vload, hload, htheta_rad ) {
         // Attribute calc_EC7_D2_ic.VB_Description = "calculate inclination of load factor ic caused by H for EC7 Eq D2"
         // Attribute calc_EC7_D2_ic.VB_ProcData.VB_Invoke_Func = " \n21"
 
         var ec7 = new cEC7_DrainedBearingResistanceD2();
+          
+        ec7.breadth = breadth
+        ec7.length = length
+        ec7.area = area
+        
         ec7.phi_rad = phi_rad
+        ec7.cohesion = cohesion
+       
+        ec7.vload= vload 
+        ec7.hload = hload
+        ec7.htheta_rad = htheta_rad
+             
         ec7.calc_D2_nq
         ec7.calc_D2_nc
-        
-        ec7.B = B
-        ec7.L = L
-        ec7.Htheta_rad = Htheta_rad
         ec7.calc_D2_m
-        
-        ec7.H = H
-        ec7.c = c
-        ec7.a = a
-        ec7.v = v
         ec7.calc_D2_iq
 
         return ec7.calc_D2_ic();
 
 }
-
-static calc_EC7_D2_sc(phi_rad, alpha_rad, B, L ) {
+/**
+ * 
+ * @param {number} breadth 
+ * @param {number} length 
+ * @param {number} phi_rad 
+ * @param {number} alpha_rad 
+ * @returns {number}
+ */
+static calc_EC7_D2_sc(breadth, length, phi_rad, alpha_rad) {
         
         // Attribute calc_EC7_D2_sc.VB_Description = "calculate shape factor sc for EC7 Eq D2"
         // Attribute calc_EC7_D2_sc.VB_ProcData.VB_Invoke_Func = " \n21"
 
         var ec7 = new cEC7_DrainedBearingResistanceD2();
-        ec7.alpha_rad = alpha_rad;
+        
+        ec7.breadth = breadth;
+        ec7.length = length;
+
         ec7.phi_rad = phi_rad;
-        ec7.B = B;
-        ec7.L = L;
+        
+        ec7.alpha_rad = alpha_rad;
+       
+       
         ec7.calc_D2_nq();
         ec7.calc_D2_sq();
+
         return ec7.calc_D2_sc();
 
 }
-
+/**
+ * 
+ * @param {number} phi_rad 
+ * @param {number} alpha_rad 
+ * @returns {number}
+ */
 static calc_EC7_D2_bc(phi_rad, alpha_rad ) {
 
         // Attribute calc_EC7_D2_bc.VB_Description = "calculate inclined foundation factor bc for EC7 Eq D2"
@@ -731,7 +930,11 @@ static calc_EC7_D2_bc(phi_rad, alpha_rad ) {
         ec7.calc_D2_bq();
         return ec7.calc_D2_bc();
 }
-
+/**
+ * 
+ * @param {number} phi_rad 
+ * @returns {number}
+ */
 static calc_EC7_D2_nq(phi_rad ) {
 
         // Attribute calc_EC7_D2_nq.VB_Description = "calculate nq factor for EC7 Eq D2"
@@ -741,38 +944,65 @@ static calc_EC7_D2_nq(phi_rad ) {
         ec7.phi_rad = phi_rad
         return ec7.calc_D2_nq();
 }
-
-static calc_EC7_D2_iq(B, L, H, v, c, a, phi_rad, Htheta_rad ) {
+/**
+ * 
+ * @param {number} breadth 
+ * @param {number} length 
+ * @param {number} area 
+ * @param {number} cohesion 
+ * @param {number} phi_rad 
+ * @param {number} Hload 
+ * @param {number} vload 
+ * @param {number} htheta_rad 
+ * @returns {number}
+ */
+static calc_EC7_D2_iq(breadth, length, area, cohesion, phi_rad, Hload, vload, htheta_rad ) {
 
         // Attribute calc_EC7_D2_iq.VB_Description = "calculate inclination of load factor iq caused by H for EC7 Eq D2"
         // Attribute calc_EC7_D2_iq.VB_ProcData.VB_Invoke_Func = " \n21"
 
         var ec7 = new cEC7_DrainedBearingResistanceD2();
 
-        ec7.H = H
-        ec7.c = c
-        ec7.a = a
-        ec7.L = L
-        ec7.B = B
-        ec7.v = v
-        ec7.Htheta_rad = Htheta_rad
+        ec7.length = length
+        ec7.breadth = breadth
+        ec7.area = area
+           
+        ec7.cohesion = cohesion 
         ec7.phi_rad = phi_rad
+
+        ec7.hload = Hload
+        ec7.vload = vload
+        ec7.htheta_rad = htheta_rad
+      
         ec7.calc_D2_m
         return ec7.calc_D2_iq();
 }
-
-static calc_EC7_D2_sq(phi_rad, B, L ) {
+/**
+ * 
+ * @param {number} breadth 
+ * @param {number} length 
+ * @param {number} phi_rad 
+ * @returns {number}
+ */
+static calc_EC7_D2_sq( breadth, length, phi_rad) {
 
         // Attribute calc_EC7_D2_sq.VB_Description = "calculate shape factor sq for EC7 Eq D2"
         // Attribute calc_EC7_D2_sq.VB_ProcData.VB_Invoke_Func = " \n21"
 
         var ec7 = new cEC7_DrainedBearingResistanceD2();
+      
+        ec7.breadth = breadth
+        ec7.length = length
         ec7.phi_rad = phi_rad
-        ec7.B = B
-        ec7.L = L
+        
         return ec7.calc_D2_sq();
 }
-
+/**
+ * 
+ * @param {number} phi_rad 
+ * @param {number} alpha_rad 
+ * @returns {number}
+ */
 static calc_EC7_D2_bq(phi_rad, alpha_rad ) {
 
         // Attribute calc_EC7_D2_bq.VB_Description = "calculate inclined foundation factor bq for EC7 Eq D2"
@@ -784,7 +1014,11 @@ static calc_EC7_D2_bq(phi_rad, alpha_rad ) {
         return ec7.calc_D2_bq();
 }
 
-
+/**
+ * 
+ * @param {number} phi_rad 
+ * @returns {number}
+ */
 static calc_EC7_D2_ng(phi_rad ) {
 
         // Attribute calc_EC7_D2_ng.VB_Description = "calculate ng factor for EC7 Eq D2"
@@ -796,34 +1030,62 @@ static calc_EC7_D2_ng(phi_rad ) {
         return ec7.calc_D2_ng();
 
 }
-static calc_EC7_D2_ig(B, L, H, v, c, a, phi_rad, Htheta_rad ) {
+/**
+ * 
+ * @param {number} breadth 
+ * @param {number} length 
+ * @param {number} area 
+ * @param {number} cohesion 
+ * @param {number} phi_rad 
+ * @param {number} hload 
+ * @param {number} vload 
+ * @param {number} htheta_rad 
+ * @returns {number}
+ */
+static calc_EC7_D2_ig(breadth, length, area, cohesion, phi_rad, hload, vload, htheta_rad ) {
 
         // Attribute calc_EC7_D2_ig.VB_Description = "calculate inclination of load factor ig caused by H for EC7 Eq D2"
         // Attribute calc_EC7_D2_ig.VB_ProcData.VB_Invoke_Func = " \n21"
 
         var ec7 = new cEC7_DrainedBearingResistanceD2();
-        ec7.H = H
-        ec7.c = c
-        ec7.a = a
-        ec7.L = L
-        ec7.B = B
-        ec7.v = v
-        ec7.Htheta_rad = Htheta_rad
+       
+        ec7.length = length
+        ec7.breadth = breadth
+        ec7.area = area
+          
+        ec7.cohesion = cohesion
         ec7.phi_rad = phi_rad
+
+        ec7.vload = vload
+        ec7.hload = hload
+        ec7.htheta_rad = htheta_rad
+       
         ec7.calc_D2_m
         return ec7.calc_D2_ig();
 
 }
-static calc_EC7_D2_sg(B, L ) {
+/**
+ * 
+ * @param {number} breadth 
+ * @param {number} length 
+ * @returns {number}
+ */
+static calc_EC7_D2_sg(breadth, length ) {
 
         // Attribute calc_EC7_D2_sg.VB_Description = "calculate shape factor sg for EC7 Eq D2"
         // Attribute calc_EC7_D2_sg.VB_ProcData.VB_Invoke_Func = " \n21"
 
         var ec7 = new cEC7_DrainedBearingResistanceD2();
-        ec7.B = B
-        ec7.L = L
+        ec7.breadth = breadth
+        ec7.length = length
         return ec7.calc_D2_sg();
 }
+/**
+ * 
+ * @param {number} phi_rad 
+ * @param {number} alpha_rad 
+ * @returns {number}
+ */
 static calc_EC7_D2_bg(phi_rad, alpha_rad ) {
 
         // Attribute calc_EC7_D2_bg.VB_Description = "calculate inclined foundation factor bg for EC7 Eq D2"
@@ -835,90 +1097,216 @@ static calc_EC7_D2_bg(phi_rad, alpha_rad ) {
         return ec7.calc_D2_bg();
 
 }
-static calc_EC7_D2_qnc(B, L, H, v, c, a, phi_rad, Htheta_rad, alpha_rad ) {
+/**
+ * 
+ * @param {number} breadth 
+ * @param {number} length 
+ * @param {number} area 
+ * @param {number} cohesion 
+ * @param {number} phi_rad 
+ * @param {number} hload 
+ * @param {number} vload 
+ * @param {number} htheta_rad 
+ * @param {number} alpha_rad 
+ * @returns {number}
+ */
+static calc_EC7_D2_qnc(breadth, length, area, cohesion, phi_rad, hload, vload, htheta_rad, alpha_rad ) {
 
         // Attribute calc_EC7_D2_qnc.VB_Description = "calculate design drained bearing resistance for cohesive component qnc EC7 Eq D2"
         // Attribute calc_EC7_D2_qnc.VB_ProcData.VB_Invoke_Func = " \n21"
 
         var ec7 = new cEC7_DrainedBearingResistanceD2();
-        ec7.c = c
+        ec7.breadth = breadth
+        ec7.length = length
+        ec7.area = area
+        
+        ec7.cohesion = cohesion
         ec7.phi_rad = phi_rad
-        ec7.B = B
-        ec7.L = L
-        ec7.a = a
-        ec7.v = v
-        ec7.H = H
+      
+        ec7.vload = vload
+        ec7.hload = hload
+        ec7.htheta_rad = htheta_rad
+
         ec7.alpha_rad = alpha_rad
-        ec7.Htheta_rad = Htheta_rad
+
         return  ec7.calc_D2_qnc();
 }
-
-static calc_EC7_D2_qnq(B, L, a, H, v, c, phi_rad, Htheta_rad, alpha_rad, q) {
+/**
+ * 
+ * @param {number} breadth 
+ * @param {number} length 
+ * @param {number} area 
+ * @param {number} cohesion 
+ * @param {number} phi_rad 
+ * @param {number} surcharge 
+ * @param {number} hload 
+ * @param {number} vload 
+ * @param {number} htheta_rad 
+ * @param {number} alpha_rad 
+ * @returns {number}
+ */
+static calc_EC7_D2_qnq(breadth, length, area, cohesion, phi_rad, surcharge, hload, vload, htheta_rad, alpha_rad) {
 
         // Attribute calc_EC7_D2_qnq.VB_Description = "calculate design drained bearing resistance for surcharge component qnq EC7 Eq D2"
         // Attribute calc_EC7_D2_qnq.VB_ProcData.VB_Invoke_Func = " \n21"
 
         var ec7 = new cEC7_DrainedBearingResistanceD2();
-        ec7.c = c
+        
+        ec7.breadth = breadth
+        ec7.length = length
+        ec7.area = area
+        
+        ec7.cohesion = cohesion
         ec7.phi_rad = phi_rad
-        ec7.q = q
-        ec7.B = B
-        ec7.L = L
-        ec7.a = a
-        ec7.v = v
-        ec7.H = H
+        ec7.surcharge = surcharge
+        
+        ec7.vload = vload
+        ec7.hload = hload
+        ec7.htheta_rad = htheta_rad
+        
         ec7.alpha_rad = alpha_rad
-        ec7.Htheta_rad = Htheta_rad
+       
+        
         return ec7.calc_D2_qnq();
 
 }
-static calc_EC7_D2_qng(B, L, a, H, v, c, phi_rad, Htheta_rad, alpha_rad, G) {
+/**
+ * 
+ * @param {number} breadth 
+ * @param {number} length 
+ * @param {number} area 
+ * @param {number} cohesion 
+ * @param {number} phi_rad 
+ * @param {number} density 
+ * @param {number} hload 
+ * @param {number} vload 
+ * @param {number} htheta_rad 
+ * @param {number} alpha_rad 
+ * @returns {number}
+ */
+static calc_EC7_D2_qng(breadth, length, area, cohesion, phi_rad, density, hload, vload, htheta_rad, alpha_rad) {
         
         // Attribute calc_EC7_D2_qng.VB_Description = "calculate design drained bearing resistance for width component qng EC7 Eq D2"
         // Attribute calc_EC7_D2_qng.VB_ProcData.VB_Invoke_Func = " \n21"
 
         var ec7 = new cEC7_DrainedBearingResistanceD2();
-        ec7.c = c
+        
+        ec7.breadth = breadth
+        ec7.length = length
+        ec7.area = area
+        
+        ec7.cohesion = cohesion
         ec7.phi_rad = phi_rad
-        ec7.G = G
-        ec7.B = B
-        ec7.L = L
-        ec7.a = a
-        ec7.v = v
-        ec7.H = H
+        ec7.density = density
+        
+        ec7.vload = vload
+        ec7.hload = hload
+        ec7.htheta_rad = htheta_rad
+        
         ec7.alpha_rad = alpha_rad
-        ec7.Htheta_rad = Htheta_rad
+           
         return ec7.calc_D2_qng();
 
 }
-static calc_EC7_D2_data (data) { 
-
-    var ec7 = new cEC7_DrainedBearingResistanceD2(data);
+static calc_EC7_D2_data (data, funct = 'calc_D2') { 
     
-    ec7.calc_D2();
+    var a_res = []
+    var a_data = []
 
-    return ec7;
+    if (Array.isArray(data)) {
+        //its already an array, assume it's  D2 fields
+       a_data = data;
+    } else {
+        // try splitting the data into D2 fields
+        var test = this.split_to_D2_data(data)
+        if (test.count > 0) {
+            a_data = test;
+        } else {
+            // try assigning as single D2 data;
+            a_data[0] = data;
+        }
+    }
+
+   
+    for (var i = 0; i < a_data.length; i++) {
+            
+        var ec7 = new cEC7_DrainedBearingResistanceD2(a_data[i]);
+
+        if (funct=='calc_D2') ec7.calc_D2(); 
+        
+        if (funct=='calc_D2_nc') ec7.calc_D2_nc();
+        if (funct=='calc_D2_ic') ec7.calc_D2_ic();
+        if (funct=='calc_D2_sc') ec7.calc_D2_sc();
+        if (funct=='calc_D2_bc') ec7.calc_D2_bc();
+        if (funct=='calc_D2_qnc') ec7.calc_D2_qnc();
+
+        if (funct=='calc_D2_nq') ec7.calc_D2_nq();
+        if (funct=='calc_D2_iq') ec7.calc_D2_iq();
+        if (funct=='calc_D2_sq') ec7.calc_D2_sq();
+        if (funct=='calc_D2_bq') ec7.calc_D2_bq();
+        if (funct=='calc_D2_qnq') ec7.calc_D2_qnq();
+        
+        if (funct=='calc_D2_ng') ec7.calc_D2_ng();
+        if (funct=='calc_D2_ig') ec7.calc_D2_ig();
+        if (funct=='calc_D2_sg') ec7.calc_D2_sg();
+        if (funct=='calc_D2_bg') ec7.calc_D2_bg();
+        if (funct=='calc_D2_qng') ec7.calc_D2_qng();
+
+        a_res.push (ec7);
+    } 
+    
+    return a_res;
+
 }
-static calc_EC7_D2(B, L, a, H, v, c, phi_rad, Htheta_rad, alpha_rad, q, G) {
+
+
+/**
+ * 
+ * @param {number} breadth 
+ * @param {number} length 
+ * @param {number} area 
+ * @param {number} cohesion 
+ * @param {number} phi_rad 
+ * @param {number} surcharge 
+ * @param {number} density 
+ * @param {number} hload 
+ * @param {number} vload 
+ * @param {number} htheta_rad 
+ * @param {number} alpha_rad 
+ * @param {string} [resp] - value
+ * @returns {}
+ */
+static calc_EC7_D2(breadth, length, area, cohesion, phi_rad, surcharge, density, hload, vload, htheta_rad, alpha_rad, resp = 'value' ) {
 
         // Attribute calc_EC7_D2.VB_Description = "calculate design drained bearing resistance for EC7 Eq D2"
         // Attribute calc_EC7_D2.VB_ProcData.VB_Invoke_Func = " \n21"
 
         var ec7 = new cEC7_DrainedBearingResistanceD2();
 
-        ec7.c = c
+        ec7.breadth = breadth
+        ec7.length = length
+        ec7.area = area
+        
+        ec7.cohesion = cohesion
         ec7.phi_rad = phi_rad
-        ec7.G = G
-        ec7.q = q
-        ec7.B = B
-        ec7.L = L
-        ec7.a = a
-        ec7.v = v
-        ec7.H = H
+        ec7.density = density
+        ec7.surcharge = surcharge
+       
+        ec7.vload = vload
+        ec7.hload = hload
+        ec7.htheta_rad = htheta_rad
+        
         ec7.alpha_rad = alpha_rad
-        ec7.Htheta_rad = Htheta_rad
+        
+        if (resp=='value') {
         return ec7.calc_D2();
+        }
+
+        return ec7;
+
 
 }
 
 }
+
+

@@ -13,5 +13,20 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "pug": "2.0.0-beta11"
-  }
+  },
+  "main": "app.js",
+  "devDependencies": {
+    "jest": "^27.4.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simon969/ge_app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simon969/ge_app/issues"
+  },
+  "homepage": "https://github.com/simon969/ge_app#readme",
+  "description": ""
 }
