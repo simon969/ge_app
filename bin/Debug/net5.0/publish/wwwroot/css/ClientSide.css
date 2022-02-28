@@ -1,0 +1,22 @@
+.ags_list-scrollbar {
+    position: relative;
+    height: 300px;
+    overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+    display: block;
+    }
+.plaxis_list-scrollbar {
+    position: relative;
+    height: 300px;
+    overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+    display: block;
+    }
+.table-success {
+    background-color: darkseagreen;
+}
+.table-fail {
+    background-color:red;
+}

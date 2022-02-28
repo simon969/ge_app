@@ -1,0 +1,85 @@
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\bin\Debug\net5.0\appsettings.json
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\bin\Debug\net5.0\package-lock.json
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\bin\Debug\net5.0\ge_app.exe
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\bin\Debug\net5.0\ge_app.deps.json
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\bin\Debug\net5.0\ge_app.runtimeconfig.json
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\bin\Debug\net5.0\ge_app.runtimeconfig.dev.json
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\bin\Debug\net5.0\ge_app.dll
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\bin\Debug\net5.0\ref\ge_app.dll
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\bin\Debug\net5.0\ge_app.pdb
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\bin\Debug\net5.0\ge_app.Views.dll
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\bin\Debug\net5.0\ge_app.Views.pdb
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.csprojAssemblyReference.cache
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.AssemblyInfoInputs.cache
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.AssemblyInfo.cs
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.csproj.CoreCompileInputs.cache
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.RazorAssemblyInfo.cache
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.RazorAssemblyInfo.cs
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\staticwebassets\ge_app.StaticWebAssets.Manifest.cache
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\staticwebassets\ge_app.StaticWebAssets.xml
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\scopedcss\bundle\ge_app.styles.css
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.TagHelpers.input.cache
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.TagHelpers.output.cache
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.RazorCoreGenerate.cache
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.RazorTargetAssemblyInfo.cache
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.RazorTargetAssemblyInfo.cs
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.Views.pdb
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.dll
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ref\ge_app.dll
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.pdb
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.genruntimeconfig.cache
+C:\Users\thomsonsj\Documents\Visual Studio Code\ge_app\obj\Debug\net5.0\ge_app.csproj.CopyComplete
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\appsettings.json
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\package-lock.json
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\ge_app.exe
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\ge_app.deps.json
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\ge_app.runtimeconfig.json
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\ge_app.runtimeconfig.dev.json
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\ge_app.dll
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\ref\ge_app.dll
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\ge_app.pdb
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\ge_app.Views.dll
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\ge_app.Views.pdb
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.csprojAssemblyReference.cache
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.AssemblyInfoInputs.cache
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.AssemblyInfo.cs
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.csproj.CoreCompileInputs.cache
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.RazorAssemblyInfo.cache
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.RazorAssemblyInfo.cs
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\staticwebassets\ge_app.StaticWebAssets.Manifest.cache
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\staticwebassets\ge_app.StaticWebAssets.xml
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\scopedcss\bundle\ge_app.styles.css
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.TagHelpers.input.cache
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.TagHelpers.output.cache
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.RazorCoreGenerate.cache
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.RazorTargetAssemblyInfo.cache
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.RazorTargetAssemblyInfo.cs
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.Views.pdb
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.dll
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ref\ge_app.dll
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.pdb
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.genruntimeconfig.cache
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\ge_app.csproj.CopyComplete
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\Razor\Views\BearingResistance\Index.cshtml.g.cs
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\Razor\Views\DataProcessing\Index.cshtml.g.cs
+C:\Users\thomsonsj\Documents\apps\ge_app\obj\Debug\net5.0\Razor\Views\PileResistance\Index.cshtml.g.cs

@@ -1,0 +1,25 @@
+﻿@using ge_app.Models
+@model IEnumerable<ge_app.Models.ProcessModel>
+
+@{
+    ViewData["Title"] = "Bearing Resistance Calculations";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bearing Resistance Calculations</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">Bearing Resistance</a>.</p>
+
+    @if (Model != null)  
+   {  
+       foreach (var item in Model)  
+       {  
+       <ul id="items">  
+  
+           <li>  
+               @Html.DisplayFor(modelItem => item.name) 
+               @Html.DisplayFor(modelItem => item.description)   
+           </li>  
+       </ul>  
+       }  
+   }  
+</div>

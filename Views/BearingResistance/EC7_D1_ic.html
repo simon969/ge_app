@@ -1,0 +1,145 @@
+<!DOCTYPE html><html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+<body>
+  <div class="container">
+
+    <h2>Bearing Resistance Calculation</h2>
+    <p>(BS EN 1997-1:2004+A1:2013 Annex D (informative))</p>
+    <h3>Load Inclination Factor ic</h3>
+   <!-- Content here -->
+    <div class="form-group" id="fg_Breadth">
+    <div class="form-group" id="fg_Area">
+      <label for="Area">Area</label>
+      <input type="text" class="form-control" id="Area" value="12" aria-describedby="AreaHelp" placeholder="...foundation area (m2)" >
+      <small id="AreaHelp" class="form-text text-muted">Enter the area of the footing</small>
+    </div>
+    <div class="form-group" id="fg_H">
+      <label for="HLoad">Horizontal Load</label>
+      <input type="text" class="form-control" id="HLoad" placeholder="...horizontal load">
+    </div>
+    <div class="form-group" id="fg_cu">
+      <label for="c">Undrained shear strength</label>
+      <input type="text" class="form-control" id="Cu" placeholder="...undrained shear strength">
+    </div>
+    <div class="form-group" id="fg_chart">
+      <label for="chart_select">Select chart</label>
+      <select class="form-control" id="chart_select">
+        <option value="ic_vs_cu">Load Inclination Factor (ic) vs Cu</option>
+        <option value="ic_vs_hload">Load Inclination Factor (ic) vs Horizontal Load</option>
+        <option value="ic_vs_area">Load Inclination Factor (ic) vs Area</option>
+      </select>
+      <canvas id="mychart"></canvas>
+    </div>
+
+    <div class="form-group" id ="fg_response" >
+      <label for="response">D.3 Undrained Conditions (intermediate results eq D1_ic)</label>
+      <textarea id="response" class = "form-control" name="response" placeholder="...intermediate results undrained inclination factor due to horizontal load" rows="4" cols="50"> </textarea>
+    </div>
+    <button  onclick="calc()" class="btn btn-primary">Calculate</button>
+    <button  onclick="populate('18,18,18,18,18,18,18,18,18','100,200,300,400,500,600,700,800,900','75,75,75,75,75,75,75,75,75')" class="btn btn-primary">Test</button>
+   </div>
+   <script type="text/javascript" src="ClientSide.js"> </script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script type="text/javascript" >
+      const data = {
+        datasets: [{
+          label: 'My First dataset',
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          data: [{x: 0, y: 0}]
+        }]
+      };
+
+      const options = {
+        scales: {
+          x: {
+            title: {
+            display: true,
+            text: 'Load inclination factor (ic)'
+            }
+          },
+          y: {
+            title: {
+            display: true,
+            text: 'Select Y axis data... (Cu or Hload)'
+            }
+          }
+        }
+      }
+
+    
+      const config = {
+        type: 'scatter',
+        data: data,
+        options: options
+      };
+    
+      var ctx = document.getElementById('mychart').getContext("2d");
+      
+      const mychart = new Chart(
+              ctx,
+              config
+      );
+
+ 
+    function calc() { 
+          
+          var Area =  get_value("Area");
+          var HLoad =  get_value("HLoad");
+          var Cu =  get_value("Cu");
+          var url = host + `/EC7_Bearing/calc_EC7_D1_ic?area=${Area}&hload=${HLoad}&cu=${Cu}`
+          
+          httpGetAsync(url, display_result)
+          
+        }
+        
+    function display_result(response) {
+          set_innerHTML ("response",response)
+          var data= JSON.parse(response)
+          renderChart (data)
+    }
+    
+    function renderChart (data) {
+
+      var chart_select = get_value("chart_select");
+      var new_data = []
+      
+      for (let i = 0; i < data.length; i++) {
+            var pt = new Object
+            pt.x = parseFloat(data[i].ic);
+            if (chart_select == 'ic_vs_cu') pt.y = parseFloat(data[i].cu);
+            if (chart_select == 'ic_vs_hload') pt.y = parseFloat(data[i].hload);
+            if (chart_select == 'ic_vs_area') pt.y = parseFloat(data[i].area);
+            new_data.push(pt)
+      }
+      
+      if (chart_select == 'ic_vs_cu') options.scales.y.title.text= "Cu";
+      if (chart_select == 'ic_vs_hload') options.scales.y.title.text = "Hload";
+      if (chart_select == 'ic_vs_area') options.scales.y.title.text = "Area";
+      
+      addData(mychart,new_data,chart_select,0);
+
+    }
+
+    function addData(chart, data, label, datasetIndex) {
+      chart.data.datasets[datasetIndex].label = label;
+      chart.data.datasets[datasetIndex].data = data;
+      chart.update();
+    }
+    
+    function populate(Area, HLoad, Cu) {
+        
+        set_value("Area",Area);
+        set_value("HLoad",HLoad);
+        set_value("Cu",Cu);
+    
+        //reset results
+        
+        set_innerHTML("response","")
+    }
+   
+</script>
+</body>
+</html>
