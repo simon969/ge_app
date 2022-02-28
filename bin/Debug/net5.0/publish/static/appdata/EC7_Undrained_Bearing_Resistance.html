@@ -1,0 +1,208 @@
+<!DOCTYPE html><html>
+    <head>
+      <title>Undrained Bearing Resistance BS EN 1997 Eq D.1</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+<body>
+  <div class="container">
+    <!-- Content here -->
+    <h2>Undrained Bearing Resistance Calculation</h2>
+    <p>(BS EN 1997-1:2004+A1:2013 Annex D (informative))</p>
+    
+    <div class="row">
+   
+    <div class="col-sm-6"> 
+      <div class="form-group" id="fg_B">
+        <label for="Breadth">Breadth</label>
+        <input type="text" class="form-control" id="Breadth" placeholder="...effective foundation breadth (m)" >
+        <!-- <p class="help-block">effective breadth of the footing</p> -->
+      </div>
+      <div class="form-group" id="fg_L">
+        <label for="Length">Length</label>
+        <input type="text" class="form-control" id="Length" placeholder="...effective foundation length (m)">
+        <!-- <p class="help-block">effective length of the footing</p> -->
+      </div>
+    </div>
+    <div class="col-sm-6"> 
+      <div class="form-group" id="fg_a">
+        <label for="a">Area</label>
+        <input type="text" class="form-control" id="Area" placeholder="...effective foundation area">
+        <!-- <p class="help-block">effective area of the footing (Length x Breadth)</p> -->
+      </div>
+      <div class="form-group" id="fg_H">
+        <label for="HLoad">Horizontal Load</label>
+        <input type="text" class="form-control" id="HLoad" placeholder="...horizontal load">
+        <!-- <p class="help-block">applied horizontal load</p> -->
+      </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-6">
+        <div class="form-group" id="fg_cu">
+          <label for="c">Undrained shear strength</label>
+          <input type="text" class="form-control" id="Cu" placeholder="...undrained shear strength">
+          <!-- <p class="help-block">undrained shear strength</p> -->
+        </div>
+        <div class="form-group" id = "fg_alpha_deg">
+          <label for="alpha_deg">Angle of inclination of base of foundation</label>
+          <input type="text" class="form-control" id="alpha_deg" placeholder="...alpha (degrees)">
+          <!-- <p class="help-block">alpha angle in degrees</p> -->
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group" id = "fg_q">
+          <label for="surcharge">Total surcharge pressure</label>
+          <input type="text" class="form-control" id="surcharge" placeholder="...total surcharge pressure at formation level">
+          <!-- <p class="help-block">surcharge at base of footing</p> -->
+        </div>
+    </div>
+    </div>
+
+      <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Factor</th>
+          <th scope="col">q cohesion</th>
+          <th scope="col"></th>
+          <th scope="col">q sucharge</th>
+          <th scope="col"></th>
+          <th scope="col">q density</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Resistance Factor</th>
+          <td>Nc</td>
+          <td id="nc"></td>
+          <td>Nq</td>
+          <td id="nq"></td>
+          <td>Ng</td>
+          <td id="ng"></td>
+        </tr>
+        <tr>
+          <th scope="row">Base inclination Factor</th>
+          <td>bc</td>
+          <td id="bc"></td>
+          <td>bq</td>
+          <td id="bq"></td> 
+          <td>bg</td>
+          <td id="bg"></td> 
+        </tr>
+        <tr>
+          <th scope="row">Shape Factor</th>
+          <td>sc</td>
+          <td id="sc"></td>
+          <td>sq</td>
+          <td id="sq"></td> 
+          <td>sg</td>
+          <td id="sg"></td> 
+        </tr>
+        <tr>
+          <th scope="row">Load inclination Factor</th>
+          <td>ic</td>
+          <td id="ic"></td>
+          <td>iq</td>
+          <td id="iq"></td> 
+          <td>ig</td>
+          <td id="ig"></td> 
+        </tr>
+        <tr>
+          <th scope="row">Resistance</th>
+          <td>q_nc</td>
+          <td id="q_nc"></td>
+          <td>q_nq</td>
+          <td id="q_nq"></td> 
+          <td>q_ng</td>
+          <td id="q_ng"></td> 
+        </tr>
+      </tbody>
+    </table>
+    <div class="form-group" id ="fg_result" >
+      <label for="result">D.3 Undrained Conditions (eq D.1)</label>
+      <input type="text" class="form-control" id="result" placeholder="...result undrained resistance">
+    </div>
+    <div class="form-group" id ="fg_response" >
+      <label for="response">D.3 Undrained Conditions (intermediate results eq D.1)</label>
+      <textarea id="response" class = "form-control" name="response" placeholder="...intermediate results undrained resistance" rows="4" cols="50"> </textarea>
+    </div>
+    <button  onclick="calc()" class="btn btn-primary">Calculate</button>
+    <button  onclick="populate(3,6,18,0,75,0,10,0)" class="btn btn-primary">Test</button>
+    
+  </div>
+<script type="text/javascript" src="js/ClientSide.js"> </script>
+<script type="text/javascript" >
+    function calc() { 
+          //var host = "https://ge-app.azurewebsites.net/api";
+          // var host = "http://localhost:3000/api";
+          var B =  get_value("Breadth");
+          var L = get_value("Length");
+          var a =  get_value("Area");
+          var H =  get_value("HLoad");
+          var Cu =  get_value("Cu");
+          var alpha_rad =  radians(get_value("alpha_deg"));
+          var q =  get_value("surcharge");
+          var url = host + `/EC7_Bearing/calc_EC7_D1?breadth=${B}&length=${L}&area=${a}&hload=${H}&cu=${Cu}&alpha_rad=${alpha_rad}&surcharge=${q}`;
+          console.log(url)
+          httpGetAsync(url, display_result)
+      }
+
+      function display_result(response) {
+          set_innerHTML ("response",response)
+          var resps = JSON.parse(response);
+          var resp = resps[0];
+          set_innerHTML ("nc", resp["nc"])
+          set_innerHTML ("nq", resp["nq"])
+          set_innerHTML ("ng", resp["ng"])
+          set_innerHTML ("bc", resp["bc"])
+          set_innerHTML ("bq", resp["bq"])
+          set_innerHTML ("bg", resp["bg"])
+          set_innerHTML ("sc", resp["sc"])
+          set_innerHTML ("sq", resp["sq"])
+          set_innerHTML ("sg", resp["sg"])
+          set_innerHTML ("ic", resp["ic"])
+          set_innerHTML ("iq", resp["iq"])
+          set_innerHTML ("ig", resp["ig"])
+          set_innerHTML ("q_nc", resp["q_nc"])
+          set_innerHTML ("q_ng", resp["q_ng"])
+          set_innerHTML ("q_nq", resp["q_nq"])
+          set_value ("result",resp["q_ult"])
+      }
+    
+    function populate(B, L, a, H, cu, alpha_deg, q) {
+        
+        set_value("Breadth",B);
+        set_value("Length",L);
+        set_value("Area",a);
+        set_value("HLoad",H);
+        set_value("Cu",cu);
+        set_value("alpha_deg", alpha_deg);
+        set_value("surcharge", q);
+           
+        
+        //reset results 
+        set_value("result", "");
+        set_innerHTML("response","")
+        
+        set_innerHTML ("nc", "")
+        set_innerHTML ("nq", "")
+        set_innerHTML ("ng", "")
+        set_innerHTML ("bc", "")
+        set_innerHTML ("bq", "")
+        set_innerHTML ("bg", "")
+        set_innerHTML ("sc", "")
+        set_innerHTML ("sq", "")
+        set_innerHTML ("sg", "")
+        set_innerHTML ("ic", "")
+        set_innerHTML ("iq", "")
+        set_innerHTML ("ig", "")
+        set_innerHTML ("q_nc", "")
+        set_innerHTML ("q_ng", "")
+        set_innerHTML ("q_nq", "")
+       
+    }
+   
+    
+</script>
+</body>
+
+</html>

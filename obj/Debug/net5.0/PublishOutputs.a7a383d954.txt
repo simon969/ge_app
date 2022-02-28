@@ -35,10 +35,10 @@ C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\publish\wwwroot\lib\jq
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\publish\wwwroot\lib\jquery\dist\jquery.min.js
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\publish\wwwroot\lib\jquery\dist\jquery.min.map
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\publish\wwwroot\lib\jquery\LICENSE.txt
-C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\publish\appdata\ProcessModelData.json
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\publish\appsettings.Development.json
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\publish\appsettings.json
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\publish\package-lock.json
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\publish\static\appdata\ProcessModelData.json
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\publish\ge_app.dll
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\publish\ge_app.deps.json
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\net5.0\publish\ge_app.runtimeconfig.json

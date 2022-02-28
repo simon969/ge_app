@@ -1,0 +1,202 @@
+<!DOCTYPE html><html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+<body>
+  <div class="container">
+
+    <h2>Bearing Resistance Calculations (BS EN 1997-1:2004+A1:2013 Annex D (informative))</h2>
+    <input type="text" class="form-control" id="condition" readonly="true" value="Drained">
+    <button  onclick="toggle_condition()" class="btn btn-primary">condition</button>
+  <!-- Content here -->
+    <div class="form-group" id="fg_B">
+      <label for="B">Breadth</label>
+      <input type="text" class="form-control" id="B" value="12" aria-describedby="BreadthHelp" placeholder="...foundation breadth (m)" >
+      <small id="BreadthHelp" class="form-text text-muted">Enter the breadth of the footing</small>
+    </div>
+    <div class="form-group" id="fg_L">
+      <label for="L">Length</label>
+      <input type="text" class="form-control" id="L" placeholder="...foundation length (m)">
+    </div>
+    <div class="form-group" id="fg_a">
+      <label for="a">Alpha</label>
+      <input type="text" class="form-control" id="a" placeholder="...alpha">
+    </div>
+    <div class="form-group" id="fg_H">
+      <label for="H">Horizontal Load</label>
+      <input type="text" class="form-control" id="H" placeholder="...horizontal load">
+    </div>
+    <div class="form-group" id="fg_V">
+      <label for="V">Vertical Load</label>
+      <input type="text" class="form-control" id="V" placeholder="...vertical load">
+    </div>
+    <div class="form-group" id="fg_c">
+      <label for="c">Cohesion</label>
+      <input type="text" class="form-control" id="c" placeholder="...cohesion">
+    </div>
+    <div class="form-group" id="fg_cu">
+      <label for="c">Undrained shear strength</label>
+      <input type="text" class="form-control" id="Cu" placeholder="...undrained shear strength">
+    </div>
+    <div class="form-group" id="fg_phi_deg">
+      <label for="phi_deg">Friction angle</label>
+      <input type="text" class="form-control" id="phi_deg" placeholder="...phi (in degrees)">
+    </div>
+    <div class="form-group" id ="fg_Htheta_deg">
+      <label for="Htheta_deg">Angle of horizontal load in plan</label>
+      <input type="text" class="form-control" id="Htheta_deg" placeholder="...htheta (in degrees)">
+    </div>
+    <div class="form-group" id = "fg_alpha_deg">
+      <label for="alpha_deg">Angle of inclination of base of foundation</label>
+      <input type="text" class="form-control" id="alpha_deg" placeholder="...alpha (degrees)">
+    </div>
+    <div class="form-group" id = "fg_q">
+      <label for="q">Effective pressure</label>
+      <input type="text" class="form-control" id="q" placeholder="...effective pressure at formation level">
+    </div>
+    <div class="form-group" id ="fg_g" >
+      <label for="g">Effective density of soil</label>
+      <input type="text" class="form-control" id="g" placeholder="...effective density of soil">
+    </div>
+    <div class="form-group" id ="fg_result_D1" >
+      <label for="result_D1">D.3 Undrained Conditions (eq D.1)</label>
+      <input type="text" class="form-control" id="result_D1" placeholder="...result undrained resistance">
+    </div>
+    <div class="form-group" id ="fg_result_D2" >
+    <label for="result_D2">D.4 Drained Conditions (eq D.2)</label>
+    <input type="text" class="form-control" id="result_D2" placeholder="...result drained resistance">
+    </div>
+    <button  onclick="calc()" class="btn btn-primary">Calculate</button>
+    <button  onclick="populate(3,6,0,0,1000,10,28,0,0,20,20,0)" class="btn btn-primary">Test</button>
+    
+  </div>
+<script type="text/javascript" src="js/ClientSide.js"> </script>
+<script type="text/javascript" >
+    function calc() { 
+        var host = "//localhost:";
+        var condition = get_value("condition");
+        
+        if (condition == "Drained") {
+          var B =  get_value("B");
+          var L = get_value("L");
+          var a =  get_value("a");
+          var H =  get_value("H");
+          var V =  get_value("V");
+          var c = get_value("c");
+          var phi_rad =  radians(get_value("phi_deg"));
+          var Htheta_rad =  radians(get_value("Htheta_deg"));
+          var alpha_rad =  radians(get_value("alpha_deg"));
+          var q =  get_value("q");
+          var G =  get_value("G");
+          var url = host + '\\EC7_Bearing\\calc_EC7_D2?B=${B},L=${L},a=${a},H=${H},V=${V},c=${c},phi_rad=${phi_rad},Htheta_rad=${Htheta_rad},alpha_rad=${alpha_rad},q=${q},G=${G}'
+          
+          httpGetAsync(url, display_result_D2)
+          
+          // var res = mEC7_Bearing.calc_EC7_D2(B, L, a, H, V, c, phi_rad, Htheta_rad, alpha_rad, q, G);
+          // set_value("result_D2",res);
+        }
+        
+        if (condition == "Undrained") {
+        
+          var B =  get_value("B");
+          var L = get_value("L");
+          var a =  get_value("a");
+          var H =  get_value("H");
+          var Cu =  get_value("Cu");
+          var alpha_rad =  radians(get_value("alpha_deg"));
+          var q =  get_value("q");
+          var url = host + '\\EC7_Bearing\\calc_EC7_D1?B=${B},L=${L},a=${a},H=${H},Cu=${Cu},alpha_rad=${alpha_rad},q=${q}'
+          
+          httpGetAsync(url, display_result_D1)
+          // var res = mEC7_Bearing.calc_EC7_D1(H, Cu, a, B, L, q, alpha_rad);
+          set_value("result_D1",res);
+        }
+
+    }
+    function display_result_D2(response) {
+        document.getElementById("result_D2").innerHTML = reponse.Result;
+    }
+    function display_result_D1(response) {
+        document.getElementById("result_D1").innerHTML = reponse.Result;
+    }
+    function populate(B, L, a, H, V, c, phi_deg, Htheta_deg, alpha_deg, q, G, result) {
+        set_value("B",B);
+        set_value("L",L);
+        set_value("a",a);
+        set_value("H",H);
+        set_value("V",V);
+        set_value("c",c);
+        set_value("phi_deg", phi_deg);
+        set_value("Htheta_deg", Htheta_deg);
+        set_value("alpha_deg", alpha_deg);
+        set_value("q", q);
+        set_value("G", G);
+        set_value("result", result);
+    }
+    function radians(deg) {
+      return deg * Math.PI / 180.0 
+    }
+
+    function set_hidden(id, value) {
+      var e = document.getElementById(id);
+      if (e != null) {
+        e.setAttribute('hidden', value);
+      }
+    }
+    
+    function set_value( id, value) {
+      var e = document.getElementById(id);
+      if (e != null) {
+        e.setAttribute('value', value);
+        e.value = value;
+      }
+    }
+    function get_value(id) {
+      var e = document.getElementById(id);
+      return e.value;
+    }
+    function toggle_condition() {
+      var condition = get_value("condition");
+      var new_condition = "";
+      if (condition == "Drained") {new_condition = "Undrained"}
+      if (condition == "Undrained") {new_condition = "Drained"}
+      set_value("condition", new_condition);
+
+      if (new_condition == "Drained") {
+        set_hidden("fg_result_D1","true")
+        set_hidden("fg_result_D2","false")
+        set_hidden("fg_Cu", "true");
+        set_hidden("fg_B", "false");
+        set_hidden("fg_L", "false");
+        set_hidden("fg_a", "false");
+        set_hidden("fg_H", "false");
+        set_hidden("fg_V", "false");
+        set_hidden("fg_c", "false");
+        set_hidden("fg_phi_deg", "false");
+        set_hidden("fg_Htheta_deg", "false");
+        set_hidden("fg_alpha_deg", "false");
+        set_hidden("fg_q", "false");
+        set_hidden("fg_G", "false");
+      }
+
+      if (new_condition == "Undrained") {
+        set_hidden("fg_result_D1","false")
+        set_hidden("fg_result_D2","true")
+        set_hidden("fg_Cu", "false");
+        set_hidden("fg_B", "false");
+        set_hidden("fg_L", "false");
+        set_hidden("fg_a", "false");
+        set_hidden("fg_H", "false");
+        set_hidden("fg_V", "true");
+        set_hidden("fg_c", "true");
+        set_hidden("fg_phi_deg", "true");
+        set_hidden("fg_Htheta_deg", "true");
+        set_hidden("fg_alpha_deg", "true");
+        set_hidden("fg_q", "false");
+        set_hidden("fg_G", "true");
+      }
+    }
+</script>
+</body>
+
+</html>

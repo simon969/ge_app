@@ -43,19 +43,21 @@ namespace ge_app
             }
 
             app.UseHttpsRedirection();
+          
             app.UseStaticFiles();
-            app.UseStaticFiles(new StaticFileOptions
+            // app.UseStaticFiles(new StaticFileOptions
+            //     {
+            //         FileProvider = new PhysicalFileProvider(
+            //             Path.Combine(env.ContentRootPath, "appdata")),
+            //         RequestPath = "/appdata"
+            //     });
+             app.UseStaticFiles(new StaticFileOptions
                 {
                     FileProvider = new PhysicalFileProvider(
                         Path.Combine(env.ContentRootPath, "static")),
                     RequestPath = "/static"
                 });
-            app.UseStaticFiles(new StaticFileOptions
-                {
-                    FileProvider = new PhysicalFileProvider(
-                        Path.Combine(env.ContentRootPath, "appdata")),
-                    RequestPath = "/appdata"
-                });
+
 
             app.UseRouting();
 
