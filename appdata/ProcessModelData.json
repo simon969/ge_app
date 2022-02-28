@@ -1,0 +1,39 @@
+[
+    {"name":"EC7 Bearing Resistance",
+        "description":"",
+        "html_page":"EC7_Bearing_Resistance.html",
+        "version":"0.0.0.1",
+        "comments":"",
+        "release_date":"2022-02-28",
+        "status":"final",
+        "controllers":"BearingResistance"},
+    
+     {"name":"Chart and Table EC7 Design Resistance D1 vs Influence Factor Ic",
+        "description":"",
+        "html_page":"EC7_D1_ic.html",
+        "version":"0.0.0.1",
+        "comments":"",
+        "release_date":"2022-02-28",
+        "status":"final",
+        "controllers":"BearingResistance"},
+    
+    {"name":"EC7 Drained Bearing Resistance",
+        "description":"",
+        "html_page":"EC7_Drained_Bearing_Resistance.html",
+        "version":"0.0.0.1",
+        "comments":"",
+        "release_date":"2022-02-28",
+        "status":"final",
+        "controllers":"BearingResistance"},
+    
+    {"name":"EC7 Undrained Bearing Resistance",
+        "description":"",
+        "html_page":"EC7_Undrained_Bearing_Resistance.html",
+        "version":"0.0.0.1",
+        "comments":"",
+        "release_date":"2022-02-28",
+        "status":"final",
+        "controllers":"BearingResistance"}
+    
+
+]
