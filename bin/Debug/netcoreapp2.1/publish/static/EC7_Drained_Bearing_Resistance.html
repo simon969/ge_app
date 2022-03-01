@@ -1,0 +1,239 @@
+<!DOCTYPE html><html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+<body>
+  <div class="container">
+ <!-- Content here -->
+  <h2>Drained Bearing Resistance Calculation</h2>
+  <p>(BS EN 1997-1:2004+A1:2013 Annex D (informative))</p>
+  
+  <div class="row">
+    <div class="col-sm-6"> 
+      <div class="form-group" id="fg_Breadth">
+        <label for="Breadth">Breadth</label>
+        <input type="text" class="form-control" id="Breadth" placeholder="...foundation breadth (m)" >
+        <!-- <p class="help-block">effective breadth of the footing</p> -->
+      </div>
+      <div class="form-group" id="fg_Length">
+        <label for="Length">Length</label>
+        <input type="text" class="form-control" id="Length" placeholder="...foundation length (m)">
+        <!-- <p class="help-block">effective length of the footing</p> -->
+      </div>
+    </div>
+    <div class="col-sm-6"> 
+      <div class="form-group" id="fg_effArea">
+        <label for="Area">Area</label>
+        <input type="text" class="form-control" id="Area" placeholder="...foundation area">
+        <!-- <p class="help-block">effective area of the footing (Length x Breadth)</p> -->
+      </div>
+      <div class="form-group" id="fg_HLoad">
+        <label for="HLoad">Horizontal Load</label>
+        <input type="text" class="form-control" id="HLoad" placeholder="...horizontal load">
+        <!-- <p class="help-block">applied horizontal load</p> -->
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-6">   
+        <div class="form-group" id="fg_VLoad">
+          <label for="VLoad">Vertical Load</label>
+          <input type="text" class="form-control" id="VLoad" placeholder="...vertical load">
+          <!-- <p class="help-block">applied vertical loading</p> -->
+        </div>
+        <div class="form-group" id="fg_cohesion">
+          <label for="cohesion">Cohesion</label>
+          <input type="text" class="form-control" id="cohesion" placeholder="...cohesion">
+          <!-- <p class="help-block">surcharge at base of footing</p> -->
+        </div>
+      </div>
+      <div class="col-sm-6"> 
+        <div class="form-group" id ="fg_Htheta_deg">
+          <label for="Htheta_deg">Angle of horizontal load in plan</label>
+          <input type="text" class="form-control" id="Htheta_deg" placeholder="...htheta (in degrees)">
+          <!-- <p class="help-block">angle of horizontal load in plan</p> -->
+        </div>
+        <div class="form-group" id="fg_phi_deg">
+          <label for="phi_deg">Friction angle</label>
+          <input type="text" class="form-control" id="phi_deg" placeholder="...phi (in degrees)">
+          <!-- <p class="help-block">friction angle of bearing material</p> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6"> 
+        <div class="form-group" id = "fg_alpha_deg">
+          <label for="alpha_deg">Angle of inclination of base of foundation</label>
+          <input type="text" class="form-control" id="alpha_deg" placeholder="...alpha (degrees)">
+          <!-- <p class="help-block">alpha angle in degrees</p> -->
+        </div>
+        <div class="form-group" id = "fg_surcharge">
+          <label for="surcharge">Effective pressure</label>
+          <input type="text" class="form-control" id="surcharge" placeholder="...effective pressure at formation level">
+          <!-- <p class="help-block">surcharge at base of footing</p> -->
+        </div>
+      </div>
+      <div class="col-sm-6"> 
+        <div class="form-group" id ="fg_density" >
+          <label for="density">Effective density of soil</label>
+          <input type="text" class="form-control" id="density" placeholder="...effective density of soil">
+          <!-- <p class="help-block">density of bearing soil</p> -->
+        </div>
+      </div>
+    </div>
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Factor</th>
+          <th scope="col">q cohesion</th>
+          <th scope="col"></th>
+          <th scope="col">q sucharge</th>
+          <th scope="col"></th>
+          <th scope="col">q density</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Resistance Factor</th>
+          <td>Nc</td>
+          <td id="nc"></td>
+          <td>Nq</td>
+          <td id="nq"></td>
+          <td>Ng</td>
+          <td id="ng"></td>
+        </tr>
+        <tr>
+          <th scope="row">Base inclination Factor</th>
+          <td>bc</td>
+          <td id="bc"></td>
+          <td>bq</td>
+          <td id="bq"></td> 
+          <td>bg</td>
+          <td id="bg"></td> 
+        </tr>
+        <tr>
+          <th scope="row">Shape Factor</th>
+          <td>sc</td>
+          <td id="sc"></td>
+          <td>sq</td>
+          <td id="sq"></td> 
+          <td>sg</td>
+          <td id="sg"></td> 
+        </tr>
+        <tr>
+          <th scope="row">Load inclination Factor</th>
+          <td>ic</td>
+          <td id="ic"></td>
+          <td>iq</td>
+          <td id="iq"></td> 
+          <td>ig</td>
+          <td id="ig"></td> 
+        </tr>
+        <tr>
+          <th scope="row">Resistance</th>
+          <td>q_nc</td>
+          <td id="q_nc"></td>
+          <td>q_nq</td>
+          <td id="q_nq"></td> 
+          <td>q_ng</td>
+          <td id="q_ng"></td> 
+        </tr>
+      </tbody>
+    </table>
+    <div class="form-group" id ="fg_result" >
+    <label for="result">D.4 Drained Conditions (eq D.2)</label>
+    <input type="text" class="form-control" id="result" placeholder="...result drained resistance">
+    </div>
+    <div class="form-group" id ="fg_response" >
+      <label for="response">D.4 Drained Conditions (intermediate results eq D.2)</label>
+      <textarea id="response" class = "form-control" name="response" placeholder="...intermediate results drained resistance" rows="4" cols="50"> </textarea>
+    </div>
+    <button  onclick="calc()" class="btn btn-primary">Calculate</button>
+    <button  onclick="populate(3,6,18,10,28,30,20,100,50,90,0)" class="btn btn-primary">Test</button>
+    
+  </div>
+  <script type="text/javascript" src="js/ClientSide.js"> </script>
+<script type="text/javascript" >
+    function calc() { 
+          // var host = "https://ge-app.azurewebsites.net/api";
+          // var host = "http://localhost:3000/api";
+          var Breadth =  get_value("Breadth");
+          var Length = get_value("Length");
+          var Area =  get_value("Area");
+          var HLoad =  get_value("HLoad");
+          var VLoad =  get_value("VLoad");
+          var cohesion = get_value("cohesion");
+          var phi_rad =  radians(get_value("phi_deg"));
+          var Htheta_rad =  radians(get_value("Htheta_deg"));
+          var alpha_rad =  radians(get_value("alpha_deg"));
+          var surcharge =  get_value("surcharge");
+          var density =  get_value("density");
+          var url = host + `/EC7_Bearing/calc_EC7_D2?breadth=${Breadth}&length=${Length}&area=${Area}&hload=${HLoad}&vload=${VLoad}&cohesion=${cohesion}&phi_rad=${phi_rad}&htheta_rad=${Htheta_rad}&alpha_rad=${alpha_rad}&surcharge=${surcharge}&density=${density}`
+          
+          httpGetAsync(url, display_result)
+        
+        }
+        
+      function display_result(response) {
+          set_innerHTML ("response",response);
+          var resps = JSON.parse(response);
+          var resp = resps[0];
+          set_innerHTML ("nc", resp["nc"])
+          set_innerHTML ("nq", resp["nq"])
+          set_innerHTML ("ng", resp["ng"])
+          set_innerHTML ("bc", resp["bc"])
+          set_innerHTML ("bq", resp["bq"])
+          set_innerHTML ("bg", resp["bg"])
+          set_innerHTML ("sc", resp["sc"])
+          set_innerHTML ("sq", resp["sq"])
+          set_innerHTML ("sg", resp["sg"])
+          set_innerHTML ("ic", resp["ic"])
+          set_innerHTML ("iq", resp["iq"])
+          set_innerHTML ("ig", resp["ig"])
+          set_innerHTML ("q_nc", resp["q_nc"])
+          set_innerHTML ("q_ng", resp["q_ng"])
+          set_innerHTML ("q_nq", resp["q_nq"])
+          set_value ("result",resp["q_ult"])
+      }
+    function populate(Breadth, Length, Area, cohesion, phi_deg, surcharge, density, HLoad, VLoad, Htheta_deg, alpha_deg) {
+        
+        set_value("Breadth",Breadth);
+        set_value("Length",Length);
+        set_value("Area",Area);
+        set_value("HLoad",HLoad);
+        set_value("VLoad",VLoad);
+        set_value("cohesion",cohesion);
+        set_value("phi_deg", phi_deg);
+        set_value("Htheta_deg", Htheta_deg);
+        set_value("alpha_deg", alpha_deg);
+        set_value("surcharge", surcharge);
+        set_value("density", density);
+       
+
+        //reset results
+        
+        set_innerHTML ("nc", "")
+        set_innerHTML ("nq", "")
+        set_innerHTML ("ng", "")
+        set_innerHTML ("bc", "")
+        set_innerHTML ("bq", "")
+        set_innerHTML ("bg", "")
+        set_innerHTML ("sc", "")
+        set_innerHTML ("sq", "")
+        set_innerHTML ("sg", "")
+        set_innerHTML ("ic", "")
+        set_innerHTML ("iq", "")
+        set_innerHTML ("ig", "")
+        set_innerHTML ("q_nc", "")
+        set_innerHTML ("q_ng", "")
+        set_innerHTML ("q_nq", "")
+        
+        set_innerHTML("response","")
+        set_value ("result","")
+    }
+   
+</script>
+</body>
+
+</html>

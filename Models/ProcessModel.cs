@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Linq;
-
+using System.Threading.Tasks;
 namespace ge_app.Models
 {
     public class ProcessModel {
@@ -31,36 +31,26 @@ namespace ge_app.Models
         }
     }
     public static class ProcessModelData { 
-        public static List<ProcessModel> List(string controller = "") {
-
+        public static IEnumerable<ProcessModel> items () {
             string file_json = Path.Combine( (string) AppDomain.CurrentDomain.GetData("ContentRootPath"),"static\\appdata\\ProcessModelData.json");
                 using (StreamReader r = new StreamReader(file_json))
                     {
                     string json = r.ReadToEnd();
-                    IEnumerable<ProcessModel> items = JsonSerializer.Deserialize<IEnumerable<ProcessModel>>(json);
-                        if (String.IsNullOrEmpty(controller)){
-                            return items.ToList();
-                        } else {
-                            return items.Where(item => item.controllers.Contains(controller)).ToList();
-                        }
+                    IEnumerable<ProcessModel> items = JsonConvert.DeserializeObject<IEnumerable<ProcessModel>>(json);
+                    return items;
                     }
-            
-            
-        }    
-    }
-//         var path = Server.MapPath("~/App_Data/Data.csv");
-// var csvRows = System.IO.File.ReadAllLines(path, Encoding.Default).ToList();
+        }
+        public static ProcessModel item(string name) {
+            return items().Where(item => item.name==name).SingleOrDefault();
+        }
+    public static List<ProcessModel> List(string controller = "") {
 
-    // public static ProcessModel[] Processes = {
-    //         new ProcessModel {  name = "EC7 Bearing Resistance",
-    //                             description ="",
-    //                             html_page = "EC7_Bearing_Resistance.html",
-    //                             controllers="BearingResistance"},
-    //         new ProcessModel {  name = "EC7 Bearing Resistance",
-    //                             description ="",
-    //                             html_page = "",
-    //                             controllers="BearingResistance"}                    
-    //         };
+                        if (String.IsNullOrEmpty(controller)){
+                            return items().ToList();
+                        } else {
+                            return items().Where(item => item.controllers.Contains(controller)).ToList();
+                        }
+    }    
     
-    // }
+    }
 }

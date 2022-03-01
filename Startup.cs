@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+// using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,11 +25,11 @@ namespace ge_app
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+               services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -57,25 +57,31 @@ namespace ge_app
                         Path.Combine(env.ContentRootPath, "static")),
                     RequestPath = "/static"
                 });
+                
+             app.UseMvc(routes =>
+                {
+                routes.MapRoute(
+                    name: "default", 
+                    template: "{controller=Home}/{action=Index}/{id?}");
+                });
 
+            // app.UseRouting();
 
-            app.UseRouting();
+            // app.UseAuthentication());
 
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-                    name: "BearingResistance",
-                    pattern: "{controller=BearingResistance}/{action=Index}/{id?}");    
-            });
+            // app.UseEndpoints(endpoints =>
+            // {
+            //     endpoints.MapControllerRoute(
+            //         name: "default",
+            //         pattern: "{controller=Home}/{action=Index}/{id?}");
+            //     endpoints.MapControllerRoute(
+            //         name: "BearingResistance",
+            //         pattern: "{controller=BearingResistance}/{action=Index}/{id?}");    
+            // });
 
             // setup app's root folders
             AppDomain.CurrentDomain.SetData("ContentRootPath", env.ContentRootPath);
-            AppDomain.CurrentDomain.SetData("WebRootPath", env.WebRootPath);
+            // AppDomain.CurrentDomain.SetData("WebRootPath", env.WebRootPath);
         }
     }
 }

@@ -1,8 +1,28 @@
-﻿@{
+﻿@using ge_app.Models
+@model IEnumerable<ge_app.Models.ProcessModel>
+    
+@{
     ViewData["Title"] = "Data Processing Procedures";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <h1 class="display-4">Data Processing</h1>
+    <p>Learn about <a href="https://en.wikipedia.org/wiki/Data_processing">Data Processing</a>.</p>
+
+    @if (Model != null)  
+   {  
+       foreach (var item in Model)  
+       {  
+       <ul id="items">  
+  
+           <li>  
+               @Html.DisplayFor(modelItem => item.name) 
+               <p> @Html.DisplayFor(modelItem => item.description)   
+                    <a href="@Href("~/static/" + item.html_page)">
+                   @Html.DisplayFor(modelItem => item.name) </a>
+                </p> 
+           </li>  
+       </ul>  
+       }  
+   }  
 </div>
