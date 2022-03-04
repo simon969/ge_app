@@ -2,11 +2,12 @@
 <head>
     <title>Get Plaxis Results Client</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css"href="ClientSide.css">
+    <link rel="stylesheet" type="text/css" href="css/ClientSide.css">
 </head>
 <body>
     <div class="container">
-        <h4>Current Tasks</h4>
+        <h1 class="class="display-4">Get Plaxis Results</h1>
+        <p>Create a query to connect to the Plaxis 2d or 3d Output Server and return a csv file</p>
         <form action="http://localhost:8000/PlaxisTask/" method="get" id="plaxis_list_form">
             <div class="row">  
                 <div class="col-sm-6"> 
@@ -35,8 +36,8 @@
                 <tbody id="task_body"></tbody>
                 </table>
             </div>
-        <button onclick="show_form('task_detail')"> <h4>Task Details</h4> </button>    
-        <button onclick="show_form('create_task')"> <h4>Create New Task</h4> </button>
+        <button class="button" onclick="show_form('task_detail')"> Task Details</button>    
+        <button class="button" onclick="show_form('create_task')"> Create New Task</button>
         <form action="http://localhost:8000/PlaxisTask/" method="post" id ="plaxis_post_form" hidden >
             <div class="row">  
                 <div class="col-sm-6"> 
@@ -132,7 +133,7 @@
             <button class="button" onclick="get_results()">Refresh Status</button>       
             </form>
     </div>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/ClientSide.js"> </script>
     <script type="text/javascript">
     

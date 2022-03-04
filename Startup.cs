@@ -42,7 +42,8 @@ namespace ge_app
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // Allows only http will checking code and connection to http://emi-gis-ps.scottwilson.co.uk/ is without ssl
+            // app.UseHttpsRedirection();
           
             app.UseStaticFiles();
             // app.UseStaticFiles(new StaticFileOptions

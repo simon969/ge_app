@@ -1,13 +1,14 @@
 ﻿@using ge_app.Models
 @model IEnumerable<ge_app.Models.ProcessModel>
-    
+
 @{
-    ViewData["Title"] = "Data Processing Procedures";
+    ViewData["Title"] = "Tunneling Analysis Tools";
 }
 
 <div class="container">
-    <h1 class="display-4">Data Processing and Model Parameters</h1>
-  
+    <h1 class="display-4">Tunneling Analysis Tools</h1>
+    <p>Learn about <a href="https://en.wikipedia.org/wiki/Tunnel">Tunnels</a>.</p>
+
     @if (Model != null)  
    {  
        foreach (var item in Model)  
@@ -24,7 +25,4 @@
        </ul>  
        }  
    }  
-    <p>Learn about <a href="https://en.wikipedia.org/wiki/Data_processing">Data Processing</a>.</p>
-    <p>Learn about <a href="https://www.pbctoday.co.uk/news/bim-news/model-parameter-geotechnical-design/58817/">Automated Model Parameters in Geotechnical Design</a>
-    <p>Learn about <a href="https://www.pbctoday.co.uk/news/bim-news/aecom-bentley-applications/58626/">Tideway Bentley iModels and Projectwise</a></p> 
 </div>

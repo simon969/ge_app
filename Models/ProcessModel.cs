@@ -32,7 +32,7 @@ namespace ge_app.Models
     }
     public static class ProcessModelData { 
         public static IEnumerable<ProcessModel> items () {
-            string file_json = Path.Combine( (string) AppDomain.CurrentDomain.GetData("ContentRootPath"),"static\\appdata\\ProcessModelData.json");
+            string file_json = Path.Combine( (string) AppDomain.CurrentDomain.GetData("ContentRootPath"),"static\\ProcessModelData.json");
                 using (StreamReader r = new StreamReader(file_json))
                     {
                     string json = r.ReadToEnd();

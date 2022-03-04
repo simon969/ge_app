@@ -1,29 +1,35 @@
-﻿using System;
+using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting;
 using ge_app.Models;
 
 namespace ge_app.Controllers
 {
-    public class DataProcessingController : Controller
+    public class TunnellingController : Controller
     {
-        private readonly ILogger<DataProcessingController> _logger;
+        private readonly ILogger<TunnellingController> _logger;
+       private readonly IHostingEnvironment _hostingEnvironment;
 
-        public DataProcessingController(ILogger<DataProcessingController> logger)
+
+        public TunnellingController(ILogger<TunnellingController> logger, IHostingEnvironment hostingEnvironment)
         {
             _logger = logger;
+            _hostingEnvironment = hostingEnvironment;
         }
-
-        public IActionResult Index()
+        [HttpGet]
+         public IActionResult Index()
         {
-            List<ProcessModel> processes = ProcessModelData.List("DataProcessing");
+            // https://stackoverflow.com/questions/49398965/what-is-the-equivalent-of-server-mappath-in-asp-net-core
+            
+            List<ProcessModel> processes = ProcessModelData.List("Tunnelling");
             return View(processes);
         }
-
 
         public IActionResult Privacy()
         {

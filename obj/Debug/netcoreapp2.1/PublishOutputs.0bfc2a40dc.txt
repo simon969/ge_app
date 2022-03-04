@@ -37,7 +37,7 @@ C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\netcoreapp2.1\publish\wwwroot
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\netcoreapp2.1\publish\appsettings.Development.json
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\netcoreapp2.1\publish\appsettings.json
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\netcoreapp2.1\publish\package-lock.json
-C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\netcoreapp2.1\publish\static\appdata\ProcessModelData.json
+C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\netcoreapp2.1\publish\static\ProcessModelData.json
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\netcoreapp2.1\publish\ge_app.dll
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\netcoreapp2.1\publish\ge_app.deps.json
 C:\Users\thomsonsj\Documents\apps\ge_app\bin\Debug\netcoreapp2.1\publish\ge_app.runtimeconfig.json

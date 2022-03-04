@@ -11,13 +11,13 @@ using ge_app.Models;
 
 namespace ge_app.Controllers
 {
-    public class BearingResistanceController : Controller
+    public class DeepFoundationsController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<DeepFoundationsController> _logger;
        private readonly IHostingEnvironment _hostingEnvironment;
 
 
-        public BearingResistanceController(ILogger<HomeController> logger, IHostingEnvironment hostingEnvironment)
+        public DeepFoundationsController(ILogger<DeepFoundationsController> logger, IHostingEnvironment hostingEnvironment)
         {
             _logger = logger;
             _hostingEnvironment = hostingEnvironment;
@@ -27,7 +27,7 @@ namespace ge_app.Controllers
         {
             // https://stackoverflow.com/questions/49398965/what-is-the-equivalent-of-server-mappath-in-asp-net-core
             
-            List<ProcessModel> processes = ProcessModelData.List("BearingResistance");
+            List<ProcessModel> processes = ProcessModelData.List("DeepFoundations");
             return View(processes);
         }
 

@@ -6,7 +6,7 @@
         "comments":"",
         "release_date":"2022-02-28",
         "status":"final",
-        "controllers":"BearingResistance"},
+        "controllers":"ShallowFoundations"},
     
      {"name":"Chart_EC7_D1_vs_Ic",
         "description":"Chart and Table EC7 Design Resistance D1 vs Influence Factor Ic",
@@ -15,7 +15,7 @@
         "comments":"",
         "release_date":"2022-02-28",
         "status":"final",
-        "controllers":"BearingResistance"},
+        "controllers":"ShallowFoundations"},
     
     {"name":"EC7_Drained_D2",
         "description":"Calculating Drained Bearing Resistance in accordance with BS EN 1997 Equateion D2",
@@ -24,7 +24,7 @@
         "comments":"",
         "release_date":"2022-02-28",
         "status":"final",
-        "controllers":"BearingResistance"},
+        "controllers":"ShallowFoundations"},
     
     {"name":"EC7_Undrained_D1",
         "description":"Calculating Undrained Bearing Resistance in accordance with BS EN 1997 Equation D1",
@@ -33,7 +33,7 @@
         "comments":"",
         "release_date":"2022-02-28",
         "status":"final",
-        "controllers":"BearingResistance"},
+        "controllers":"ShallowFoundations"},
 
     {"name":"AGSSummary",
         "description":"Summary of multiple AGS files with quantities of records by pointid and group",
@@ -51,5 +51,23 @@
             "comments":"",
             "release_date":"2022-02-28",
             "status":"final",
-            "controllers":"DataProcessing"} 
+            "controllers":"DataProcessing"} ,
+
+    {"name":"MONDViewer",
+                "description":"View and edit selected records in the AGS MOND monitoring table",
+                "html_page":"ViewMOND.html",
+                "version":"0.0.0.1",
+                "comments":"",
+                "release_date":"2022-02-28",
+                "status":"final",
+                "controllers":"Groundwater"},
+
+    {"name":"ViewFeature",
+                    "description":"View and edit selected records in an ArcGIS feature table",
+                    "html_page":"ViewFeature.html",
+                    "version":"0.0.0.1",
+                    "comments":"",
+                    "release_date":"2022-02-28",
+                    "status":"final",
+                    "controllers":"Groundwater"}                         
 ]

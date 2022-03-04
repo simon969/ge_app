@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,18 +9,18 @@ using ge_app.Models;
 
 namespace ge_app.Controllers
 {
-    public class DataProcessingController : Controller
+    public class GroundwaterController : Controller
     {
-        private readonly ILogger<DataProcessingController> _logger;
+        private readonly ILogger<GroundwaterController> _logger;
 
-        public DataProcessingController(ILogger<DataProcessingController> logger)
+        public GroundwaterController(ILogger<GroundwaterController> logger)
         {
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            List<ProcessModel> processes = ProcessModelData.List("DataProcessing");
+            List<ProcessModel> processes = ProcessModelData.List("Groundwater");
             return View(processes);
         }
 

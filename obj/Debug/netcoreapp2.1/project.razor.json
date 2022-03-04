@@ -1833,8 +1833,8 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\PileResistance\\Index.cshtml",
-      "TargetPath": "Views\\PileResistance\\Index.cshtml",
+      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\DeepFoundations\\Index.cshtml",
+      "TargetPath": "Views\\DeepFoundations\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -1853,8 +1853,8 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\BearingResistance\\Index.cshtml",
-      "TargetPath": "Views\\BearingResistance\\Index.cshtml",
+      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\Tunnelling\\Index.cshtml",
+      "TargetPath": "Views\\Tunnelling\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -1865,6 +1865,21 @@
     {
       "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\GroundWater\\Index.cshtml",
+      "TargetPath": "Views\\GroundWater\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\ShallowFoundations\\Index.cshtml",
+      "TargetPath": "Views\\ShallowFoundations\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\Home\\Technical.cshtml",
+      "TargetPath": "Views\\Home\\Technical.cshtml",
       "FileKind": "mvc"
     }
   ],
