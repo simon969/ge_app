@@ -3,41 +3,18 @@
 @model IEnumerable<ge_app.Models.ProcessModel>
 
 @{
-    ViewData["Title"] = "Bearing Resistance Tools";
+    ViewData["Title"] = "Shallow Foundation Tools";
 }
 
 <div class="container">
-    <h1 class="display-4">Bearing Resistance Tools</h1>
-    <p>Learn about <a href="https://en.wikipedia.org/wiki/Bearing_capacity">Bearing Resistance</a>.</p>
+    
+    <h3 class="display-4">Shallow Foundation Tools</h3>
 
-<h1> Undrained Bearing Resistance of Shallow Footing</h1>
-<p>Calculate undrained bearing resistance of rectancular footing using EC7 formulae</p> 
-<p>@Html.ActionLink("Undrained Bearing Resistance", "UndrainedBearingEC7")</p>
-
-
-<h1>Drained Bearing Resistance of Shallow Footing</h1>
-<p>Calculate drained beraing resistance of rectancular footing using EC7 formulae</p> 
-<p>@Html.ActionLink("Drained Bearing Resistance", "DrainedBearingEC7")</p>
-
-<h1>Inclination Factor for Shallow Footing</h1>
-<p>Investigate the Load Inclination Factor Ic </p> 
-<p>@Html.ActionLink("Load Inclination Factor", "EC7D1ic")</p>
-
-
-    @* @if (Model != null)  
-   {  
-       foreach (var item in Model)  
-       {  
-       <ul id="items">  
-  
-           <li>  
-               @Html.DisplayFor(modelItem => item.name) 
-               <p> @Html.DisplayFor(modelItem => item.description)   
-                    <a href="@Href("~/static/" + item.html_page)">
-                   @Html.DisplayFor(modelItem => item.name) </a>
-                </p> 
-            </li>  
-       </ul>  
-       }  
-   }   *@
+    <p>The following geotechnical tools are available to assist in determining shallow foundation sizes</p>
+    <h3>Bearing Resistance @Html.ActionLink("Undrained", "UndrainedBearingEC7") and @Html.ActionLink("Drained", "DrainedBearingEC7") </h3>
+    <p>Calculate undrained and drained bearing resistance of rectancular footing using EC7 formulae. The input values are submitted to the remote server and the results are presented in a results table</p> 
+   
+    <h3>@Html.ActionLink("Load Inclination Factor", "EC7D1ic")</h3>
+    <p>Investigate the influence of the Load Inclination Factor Ic on the bearing resistance. The input values are submitted to the remote server and the results are presented in a results table and a chart</p> 
+ 
 </div>

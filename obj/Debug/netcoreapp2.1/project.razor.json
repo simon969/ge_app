@@ -1838,6 +1838,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Home\\Index2.cshtml",
+      "TargetPath": "Views\\Home\\Index2.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Employees\\Details.cshtml",
       "TargetPath": "Views\\Employees\\Details.cshtml",
       "FileKind": "mvc"
@@ -1853,6 +1858,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Home\\APIDetails.cshtml",
+      "TargetPath": "Views\\Home\\APIDetails.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Tunnelling\\Index.cshtml",
       "TargetPath": "Views\\Tunnelling\\Index.cshtml",
       "FileKind": "mvc"
@@ -1860,6 +1870,11 @@
     {
       "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Shared\\_LoginPartial2.cshtml",
+      "TargetPath": "Views\\Shared\\_LoginPartial2.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -1890,11 +1905,6 @@
     {
       "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Home\\Technical.cshtml",
-      "TargetPath": "Views\\Home\\Technical.cshtml",
       "FileKind": "mvc"
     },
     {

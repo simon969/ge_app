@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "API Details";
+}
+
+<div class="container">
+   <h3 class="display-4">API Details</h3>
+   @* <p>Below are some of the benefits and limitations of a distributed API system </p>
+   <h4> Benefits of a distributed integrated API approach</h4>
+    <ul>
+        <li>Single set of procedures for tasks, no duplication required if any processs needs the result of the task it can get it directly</li>
+        <li>Allow us to streamline our processes</li>
+        <li>Centralised everyone uses the same approach and can collaborate on progressing the task</li> 
+        <li>If they comply with an OpenAPI specification that allows us to connect and consume REST APIs</li>   
+    </ul>
+    
+    <h4> Drawbacks of a distributed API approach</h4>
+    <ul>
+        <li>Development time takes longer, need to adhere to a set prescribed set of input values and response</li>
+        <li>Revising and changing tasks would have knock on effect on all de-coupled procedures that use that task</li>
+        <li>Centralised, if servers are down no productivity</li>
+    </ul> *@
+    
+    <p>This application provides the data input and handles the data response from the following services.</p>
+       
+    <h4 class="display-5">Python AIP service </h4>
+    <p><a href="http://emi-gis-ps.scottwilson.co.uk:8000/">http://emi-gis-ps.scottwilson.co.uk:8000/</a></p>
+    <p>This is a python application server running python 3.9 and the django framework. It has a local media folder for running python scripts and a local database for storage of task flow progress</p>
+    <p>In this application the python API it is used by the following clients</p>  
+    <ul>
+        <li><p>@Html.ActionLink("Summary of AGS Files", "GetAGSSummary","DataProcessing")</p></li>
+        <li><p>@Html.ActionLink("Export Plaxis Results", "GetPlaxisResults","DataProcessing")</p></li>
+    </ul>
+    <h4 class="display-5">JavaScript AIP service </h4>  
+    <p><a href="http://emi-gis-ps.scottwilson.co.uk:3000/">http://emi-gis-ps.scottwilson.co.uk:3000/</a></p>
+    <p>This is a javascript application server running Node.js and the express framework</p>
+    <p>In this application the javascript API is used by the following clients</p>  
+    <p>@Html.ActionLink("Undrained Bearing Resistance", "UndrainedBearingEC7", "ShallowFoundations")</p>
+    <p>@Html.ActionLink("Drained Bearing Resistance", "DrainedBearingEC7", "ShallowFoundations") </h3>
+    
+    <h4 class="display-5">gINT Database AIP service </h4> 
+    <p><a href="http://emi-gis-ps.scottwilson.co.uk/ge_gint4/api/project">http://emi-gis-ps.scottwilson.co.uk/ge_gint4/api/project</a></p>
+    <p><a href="http://emi-gis-ps.scottwilson.co.uk/ge_gint4/swagger/index.html">http://emi-gis-ps.scottwilson.co.uk/ge_gint4/swagger/index.html</a></p>
+    <p>This is a C# application server running ASP.Net Core 2.1 framework</p>
+    <p>In this application the gINT API is used by the following clients</p>  
+    <p>@Html.ActionLink("View MOND Table", "MONDResults","Groundwater")</p>
+    
+    
+</div>  

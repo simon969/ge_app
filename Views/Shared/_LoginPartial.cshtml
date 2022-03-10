@@ -1,14 +1,11 @@
 @if (User.Identity.IsAuthenticated)
 {
-  <ul class="nav navbar-nav navbar-right">
-    <li class="nav-item"><p class="navbar-text">Hello, @User.Identity.Name</p></li>                 	 
-    <li class="nav-item"><a onclick="document.getElementById('logout_form').submit();" style="cursor: pointer;">Log out</a></li>
-  </ul>
-  <form asp-controller="Account" asp-action="Logout" method="post" id="logout_form"></form>
+  <li class="nav-item"><p class="navbar-text">Hello, @User.Identity.Name</p> 
+  <a onclick="document.getElementById('logout_form').submit();" style="cursor: pointer;">Log out</a> </li>
+  <li class="nav-link text-dark">
+  <form asp-controller="Account" asp-action="Logout" method="post" id="logout_form"></form></li>
 }
 else
 {
-  <ul class="nav navbar-nav navbar-right">   
-    <li class="nav-item"><a asp-controller="Account" asp-action="Login">Log in</a></li>
-  </ul>
+  <li class="nav-link text-dark" ><a asp-controller="Account" asp-action="Login">Log in</a></li>
 }

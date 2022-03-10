@@ -27,7 +27,6 @@ C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\GroundWater\I
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\GroundWater\MONDResults.g.cshtml.cs
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Home\Privacy.g.cshtml.cs
-C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Home\Technical.g.cshtml.cs
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\ShallowFoundations\DrainedBearingEC7.g.cshtml.cs
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\ShallowFoundations\EC7D1ic.g.cshtml.cs
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\ShallowFoundations\Index.g.cshtml.cs
@@ -46,3 +45,6 @@ C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.Views.pdb
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.dll
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.pdb
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.csproj.CopyComplete
+C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_LoginPartial2.g.cshtml.cs
+C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Home\APIDetails.g.cshtml.cs
+C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index2.g.cshtml.cs

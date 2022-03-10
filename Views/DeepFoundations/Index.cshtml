@@ -7,22 +7,4 @@
 
 <div class="container">
     <h3 class="display-4">Pile Resistance Toolbox</h3>
-    <p>Learn about <a href="https://en.wikipedia.org/wiki/Deep_foundation">Deep Foundations</a>.</p>
-// https://www.sciencedirect.com/topics/engineering/pile-capacity
-    @* @if (Model != null)  
-   {  
-       foreach (var item in Model)  
-       {  
-       <ul id="items">  
-  
-           <li>  
-               @Html.DisplayFor(modelItem => item.name) 
-               <p> @Html.DisplayFor(modelItem => item.description)   
-                    <a href="@Href("~/static/" + item.html_page)">
-                   @Html.DisplayFor(modelItem => item.name) </a>
-                </p> 
-           </li>  
-       </ul>  
-       }  
-   }   *@
 </div>
