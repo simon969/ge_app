@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<head>
+    <title>Get Plaxis Results Client</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/ClientSide.css">
+</head>
+<body>
+    <div class="container">
+        <h3 class="class="display-4">Get Plaxis Results</h3>
+        <p>Create a query to connect to the Plaxis 2d or 3d Output Server and return a csv file</p>
+        <form action="http://localhost:8000/PlaxisTask/" method="get" id="plaxis_list_form">
+            <div class="row">  
+                <div class="col-sm-6"> 
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="owner" name="owner" placeholder="...enter owner email">
+                    </div>
+                </div>
+                <div class="col-sm-6"> 
+                    <input class="button" type="submit" value="Find">
+                </div>
+            </div>   
+        </form>
+            <div class="table-wrapper-scroll-y plaxis_list-scrollbar">
+                <table class="table table-striped" id="task_table">
+                    <thead>
+                    <tr>
+                        <th class="d-none" scope="col">Id</th>
+                        <th class="col-3" scope="col">Connection</th>
+                        <th class="col-4" scope="col">Query</th>
+                        <th class="col-1" scope="col">Created</th>
+                        <th class="col-1" scope="col">Completed</th>
+                        <th class="col-1"  scope="col">Status</th>
+                        <th class="col-1"  scope="col">Action</th>
+                    </tr>
+                    </thead>
+                <tbody id="task_body"></tbody>
+                </table>
+            </div>
+        <button class="button" onclick="show_form('task_detail')"> Task Details</button>    
+        <button class="button" onclick="show_form('create_task')"> Create New Task</button>
+        <form action="http://localhost:8000/PlaxisTask/" method="post" id ="plaxis_post_form" hidden >
+            <div class="row">  
+                <div class="col-sm-6"> 
+                    <div class="form-group">
+                        <label for="host">Host</label>
+                        <input type="text" class="form-control" id="host" name="host" placeholder="...host" >
+                    </div>
+                    <div class="form-group">
+                        <label for="port">Port</label>
+                        <input type="text" class="form-control" id="port" name="port" placeholder="...port">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" id="password" name="password" placeholder="...password">
+                    </div>
+                </div>
+                <div class="col-sm-6"> 
+                    <div class="form-group">
+                        <label for="version">version</label>
+                        <select type="text" class="form-control" id="version"> 
+                            <option value="Plaxis2dConnectV2">Plaxis2dConnectV2</option>
+                            <option value="Plaxis2dConnect">Plaxis2dConnect</option>
+                            <option value="Plaxis3dConnect">Plaxis3dConnect</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="results">results</label>
+                        <input type="text" class="form-control" id="results" placeholder="...version">
+                    </div>
+                    <div class="form-group">
+                        <label for="phases">phases</label>
+                        <input type="text" class="form-control" id="phases" placeholder="...phases">
+                    </div>
+                    </div>
+            </div>
+            <input type="hidden" class="form-control" id="query" name="query" placeholder="...query">
+            <input type="hidden" class="form-control" id="conn" name="conn" placeholder="...conn">
+            <input type="submit" value="Create New">
+        <button type="button" onclick="populate_post('UKCRD1PC40002',10000,'vPQ?G?Ua3~5whK+W','Plaxis2dConnectV2','Plates EmbeddedBeams','All')">UKCRD1PC40002</button>
+        <button type="button" onclick="populate_post('UKCRDLFP0B8Y2',10000,'5g^zi8kaH5sS2fW4','Plaxis3dConnect','Plates EmbeddedBeams','Phase_51')">UKCRDLFP0B8Y2 Plaxis3d</button>
+        <button type="button" onclick="populate_post('UKCRDLFP0B8Y2',10001,'LFgQ=CC1ZAVCuRmx','Plaxis2dConnect','Plates,EmbeddedBeams,Interfaces,FixedEndAnchors,NodeToNodeAnchors','Phase_19')">UKCRDLFP0B8Y2 Plaxis2d</button>
+        </form> 
+           <form id ="plaxis_get_form" >
+            <div class="form-group">
+                <label for="response">Task Response</label>
+                <textarea class="form-control" readonly id="response" rows="4"></textarea>
+            </div>
+            <div class="row">  
+                <div class="col-sm-6"> 
+                    <div class="form-group">
+                        <label for="id">Task Id</label>
+                        <input class="form-control" readonly type="text" id="id">
+                    </div>
+                    <div class="form-group">
+                        <label for="get_conn">Connection</label>
+                        <input class="form-control" readonly type="text" id="get_conn">
+                    </div>
+                    <div class="form-group">
+                        <label for="get_query">Query</label>
+                        <input class="form-control" readonly type="text" id="get_query">
+                    </div>
+                    <div class="form-group">
+                        <label for="get_files">Files</label>
+                        <input class="form-control" readonly type="text" id="get_files">
+                    </div>
+                </div>
+                <div class="col-sm-6"> 
+                    <div class="form-group">
+                        <label for="createdDT">Created Datetime</label>
+                        <input class="form-control" readonly type="text" id="get_createdDT">
+                    </div>
+                    <div class="form-group">
+                        <label for="completedDT">Completed Datetime</label>
+                        <input class="form-control" readonly type="text" id="get_completedDT">
+                    </div> 
+                    <div class="form-group">
+                        <label for="owner">Owner</label>
+                        <input class="form-control" readonly type="text" id="get_owner">
+                    </div> 
+                    <div class="form-group">
+                        <label for="get_result">Results</label>
+                        <input class="form-control" readonly type="text" id="get_result">
+                    </div> 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="get_progress">Progress</label>
+                <textarea class = "form-control" readonly id="get_progress"></textarea>
+            </div>   
+            <div class="form-group">
+                <label for="download_list">Download Files</label>
+                <ul class="list-group" id="download_list"></ul>  
+            <button class="button" onclick="get_results()">Refresh Status</button>       
+            </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/ClientSide.js"> </script>
+    <script type="text/javascript">
+    
+    function update_JSONfields() {
+        var qry = "{'version':'" + get_value("version") + "','phases':'" + get_value("phases") + "','results':'" + get_value("results") + "'}"
+        set_value("query", qry);
+        var con = "{'host':'"+ get_value("host") + "','port':" + get_value("port") + ",'password':'" + get_value("password") + "'}"
+        set_value("conn", con);
+    }
+    function show_form(s) {
+        var create = document.getElementById("plaxis_post_form");
+        var detail = document.getElementById("plaxis_get_form");
+        if (s=='create_task') {
+            detail.setAttribute("hidden", "True")
+            create.removeAttribute("hidden")
+        }
+
+        if (s=='task_detail') {
+            detail.removeAttribute("hidden")
+            create.setAttribute("hidden", "True")
+        }
+
+    }
+    function populate_post(host, port, password, version, results, phases) {
+        set_value("host",host);
+        set_value("port",port);
+        set_value("password",password);
+        set_value("version",version);
+        set_value ("phases",phases);
+        set_value("results",results);
+     }
+    $("#plaxis_post_form").submit(function(e) {
+        e.preventDefault()
+        post_results()
+    });
+    $("#plaxis_get_form").submit(function(e) {
+        e.preventDefault()
+        get_result()
+    });
+    $("#plaxis_list_form").submit(function(e) {
+        e.preventDefault()
+        get_results()
+    });
+
+    function get_results() {
+        var owner = get_value("owner")
+        if (owner !=null) {
+        var url = py_host + '/PlaxisTask/?owner=' + owner;
+        httpGetAsync(url,display_list)
+        }
+    }
+    function delete_task(id) {
+        var url = py_host + '/PlaxisTask/' + id;
+        httpDelete(url,display_detail)
+        get_results()
+    }
+    function get_result(id = null) {
+        if (id==null) {
+            id = get_value("id")
+        }
+        if (id !=null) {
+        var url = py_host + '/PlaxisTask/' + id;
+        show_form('task_detail')
+        httpGetAsync(url,display_detail)
+        }
+    }
+    function post_results() {
+        update_JSONfields();
+        var conn =  get_value("conn");
+        var query =  get_value("query");
+        var owner =  get_value("owner");
+        var content = `{"conn":"${conn}","query":"${query}","owner":"${owner}"}`;
+        var url = py_host + '/PlaxisTask/';
+        console.log(content);
+        show_form('plaxis_get_form')
+        httpPostAsync(url, content, display_detail)
+    }
+    function display_list (response) {
+        var json_data = JSON.parse(response);
+        var tbd = document.getElementById("task_body");
+        tbd.innerText='';
+        tbd.innerHTML='';
+        tbd.childNodes = null;
+        $("#task_body").empty();
+        clear_detail();
+        for (var i = 0; i < json_data.length; i++) {
+        var task = json_data[i];
+        tr = document.createElement('tr');
+            if (task.completedDT!=null) {
+                tr.setAttribute("class",".table-success")
+            }
+            td = document.createElement('td')
+                td.setAttribute("class","d-none")
+                td.innerHTML = task.id
+            tr.appendChild(td)
+            
+            td = document.createElement('td')
+            td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;")
+            td.innerHTML = task.conn
+            tr.appendChild(td)
+            
+            td = document.createElement('td')
+            td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;")
+                td.innerHTML = task.query
+            tr.appendChild(td)
+            td = document.createElement('td')
+                td.innerHTML = task.createdDT
+            tr.appendChild(td)
+            td = document.createElement('td')
+                td.innerHTML = task.completedDT
+            tr.appendChild(td)
+            td = document.createElement('td')
+            td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;")
+                td.innerHTML = task.files
+            tr.appendChild(td)
+            td = document.createElement('td')
+                td.innerHTML = task.results
+            tr.appendChild(td)
+            td = document.createElement('td')
+                del_btn = document.createElement ('button')
+                del_btn.setAttribute("class", "button")
+                del_btn.setAttribute("onclick", "get_result('" + task.id + "')")
+                del_btn.innerHTML = "Details"
+                td.appendChild(del_btn)
+                
+                del_btn = document.createElement ('button')
+                del_btn.setAttribute("class", "button")
+                del_btn.setAttribute("onclick", "delete_task('" + task.id + "')")
+                del_btn.innerHTML = "Delete"
+                td.appendChild(del_btn)
+                
+            tr.appendChild(td)
+        tbd.appendChild(tr);
+        } 
+    }
+    
+    function clear_detail() {
+            set_innerHTML("response",'')  
+            set_value("id",'') 
+            set_value("get_conn",'')
+            set_value("get_query",'')
+            set_value("get_createdDT",'')
+            set_value("get_completedDT",'')
+            set_value("get_result",'')
+            set_value("get_files",'')
+            set_value("get_progress",'')
+            var lst =  document.getElementById("download_list");
+            lst.innerHTML = "";
+
+    }
+    function display_detail(response) { 
+        set_innerHTML ("response",response)
+        var resp = JSON.parse(response);
+        var id = resp.id
+        if (id!=null) { 
+            set_value("id",id) 
+            set_value("get_conn",resp.conn)
+            set_value("get_query",resp.query)
+            set_value("get_createdDT",resp.createdDT)
+            set_value("get_completedDT",resp.completedDT)
+            set_value("get_progress",resp.progress)
+            set_value("get_files",resp.files)
+            set_value("get_result",resp.result)
+            var lst =  document.getElementById("download_list"); 
+                //clear existing list
+                lst.innerHTML = "";
+            var i = 0;
+            
+            if (resp.files != null) {
+                files = resp.files.split(",")
+               
+            while(i < files.length) { 
+                var download_url = py_host + "/PlaxisTask/" + id + "/download/" + files[i]
+                li = document.createElement('li');
+                li.setAttribute("class", "list-group-item");
+                // Create anchor element.
+                var a = document.createElement('a'); 
+                // Create the text node for anchor element.
+                var link = document.createTextNode(files[i]);
+                // Append the text node to anchor element.
+                a.appendChild(link); 
+                // Set the title.
+                a.title = files[i]; 
+                // Set the href property.
+                a.href = download_url 
+                li.appendChild(a)
+                lst.appendChild(li);
+                i++
+            }
+            
+            }
+        }
+    }
+    </script>
+</body>
+
+</html>

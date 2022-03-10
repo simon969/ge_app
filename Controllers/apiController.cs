@@ -11,26 +11,30 @@ using ge_app.Models;
 
 namespace ge_app.Controllers
 {
-    public class apiController : Controller
+    [Route("api/[controller]")]
+    [ApiController]  public class PageController : Controller
     {
         private readonly ILogger<HomeController> _logger;
        private readonly IHostingEnvironment _hostingEnvironment;
 
 
-        public apiController(ILogger<HomeController> logger, IHostingEnvironment hostingEnvironment)
+        public PageController(ILogger<HomeController> logger, IHostingEnvironment hostingEnvironment)
         {
             _logger = logger;
             _hostingEnvironment = hostingEnvironment;
         }
+      
         [HttpGet]
-        public async Task<IActionResult> AllPages()
+        public async Task<IActionResult> Page()
         {
             var processes = ProcessModelData.items();
             return Ok(processes);
         }
-        public async Task<IActionResult> Page(string name)
+        
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Page(string id)
         {
-            var processes = ProcessModelData.item(name);
+            var processes = ProcessModelData.item(id);
             return Ok(processes);
         }
     }

@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ge_app.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ge_app.Controllers
 {
+    // [Authorize]
+    // [AllowAnonymous]
     public class DataProcessingController : Controller
     {
         private readonly ILogger<DataProcessingController> _logger;
@@ -20,8 +23,9 @@ namespace ge_app.Controllers
 
         public IActionResult Index()
         {
-            List<ProcessModel> processes = ProcessModelData.List("DataProcessing");
-            return View(processes);
+            // List<ProcessModel> processes = ProcessModelData.List("DataProcessing");
+            // return View(processes);
+            return View();
         }
 
 
@@ -35,5 +39,15 @@ namespace ge_app.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult GetAGSSummary() {
+            return View();
+
+        }
+        public IActionResult GetPlaxisResults() {
+            return View();
+
+        }
+       
     }
 }

@@ -6,9 +6,20 @@
 }
 
 <div class="container">
-    <h1 class="display-4">Data Processing and Model Parameters</h1>
+    <h3 class="display-4">Data Processing and Model Parameters</h3>
   
-    @if (Model != null)  
+<h1>Export Plaxis 2d and 3d Outputs</h1>
+<p>Connect to Plaxis 2d and Plaxis 3d Output server, extract results for structural elements and save as csv files</p> 
+<p>@Html.ActionLink("Get Plaxis Results", "GetPlaxisResults")</p>
+
+
+<h1>AGS Summary</h1>
+<p>Create statistical summary of record counts by file, loca_id and group in multiple AGs files</p> 
+<p>@Html.ActionLink("Create AGs Summary", "GetAGSSummary")</p>
+
+
+
+    @* @if (Model != null)  
    {  
        foreach (var item in Model)  
        {  
@@ -23,8 +34,38 @@
            </li>  
        </ul>  
        }  
-   }  
+   }   *@
+
     <p>Learn about <a href="https://en.wikipedia.org/wiki/Data_processing">Data Processing</a>.</p>
     <p>Learn about <a href="https://www.pbctoday.co.uk/news/bim-news/model-parameter-geotechnical-design/58817/">Automated Model Parameters in Geotechnical Design</a>
     <p>Learn about <a href="https://www.pbctoday.co.uk/news/bim-news/aecom-bentley-applications/58626/">Tideway Bentley iModels and Projectwise</a></p> 
+
+<div id="#osw-container">
+
 </div>
+
+    @* https://github.com/okta/okta-signin-widget#embedded-self-hosted *@
+    <script src="https://global.oktacdn.com/okta-signin-widget/6.1.1/js/okta-sign-in.min.js" type="text/javascript"></script>
+    <link href="https://global.oktacdn.com/okta-signin-widget/6.1.1/css/okta-sign-in.min.css" type="text/css" rel="stylesheet"/>
+
+    <script type="text/javascript">
+
+    var signIn = new OktaSignIn(
+        {
+            baseUrl: 'https://dev-312326.okta.com',
+            clientId: '0oa6f722ndf2hSUzW4x7',
+            redirectUri: 'http://localhost:5002'
+        }
+        );
+
+        signIn.showSignInToGetTokens({
+        // Assumes there is an empty element on the page with an id of 'osw-container'
+        el: '#osw-container'
+        }).then(function(tokens) {
+        // Store tokens
+        }).catch(function(error) {
+        // Handle error
+        });
+
+    </script>
+

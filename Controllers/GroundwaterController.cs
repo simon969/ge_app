@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ge_app.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ge_app.Controllers
 {
+    // [Authorize]
+    // [AllowAnonymous]
     public class GroundwaterController : Controller
     {
         private readonly ILogger<GroundwaterController> _logger;
@@ -20,8 +23,9 @@ namespace ge_app.Controllers
 
         public IActionResult Index()
         {
-            List<ProcessModel> processes = ProcessModelData.List("Groundwater");
-            return View(processes);
+          //  List<ProcessModel> processes = ProcessModelData.List("Groundwater");
+          //  return View(processes);
+          return View();
         }
 
 
@@ -34,6 +38,12 @@ namespace ge_app.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        
+       // [Authorize]
+         public IActionResult MONDResults() {
+            // Response.Headers.Add("Content-Security-Policy", "default-src 'self' https://*.okta.com/");
+            return View();
         }
     }
 }

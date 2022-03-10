@@ -6,10 +6,16 @@
 }
 
 <div class="container">
-    <h1 class="display-4">Groundwater Monitoring Toolbox</h1>
+    <h3 class="display-4">Groundwater Monitoring Toolbox</h3>
     <p>Learn about <a href="https://en.wikipedia.org/wiki/Groundwater">Groundwater Monitoring</a>.</p>
 
-    @if (Model != null)  
+
+    <h1>View MOND Table Results</h1>
+    <p>Connect to an SQL gINT database and query the monitoring data in the MOND table</p> 
+    <p>@Html.ActionLink("View MOND Table", "MONDResults")</p>
+    
+    
+    @* @if (Model != null)  
    {  
        foreach (var item in Model)  
        {  
@@ -24,5 +30,5 @@
            </li>  
        </ul>  
        }  
-   }  
+   }   *@
 </div>

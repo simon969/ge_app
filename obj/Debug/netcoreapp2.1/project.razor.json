@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\ge_app.csproj",
+  "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\ge_app.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-2.1",
     "LanguageVersion": "2.1",
@@ -1818,68 +1818,133 @@
   "RootNamespace": "ge_app",
   "Documents": [
     {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\_ViewImports.cshtml",
-      "TargetPath": "Views\\_ViewImports.cshtml",
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\ShallowFoundations\\EC7D1ic.cshtml",
+      "TargetPath": "Views\\ShallowFoundations\\EC7D1ic.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\Home\\Privacy.cshtml",
-      "TargetPath": "Views\\Home\\Privacy.cshtml",
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\ShallowFoundations\\DrainedBearingEC7.cshtml",
+      "TargetPath": "Views\\ShallowFoundations\\DrainedBearingEC7.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\Shared\\Error.cshtml",
-      "TargetPath": "Views\\Shared\\Error.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\DeepFoundations\\Index.cshtml",
-      "TargetPath": "Views\\DeepFoundations\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\Home\\Index.cshtml",
-      "TargetPath": "Views\\Home\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-      "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\DataProcessing\\Index.cshtml",
-      "TargetPath": "Views\\DataProcessing\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\Tunnelling\\Index.cshtml",
-      "TargetPath": "Views\\Tunnelling\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\_ViewStart.cshtml",
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\Shared\\_Layout.cshtml",
-      "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\GroundWater\\MONDResults.cshtml",
+      "TargetPath": "Views\\GroundWater\\MONDResults.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\GroundWater\\Index.cshtml",
-      "TargetPath": "Views\\GroundWater\\Index.cshtml",
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Employees\\Details.cshtml",
+      "TargetPath": "Views\\Employees\\Details.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\ShallowFoundations\\Index.cshtml",
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\ShallowFoundations\\Index.cshtml",
       "TargetPath": "Views\\ShallowFoundations\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\thomsonsj\\Documents\\apps\\ge_app\\Views\\Home\\Technical.cshtml",
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Shared\\_LoginPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_LoginPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Tunnelling\\Index.cshtml",
+      "TargetPath": "Views\\Tunnelling\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Shared\\Error.cshtml",
+      "TargetPath": "Views\\Shared\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\DataProcessing\\Index.cshtml",
+      "TargetPath": "Views\\DataProcessing\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Employees\\Delete.cshtml",
+      "TargetPath": "Views\\Employees\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Shared\\_CookieConsentPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_CookieConsentPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\GroundWater\\Index.cshtml",
+      "TargetPath": "Views\\GroundWater\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Home\\Index.cshtml",
+      "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Home\\Privacy.cshtml",
+      "TargetPath": "Views\\Home\\Privacy.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Home\\Technical.cshtml",
       "TargetPath": "Views\\Home\\Technical.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\DataProcessing\\GetAGSSummary.cshtml",
+      "TargetPath": "Views\\DataProcessing\\GetAGSSummary.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\_ViewImports.cshtml",
+      "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Employees\\Create.cshtml",
+      "TargetPath": "Views\\Employees\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\DataProcessing\\GetPlaxisResults.cshtml",
+      "TargetPath": "Views\\DataProcessing\\GetPlaxisResults.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\ShallowFoundations\\UndrainedBearingEC7.cshtml",
+      "TargetPath": "Views\\ShallowFoundations\\UndrainedBearingEC7.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Employees\\Index.cshtml",
+      "TargetPath": "Views\\Employees\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\DeepFoundations\\Index.cshtml",
+      "TargetPath": "Views\\DeepFoundations\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Shared\\_Layout.cshtml",
+      "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Employees\\Edit.cshtml",
+      "TargetPath": "Views\\Employees\\Edit.cshtml",
       "FileKind": "mvc"
     }
   ],

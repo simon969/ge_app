@@ -1,17 +1,20 @@
-using System;
-using System.IO;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-// using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.FileProviders;
+using Microsoft.EntityFrameworkCore;
+using ge_app.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Okta.AspNetCore;
 
-namespace ge_app
+namespace OktaMvcLogin
 {
     public class Startup
     {
@@ -25,12 +28,38 @@ namespace ge_app
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-               services.AddMvc();
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=okta.db"));
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddAuthentication(options =>
+            {
+            options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = OktaDefaults.MvcAuthenticationScheme;
+            })
+            .AddCookie()
+            .AddOktaMvc(new OktaMvcOptions
+            {
+            OktaDomain = Configuration["Okta:Domain"],
+            ClientId = Configuration["Okta:ClientId"],
+            ClientSecret = Configuration["Okta:ClientSecret"]
+            });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext dbContext)
         {
+            
+            dbContext.Database.EnsureCreated();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -42,47 +71,16 @@ namespace ge_app
                 app.UseHsts();
             }
 
-            // Allows only http will checking code and connection to http://emi-gis-ps.scottwilson.co.uk/ is without ssl
-            // app.UseHttpsRedirection();
-          
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
-            // app.UseStaticFiles(new StaticFileOptions
-            //     {
-            //         FileProvider = new PhysicalFileProvider(
-            //             Path.Combine(env.ContentRootPath, "appdata")),
-            //         RequestPath = "/appdata"
-            //     });
-             app.UseStaticFiles(new StaticFileOptions
-                {
-                    FileProvider = new PhysicalFileProvider(
-                        Path.Combine(env.ContentRootPath, "static")),
-                    RequestPath = "/static"
-                });
-                
-             app.UseMvc(routes =>
-                {
+            app.UseCookiePolicy();
+            app.UseAuthentication();
+            app.UseMvc(routes =>
+            {
                 routes.MapRoute(
-                    name: "default", 
+                    name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-                });
-
-            // app.UseRouting();
-
-            // app.UseAuthentication());
-
-            // app.UseEndpoints(endpoints =>
-            // {
-            //     endpoints.MapControllerRoute(
-            //         name: "default",
-            //         pattern: "{controller=Home}/{action=Index}/{id?}");
-            //     endpoints.MapControllerRoute(
-            //         name: "BearingResistance",
-            //         pattern: "{controller=BearingResistance}/{action=Index}/{id?}");    
-            // });
-
-            // setup app's root folders
-            AppDomain.CurrentDomain.SetData("ContentRootPath", env.ContentRootPath);
-            // AppDomain.CurrentDomain.SetData("WebRootPath", env.WebRootPath);
+            });
         }
     }
 }

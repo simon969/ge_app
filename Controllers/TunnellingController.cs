@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
 using ge_app.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ge_app.Controllers
 {
+    // [Authorize]
+    // [AllowAnonymous]
     public class TunnellingController : Controller
     {
         private readonly ILogger<TunnellingController> _logger;
@@ -27,8 +30,9 @@ namespace ge_app.Controllers
         {
             // https://stackoverflow.com/questions/49398965/what-is-the-equivalent-of-server-mappath-in-asp-net-core
             
-            List<ProcessModel> processes = ProcessModelData.List("Tunnelling");
-            return View(processes);
+            // List<ProcessModel> processes = ProcessModelData.List("Tunnelling");
+            // return View(processes);
+            return View();
         }
 
         public IActionResult Privacy()

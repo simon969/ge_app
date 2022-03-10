@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<head>
+    <title>Get AGS Summary</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+</head>
+<body>
+    <div class="container">
+        <h3 class="class="display-4">Get AGS Summary</h3>
+        <form action="http://localhost:8000/AGSTask/" method="get" id="ags_list_form">
+            <div class="row">  
+                <div class="col-sm-6"> 
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="owner" name="owner" placeholder="...enter owner email">
+                    </div>
+                </div>
+                <div class="col-sm-6"> 
+                    <input class="button" type="submit" value="Find">
+                </div>
+            </div>   
+        </form>
+            <div class="table-wrapper-scroll-y ags_list-scrollbar">
+                <table class="table table-striped" id="task_table">
+                    <thead>
+                    <tr>
+                        <th class="d-none" scope="col">Id</th>
+                        <th class="col-3" scope="col">Task</th>
+                        <th class="col-1" scope="col">Created</th>
+                        <th class="col-1" scope="col">Completed</th>
+                        <th class="col-2"  scope="col">Status</th>
+                        <th class="col-1"  scope="col">Action</th>
+                    </tr>
+                    </thead>
+                <tbody id="task_body"></tbody>
+                </table>
+            </div>
+        
+            <div class = "form-group">    
+                <button class="button" onclick="show_form('task_detail')"> Task Details </button>    
+                <button class="button" onclick="show_form('create_task')"> Create New Task </button>
+            </div>
+
+        <form class="form-group" action="http://localhost:8000/AGSTask/" enctype='multipart/form-data' method="post" id="ags_post_form" hidden>
+            <div class="row">  
+                <div class="col-sm-6"> 
+                    <div class="form-group">
+                        <label for="host">AGS Files</label>
+                        <input type="file" id="files" name="files" multiple="multiple" onchange="update_file_list3('files','filelist')" >
+                    </div>
+                    <div class="form-group">
+                       <ul class="list-group" id="filelist" > </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6"> 
+                    <div class="form-group">
+                        <label for="version">AGS version</label>
+                        <select type="text" class="form-control" id="version" name="version"> 
+                            <option value="AGS4">AGS 4.0</option>
+                            <option value="AGS3.1">AGS 3.1</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="actions">Task Actions</label>
+                        <input type="text" class="form-control" id="actions" placeholder="...actions">
+                    </div>
+                    <div class="form-group">
+                        <label for="results">Task Results</label>
+                        <input type="text" class="form-control" id="results" placeholder="...results">
+                    </div>
+                    <div class="form-group" hidden>
+                    <label for="task">task</label>
+                    <input type="text" class="form-control" id="task" name="task" placeholder="...task">
+                    </div>
+                    <input type="submit" value="Submit">
+                  
+                </div> 
+            </div>
+        </form>  
+
+        <button onclick="post_results()">Post</button>
+      
+        <button onclick="populate('simon.thomson@aecom.com','AGS4', 'processAGS','ags_summary,ags_lines')">Test101</button>
+
+        <form id ="ags_get_form" >
+
+        <div class="form-group">
+            <label for="response">Task Response</label>
+            <textarea class="form-control" readonly id="response" rows="4"></textarea>
+        </div>
+        <div class="row">  
+            <div class="col-sm-6"> 
+                <div class="form-group">
+                    <label for="id">Task Id</label>
+                    <input class="form-control" readonly type="text" id="id">
+                </div>
+                <div class="form-group">
+                    <label for="get_task">Task Details</label>
+                    <input class="form-control" readonly type="text" id="get_task">
+                </div>
+                <div class="form-group">
+                    <label for="get_createdDT">Task Created Datetime</label>
+                    <input class="form-control" readonly type="text" id="get_createdDT">
+                </div>
+                <div class="form-group">
+                    <label for="completedDT">Completed Datetime</label>
+                    <input class="form-control" readonly type="text" id="get_completedDT">
+                </div>   
+            </div>
+            <div class="col-sm-6">  
+                <div class="form-group">
+                    <label for="get_files">Files</label>
+                    <input class="form-control" readonly type="text" id="get_files">
+                </div>
+                <div class="form-group">
+                    <label for="owner">Owner</label>
+                    <input class="form-control" readonly type="text" id="get_owner">
+                </div> 
+                <div class="form-group">
+                    <label for="get_result">Result</label>
+                    <input class="form-control" readonly type="text" id="get_result">
+                </div>  
+                <div class="form-group">
+                    <label for="get_status">Status</label>
+                <input class="form-control" readonly type="text" id="get_status">
+                </div> 
+            </div>
+        </div>
+        <div class="form-group">
+        <label for="get_progress">Progress</label>
+        <textarea class = "form-control" readonly id="get_progress"></textarea>
+        </div> 
+        
+        <div class="form-group">
+            <label for="download_list">Download Files</label>
+            <ul class="list-group" id="download_list"></ul>  
+        <button class="button" onclick="get_results()">Refresh Status</button>       
+        </div>         
+       </form>
+    </div> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/ClientSide.js"> </script>
+    <script type="text/javascript">
+    
+    function update_JSONfields() {
+        var task = "{'version':'" + get_value("version") + "','actions':'" + get_value("actions") +"','results':'" + get_value("results") + "'}"
+        set_value("task", task);
+    }
+    function populate(owner, version, actions, results) {
+        set_value("owner",owner);
+        set_value("version",version);
+        set_value("actions",actions);
+        set_value("results",results);
+        update_JSONfields()
+    }
+    function show_form(s) {
+        var create = document.getElementById("ags_post_form");
+        var detail = document.getElementById("ags_get_form");
+        if (s=='create_task') {
+            detail.setAttribute("hidden", "True")
+            create.removeAttribute("hidden")
+        }
+
+        if (s=='task_detail') {
+            detail.removeAttribute("hidden")
+            create.setAttribute("hidden", "True")
+        }
+    }
+
+    $("#ags_post_form").submit(function(e) {
+        e.preventDefault()
+        post_results()
+    });
+    $("#ags_get_form").submit(function(e) {
+        e.preventDefault()
+        get_result()
+    });
+    $("#ags_list_form").submit(function(e) {
+        e.preventDefault()
+        get_results()
+    });
+    // $("#ags_form").submit(function() { alert("hi");
+    //     var url = "http://localhost:8000/AGSTask/";
+    //     $.ajax({
+    //         type: "POST",
+    //         url: url,
+    //         data: $("#ags_form").serialize(),
+    //         success: function(data) {
+    //             alert(data);
+    //         }
+    //         });
+
+    //     return false;
+    // });
+   
+    
+    function get_results() {
+        var owner = get_value("owner")
+        if (owner !=null) {
+        var url = py_host + '/AGSTask/?owner=' + owner;
+        httpGetAsync(url,display_list)
+        }
+    }
+    function get_result(id = null) {
+        if (id==null) {
+            id = get_value("id")
+        }
+        if (id !=null) {
+        var url = py_host + '/AGSTask/' + id;
+        show_form('task_detail')
+        httpGetAsync(url,display_detail)
+        }
+    }
+    function delete_task(id) {
+        var url = py_host + '/AGSTask/' + id;
+        httpDelete(url,display_detail)
+        get_results()
+    }
+    function post_results() {
+
+        // https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+
+        var form = document.getElementById("ags_post_form");
+        var data = new FormData(form);
+        update_JSONfields()
+        var task = get_value("task");
+        var owner = get_value("owner");
+        var content = `{"task":"${task}","owner":"${owner}"}`;
+        data.append("owner", owner)
+        var url = py_host + '/AGSTask/';
+        console.log(data);
+        // httpPostAsync(url,data,display_result,'multi-part/form-data')
+        clear_detail();
+        show_form('task_detail');
+        httpPostAsync(url,data,display_detail,'')
+        // httpPostAsync(url,content,display_result)
+        }
+    function display_detail(response) { 
+        console.log(response);
+        set_innerHTML("response",response)
+        var resp = JSON.parse(response);
+        var id = resp.id
+        if (id!=null) { 
+            set_value("id",id) 
+            set_value("get_task",resp.task)
+            set_value("get_files",resp.files)
+            set_value("get_result",resp.result)
+            set_value("get_createdDT",resp.createdDT)
+            set_value("get_completedDT",resp.completedDT)
+            set_value("get_progress",resp.progress)
+            set_value("get_status",resp.status)
+            set_value("get_owner",resp.owner)
+            
+            var lst =  document.getElementById("download_list");
+              //clear existing list
+                lst.innerHTML = "";
+            var i = 0;
+            
+            if (resp.files.length>0) {
+                files = resp.files.split(",")
+              
+            while(i < files.length) { 
+                var download_url = py_host + "/AGSTask/" + id + "/download/" + files[i]
+                li = document.createElement('li');
+                li.setAttribute("class", "list-group-item");
+                // Create anchor element.
+                var a = document.createElement('a'); 
+                // Create the text node for anchor element.
+                var link = document.createTextNode(files[i]);
+                // Append the text node to anchor element.
+                a.appendChild(link); 
+                // Set the title.
+                a.title = files[i]; 
+                // Set the href property.
+                a.href = download_url 
+                li.appendChild(a)
+                lst.appendChild(li);
+                i++
+            }
+            
+            }
+        }
+    }
+
+    function clear_detail() {
+            set_innerHTML("response",'') 
+            set_value("id",'') 
+            set_value("get_task",'')
+            set_value("get_createdDT",'')
+            set_value("get_completedDT",'')
+            set_value("get_result",'')
+            set_value("get_files",'')
+            set_value("get_progress",'')
+            set_value("get_status",'')
+            var lst =  document.getElementById("download_list");
+            lst.innerHTML = "";
+
+    }
+    function display_list (response) {
+        var json_data = JSON.parse(response);
+        var tbd = document.getElementById("task_body");
+        tbd.innerText='';
+        tbd.innerHTML='';
+        tbd.childNodes = null;
+        $("#task_body").empty();
+        clear_detail();
+        for (var i = 0; i < json_data.length; i++) {
+        var task = json_data[i];
+        tr = document.createElement('tr');
+            if (task.completedDT!=null) {
+                tr.setAttribute("class",".table-success")
+            }
+            td = document.createElement('td')
+                td.setAttribute("class","d-none")
+                td.innerHTML = task.id
+            tr.appendChild(td)
+            
+            td = document.createElement('td')
+            td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;")
+            td.innerHTML = task.task
+            tr.appendChild(td)
+            
+            td = document.createElement('td')
+                td.innerHTML = task.createdDT
+            tr.appendChild(td)
+ 
+            td = document.createElement('td')
+                td.innerHTML = task.completedDT
+            tr.appendChild(td)
+ 
+            td = document.createElement('td')
+                if (task.status == status.SUCCESS) {
+                    td.setAttribute("class",".table-success")
+                }
+                td.innerHTML = get_status(task.status)
+            tr.appendChild(td)
+ 
+            td = document.createElement('td')
+                del_btn = document.createElement ('button')
+                del_btn.setAttribute("class", "button")
+                del_btn.setAttribute("onclick", "get_result('" + task.id + "')")
+                del_btn.innerHTML = "Details"
+                td.appendChild(del_btn)
+                
+                del_btn = document.createElement ('button')
+                del_btn.setAttribute("class", "button")
+                del_btn.setAttribute("onclick", "delete_task('" + task.id + "')")
+                del_btn.innerHTML = "Delete"
+                td.appendChild(del_btn)
+                
+            tr.appendChild(td)
+        tbd.appendChild(tr);
+        } 
+    }
+    </script>
+</body>
+
+</html>
