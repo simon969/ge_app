@@ -67,7 +67,7 @@ using ge_app.Models;
             WriteLiteral("<!DOCTYPE html>\r\n");
             EndContext();
             BeginContext(17, 273, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "87a3e6fe83f84033bfbf45a0a4f83438", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "171abcb9e5084265a718aae2fc26b800", async() => {
                 BeginContext(23, 260, true);
                 WriteLiteral(@"
     <title>Get AGS Summary</title>
@@ -91,12 +91,12 @@ using ge_app.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(292, 14282, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "10320cf7746a4d978d46a5d8430f74ea", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dcac879f325f41e58f23a9a950c0c98e", async() => {
                 BeginContext(298, 98, true);
                 WriteLiteral("\r\n    <div class=\"container\">\r\n        <h3 class=\"class=\"display-4\">Get AGS Summary</h3>\r\n        ");
                 EndContext();
                 BeginContext(396, 551, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "42581a6303b947dbb3f80edb115dc12e", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "32c4999f070e4ecaae1ef81cd537e421", async() => {
                     BeginContext(474, 466, true);
                     WriteLiteral(@"
             <div class=""row"">  
@@ -154,7 +154,7 @@ using ge_app.Models;
                 WriteLiteral("v>\r\n\r\n        ");
                 EndContext();
                 BeginContext(1985, 1967, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3dc3da3d0d5d4569b3b0f259c7d01710", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "544b1ad6a0cc473b97323d9c31e07bc8", async() => {
                     BeginContext(2120, 794, true);
                     WriteLiteral(@"
             <div class=""row"">  
@@ -174,7 +174,7 @@ using ge_app.Models;
                             ");
                     EndContext();
                     BeginContext(2914, 37, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "661a60e339b34f16b46919cf75d0cb31", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a09d2e0c14004e53908069336dc0e054", async() => {
                         BeginContext(2935, 7, true);
                         WriteLiteral("AGS 4.0");
                         EndContext();
@@ -196,7 +196,7 @@ using ge_app.Models;
                     WriteLiteral("\r\n                            ");
                     EndContext();
                     BeginContext(2981, 39, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5da666d77ded456181eda4b324ae8cf6", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ba9b9b339284418ac47e247209365e2", async() => {
                         BeginContext(3004, 7, true);
                         WriteLiteral("AGS 3.1");
                         EndContext();
@@ -263,7 +263,7 @@ using ge_app.Models;
                 WriteLiteral("  \r\n\r\n        <button onclick=\"post_results()\">Post</button>\r\n      \r\n        <button onclick=\"populate(\'simon.thomson@aecom.com\',\'AGS4\', \'processAGS\',\'ags_summary,ags_lines\')\">Test101</button>\r\n\r\n        ");
                 EndContext();
                 BeginContext(4157, 2588, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e3cceeca4e1048ed96575f00a9d2eead", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1c462e6431be48b19a853754360c205a", async() => {
                     BeginContext(4183, 2555, true);
                     WriteLiteral(@"
 
