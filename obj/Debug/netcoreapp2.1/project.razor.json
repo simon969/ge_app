@@ -1953,6 +1953,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\ClientAPI\\Index.cshtml",
+      "TargetPath": "Views\\ClientAPI\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\thomsonsj\\apps\\ge_app\\Views\\Employees\\Edit.cshtml",
       "TargetPath": "Views\\Employees\\Edit.cshtml",
       "FileKind": "mvc"

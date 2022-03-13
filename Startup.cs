@@ -13,8 +13,10 @@ using Microsoft.EntityFrameworkCore;
 using ge_app.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Okta.AspNetCore;
+using OktaClients;
 
 namespace OktaMvcLogin
+
 {
     public class Startup
     {
@@ -28,7 +30,22 @@ namespace OktaMvcLogin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // For connecting to gINT secure AIP    
+           
+            services.AddSingleton<ITokenService, TokenService>();
+          
+            services.Configure<OktaConfigs>(Configuration.GetSection("OktaClients"));
+            
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=okta.db"));
+        
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -36,6 +53,27 @@ namespace OktaMvcLogin
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            
+            services.AddCors(options =>
+                    {
+                       options.AddDefaultPolicy(
+                            builder =>
+                            {
+                                builder.WithOrigins("http://localhost:5001",
+                                                    "http://localhost:5000",
+                                                    "localhost:5000",
+                                                    "localhost:5001",
+                                                    "https://ge-app.azurewebsites.net",
+                                                    "http://emi-gis-ps.scottwilson.co.uk",
+                                                    "https://dev-312326.okta.com"
+                                                    )
+                                        .AllowCredentials()
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod()
+                                        .SetIsOriginAllowed(_ => true);
+                                        
+                            });
+                    });
 
             services.AddAuthentication(options =>
             {
@@ -45,11 +83,11 @@ namespace OktaMvcLogin
             })
             .AddCookie()
             .AddOktaMvc(new OktaMvcOptions
-            {
-            OktaDomain = Configuration["Okta:Domain"],
-            ClientId = Configuration["Okta:ClientId"],
-            ClientSecret = Configuration["Okta:ClientSecret"]
-            });
+                {
+                OktaDomain = Configuration["OktaSignIn:Domain"],
+                ClientId = Configuration["OktaSignIn:ClientId"],
+                ClientSecret = Configuration["OktaSignIn:ClientSecret"]
+                });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -70,11 +108,12 @@ namespace OktaMvcLogin
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
+            app.UseCors();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

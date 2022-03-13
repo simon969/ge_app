@@ -6,8 +6,17 @@
     // const py_host = 'https://ge-py.azurewebsites.net';
     const py_host = 'http://emi-gis-ps.scottwilson.co.uk:8000';
     //const py_host = 'http://localhost:8000';
-    // const ge_host = 'http://localhost:5000';
-    const ge_host = 'http://emi-gis-ps.scottwilson.co.uk:80/ge_gint4/api';
+    const gint_host = 'http://localhost:5000/api';
+    // const gint_host = 'http://emi-gis-ps.scottwilson.co.uk:80/ge_gint4/api';
+
+    var OAuth2Client_gINT = {
+            client_id : '0oa6ftjshgwk9supA4x7',
+            client_secret : 'MTkiHq0m1x7gFWR0yXyDXDtCuGyUR418TkFhcJgJ',
+            oauth2_url : 'https://dev-312326.okta.com/oauth2/aus6i9nii2BVLF0hZ4x7/v1/token',
+            grant_type : 'client_credentials',
+            scope : '',
+            token : ''   
+            };
 
     class Status {
         static FAIL = -1
@@ -15,6 +24,11 @@
         static PROCESSING = 1
         static SUCCESS = 2
     }
+    class  OAuthClient {
+        
+        scope
+    }
+
     function get_status (s){
         if (s==Status.FAIL) return 'FAIL'
         if (s==Status.READY) return 'READY'
@@ -24,7 +38,7 @@
     function radians(deg) {
         return deg * Math.PI / 180.0 
     }
-
+    
     function set_visible(id, value) {
         var e = document.getElementById(id);
         if (e != null) {
@@ -128,6 +142,62 @@
             }
         }
     }
+    function get_token (OAuthClient) {
+        
+        // creates an object
+
+        let formdata = new FormData(); 
+        
+        formdata.append('client_id', OAuthClient.client_id);
+        formdata.append ('client_secret',OAuthClient.client_secret);
+        formdata.append ('client_credentials',OAuthClient.client_credentials);
+        formdata.append('scope', OAuthClient.scope); 
+
+        var xmlHttp = new XMLHttpRequest();
+        
+        xmlHttp.open("POST", OAuthClient.oauth2_url, false); // false for synchronous 
+        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlHttp.send(formdata);
+        
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            OAuthClient.token = xmlHttp.responseText;
+            return OAuthClient.token;
+        }
+    }
+
+    function test_OktaCORS () {
+    var baseUrl = 'https://dev-312326.okta.com';
+        var xhr = new XMLHttpRequest();
+        if ("withCredentials" in xhr) {
+            xhr.onerror = function() {
+            alert('Invalid URL or Cross-Origin Request Blocked.  You must explicitly add this site (' + window.location.origin + ') to the list of allowed websites in the administrator UI');
+            }
+            xhr.onload = function() {
+                alert(this.responseText);
+            };
+            xhr.open('GET', baseUrl + '/api/v1/users/me', true);
+            xhr.withCredentials = true;
+            xhr.send();
+        } else {
+            alert("CORS is not supported for this browser!")
+        }
+    }
+    
+    function httpGetAsync(theUrl, callback, authorization)
+    {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() { 
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+            }
+            console.log(theUrl);
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous
+            if (authorization) {
+                xmlHttp.setRequestHeader ("Authorization",authorization)
+            } 
+            // xmlHttp.setRequestHeader("Access-Control-Allow-Origin", "http://localhost:5002")
+            xmlHttp.send(null);
+    }
     function httpGetAsync(theUrl, callback)
     {
             var xmlHttp = new XMLHttpRequest();
@@ -137,7 +207,6 @@
             }
             console.log(theUrl);
             xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-           // xmlHttp.setRequestHeader("Access-Control-Allow-Origin", "http://localhost:5002")
             xmlHttp.send(null);
     }
     
@@ -154,7 +223,6 @@
             var xmlHttp = new XMLHttpRequest();
             console.log(theUrl);
             xmlHttp.open("POST", theUrl, false); // false for synchronous 
-           
             xmlHttp.send(body);
             return xmlHttp.responseText;
     }

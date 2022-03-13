@@ -48,3 +48,4 @@ C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.csproj.CopyComplet
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_LoginPartial2.g.cshtml.cs
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Home\APIDetails.g.cshtml.cs
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index2.g.cshtml.cs
+C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\ClientAPI\Index.g.cshtml.cs
