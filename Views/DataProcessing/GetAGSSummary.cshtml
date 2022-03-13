@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6"> 
-                    <input class="button" type="submit" value="Find">
+                    <input class="button" type="button" onclick="get_results()" value="Find">
                 </div>
             </div>   
         </form>
@@ -137,8 +137,7 @@
         </div>         
        </form>
     </div> 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/ClientSide.js"> </script>
+    
     <script type="text/javascript">
     
     function update_JSONfields() {
@@ -165,19 +164,21 @@
             create.setAttribute("hidden", "True")
         }
     }
+    function init_form()  {
+            $("#ags_post_form").submit(function(e) {
+                e.preventDefault()
+                post_results()
+            });
+            $("#ags_get_form").submit(function(e) {
+                e.preventDefault()
+                get_result()
+            });
+            $("#ags_list_form").submit(function(e) {
+                e.preventDefault()
+                get_results()
+            });
+    }
 
-    $("#ags_post_form").submit(function(e) {
-        e.preventDefault()
-        post_results()
-    });
-    $("#ags_get_form").submit(function(e) {
-        e.preventDefault()
-        get_result()
-    });
-    $("#ags_list_form").submit(function(e) {
-        e.preventDefault()
-        get_results()
-    });
     // $("#ags_form").submit(function() { alert("hi");
     //     var url = "http://localhost:8000/AGSTask/";
     //     $.ajax({
@@ -194,7 +195,8 @@
    
     
     function get_results() {
-        var owner = get_value("owner")
+        init_form();
+        var owner = get_value("owner");
         if (owner !=null) {
         var url = py_host + '/AGSTask/?owner=' + owner;
         httpGetAsync(url,display_list)

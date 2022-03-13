@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6"> 
-                    <input class="button" type="submit" value="Find">
+                    <input class="button" type="button" value="Find" onclick="get_results()">
                 </div>
             </div>   
         </form>
@@ -123,10 +123,10 @@
             <div class="form-group">
                 <label for="download_list">Download Files</label>
                 <ul class="list-group" id="download_list"></ul>  
-            <button class="button" onclick="get_results()">Refresh Status</button>       
+            <button class="button" type="button" onclick="get_results()">Refresh Status</button>       
             </form>
     </div>
-  
+   
     <script type="text/javascript">
     
     function update_JSONfields() {
@@ -157,20 +157,24 @@
         set_value ("phases",phases);
         set_value("results",results);
      }
-    $("#plaxis_post_form").submit(function(e) {
-        e.preventDefault()
-        post_results()
-    });
-    $("#plaxis_get_form").submit(function(e) {
-        e.preventDefault()
-        get_result()
-    });
-    $("#plaxis_list_form").submit(function(e) {
-        e.preventDefault()
-        get_results()
-    });
+    
+    function init_form() {
+        $("#plaxis_post_form").submit(function(e) {
+            e.preventDefault()
+            post_results()
+        });
+        $("#plaxis_get_form").submit(function(e) {
+            e.preventDefault()
+            get_result()
+        });
+        $("#plaxis_list_form").submit(function(e) {
+            e.preventDefault()
+            get_results()
+        });
+    }
 
     function get_results() {
+        init_form();
         var owner = get_value("owner")
         if (owner !=null) {
         var url = py_host + '/PlaxisTask/?owner=' + owner;
@@ -203,6 +207,7 @@
         show_form('plaxis_get_form')
         httpPostAsync(url, content, display_detail)
     }
+
     function display_list (response) {
         var json_data = JSON.parse(response);
         var tbd = document.getElementById("task_body");
