@@ -8,32 +8,62 @@
     <div class="container">
         <h4>Get MOND Results</h4>
         <form method="get" action="/action_page.php" id="get_list_form">
-            <div class="row">  
+            <div class="row col-sm-12">  
                 <div class="col-sm-6"> 
                     <div class="form-group">
-                        <label for="ProjectId">ProjectId
+                        <label for="qryProjectId">ProjectId
                         <button class="button" type="button" onclick="get_projects()">Load Projects</button>
                         </label>
                         <select class="form-control" type="text" id="qryProjectId" name="qryProjectId"> 
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="qryMondType">Reading Type (MOND_TYPE)</label>
+                        <button class="button" type="button" onclick="get_mondtypes()">Load Types</button>
+                        <select class="form-control" type="text" id="qryMondType" name="qryMondType"> 
                         
                         </select>
-
-                     </div>
-                    <div class="form-group">
-                        <label for="PointId">Location (PointId) </label>
-                        <button class="button" type="button" onclick="get_points()">Load Points</button>
-                    </label>
-                    <select class="form-control" type="text" id="qryPointId" name="qryPointId"> 
-                    
-                    </select>
+                        @* <input class="form-control" type="text" id="qryMOND_TYPE" name="qryMOND_TYPE" placeholder="...enter mond_type"> *@
                     </div>
                     <div class="form-group">
-                        <label for="MOND_TYPE">Reading Type (MOND_TYPE)</label>
-                        <input class="form-control" type="text" id="qryMOND_TYPE" name="qryMOND_TYPE" placeholder="...enter mond_type">
+                        <label for="qryPointId">Location (PointId) </label>
+                        <button class="button" type="button" onclick="get_pointsbymond()">Load Points</button>
+                        </label>
+                        <select class="form-control" type="text" id="qryPointId" name="qryPointId"> 
+                        
+                        </select>
+                    </div>
+                   <div class="form-group">
+                        <label for="qryInterval">Reading Interval</label>
+                        <select class="form-control" type="text" id="qryInterval" name="qryInterval">
+                            <option value="individual">Individual Readings</option>
+                            <option value="day_max">Daily Max</option>
+                            <option value="day_min">Daily Min</option>
+                        </select>
                     </div>
                 </div>
-                <div class="col-sm-6"> 
-                    <input class="button" type="submit" value="Find">
+                <div class="col-sm-6">      
+                    <div class="form-group">
+                        <label for="qryFromDT">Readings from DateTime</label>
+                        <input class="form-control" type="datetime-local" id="qryFromDT" name="qryFromDT" placeholder="...enter mond_type">
+                    </div>
+                    <div class="form-group">
+                        <label for="qryFromDT">Readings from DateTime</label>
+                        <input class="form-control" type="datetime-local" id="qryFromDT" name="qryFromDT" placeholder="...enter mond_type">
+                    </div>
+                    <div class="form-group">
+                                <label for="qryPage">Page No</label>
+                                <input class="form-control" type="text" id="qryPage" name="qryPage" value="0">
+                    </div>  
+                    <div class="form-group">
+                                <label for="qryPage">Page Size</label>
+                                <input class="form-control" type="text" id="qrySize" name="qrySize" value="1000">
+                    </div>
+                    <div class="form-group">  
+                                <input class="button" type="button" value="Previous Page" onclick="previous_page()">  
+                                <input class="button" type="button" value="Get MOND Results" onclick="get_mond_results()">  
+                                <input class="button" type="button" value="Next Page" onclick="next_page()">  
+                    </div>
                 </div>
             </div>   
         </form>
@@ -44,6 +74,7 @@
                 <tbody id="mond_body"></tbody>
                 </table>
             </div>
+            <p id="response"> </p>
            <canvas id="mychart"></canvas>
     </div>  
     
@@ -53,7 +84,7 @@
     <script type="text/javascript">
     const data = {
         datasets: [{
-          label: 'My First dataset',
+          label: 'MOND_TYPE',
           backgroundColor: 'rgb(255, 99, 132)',
           borderColor: 'rgb(255, 99, 132)',
           data: [{x: 0, y: 0}]
@@ -99,7 +130,12 @@
               config
       );
 
-    function renderChart (data) {
+    function resetChart () {
+
+        mychart.data = data        
+
+    }
+    function renderChart (data, index) {
 
       var chart_select = get_value("chart_select");
       var new_data = []
@@ -113,11 +149,17 @@
       }
       
       options.scales.y.title.text= data[0].MOND_TYPE + ' ' + data[0].MOND_UNIT;
+            
+      addData(mychart,new_data,data[0].MOND_TYPE, index);
       
-      addData(mychart,new_data,chart_select,0);
-
     }
 
+    function removeData(ds1) {
+    let removalIndex = data.datasets.indexOf(ds1); //Locate index of ds1
+        if(removalIndex >= 0) { //make sure this element exists in the array
+            data.datasets.splice(removalIndex, 1);
+        }
+    }
     function addData(chart, data, label, datasetIndex) {
       chart.data.datasets[datasetIndex].label = label;
       chart.data.datasets[datasetIndex].data = data;
@@ -137,7 +179,6 @@
         var url = gint_host + '/project';
         httpGetAsync(url,display_projects)
     }
-    
     function display_projects(response) {
         var json_data = JSON.parse(response);
         var sel = document.getElementById("qryProjectId");
@@ -149,7 +190,38 @@
             op.innerHTML = project.PROJ_NAME 
             sel.appendChild(op)
         }
+    }
+    function get_mondtypes() {
+        var projectid = get_value("qryProjectId");
+        var url = gint_host + '/mond/uniquetypes/project/'+ projectid;
+        httpGetAsync(url,display_mondtypes)
+    }
+    function display_mondtypes(response) {
+        var json_data = JSON.parse(response);
+        var sel = document.getElementById("qryMondType");
+        sel.innerHTML = ""
+        for (var i = 0; i < json_data.length; i++) {
+            var type = json_data[i];
+            op = document.createElement('option');
+            op.setAttribute("value",type.MOND_TYPE)
+            op.innerHTML = type.MOND_TYPE + ' (' + type.count + ')' 
+            sel.appendChild(op)
+        }
 
+    }
+    function get_pointsbymond() {
+        var projectid = get_value("qryProjectId");
+        var mondtype = get_value("qryMondType");
+        var url = gint_host + '/mond/uniquetypes/project/'+ projectid + '/type/' + mondtype;
+
+        // test_OktaCORS()
+        // if (!OAuth2Client_gINT.token) {
+        //    get_token (OAuth2Client_gINT)
+        // }
+        // httpGetAsync(url,display_points, OAuth2Client_gINT.token)
+        
+        httpGetAsync(url,display_points)
+        
     }
 
     function get_points() {
@@ -157,7 +229,6 @@
         var url = gint_host + '/point/project/' + projectid;
 
         // test_OktaCORS()
-
         // if (!OAuth2Client_gINT.token) {
         //    get_token (OAuth2Client_gINT)
         // }
@@ -175,33 +246,65 @@
             var point = json_data[i];
             op = document.createElement('option');
             op.setAttribute("value",point.PointID)
-            op.innerHTML = point.PointID 
+            if (point.count) { 
+                op.innerHTML = point.PointID + ' (' + point.count + ': ' + point.FromDT + '-' + point.ToDT + ')'
+            } else {
+                op.innerHTML = point.PointID  
+            }
             sel.appendChild(op)
         }
 
     }
+    function previous_page() {
+        var page = get_value("qryPage");
+        if (page > 0) {
+        set_value("qryPage", parseInt(page) - 1);
+        }
+        get_mond_results();
+    }
+    
+    function next_page() {
+        var page = get_value("qryPage");
+        set_value("qryPage", parseInt(page) + 1);
+        get_mond_results();
+    }
     function get_mond_results() {
-        var projectid = get_value("qryProjectId")
-        var pointid = get_value("qryPointId")
-        var mond_type = get_value("qryMOND_TYPE")
-        var url = gint_host + '/mond/project/' + projectid + '/point/' + pointid + '/type/' + mond_type;
-        httpGetAsync(url,display_list)
+        var projectid = get_value("qryProjectId");
+        var pointid = get_value("qryPointId");
+        var mond_type = get_value("qryMondType");
+        var from_dt = get_value("qryFromDT");
+        var to_dt = get_value("qryToDT");
+        var page = get_value("qryPage");
+        var size = get_value("qrySize");
+        dateformat = 'YYYY-MM-DDTHH:m:s';
+
+
+        if (from_dt && to_dt) {
+            var url = gint_host + '/mond/project/' + projectid + '/point/' + pointid + '/type/' + mond_type + '?from=' + from_dt.format(dateformat) +'&to=' + to_dt.format(dateformat);
+        } else {
+            if (page && size) {
+                var url = gint_host + '/mond/project/' + projectid + '/point/' + pointid + '/type/' + mond_type + '/?size=' + size + '&page=' + page
+            } else {
+                var url = gint_host + '/mond/project/' + projectid + '/point/' + pointid + '/type/' + mond_type;
+            }
+        }
+        httpGetAsync(url,display_list);
     }
 
     function display_list (response) {
-        var show_fields = ['PointID','MOND_TYPE','ItemKey','MONG_DIS','DateTime','MOND_RDNG']
+        var show_fields = ['PointID','MOND_TYPE','ItemKey','MONG_DIS','DateTime','MOND_RDNG','MOND_REM']
         var json_data = JSON.parse(response);
         var thead = document.getElementById("mond_head");
         thead.innerHTML = "";
         tr = document.createElement('tr');
-        th = document.createElement('th')
-            th.setAttribute("class","d-none")
-            th.innerHTML = "GintRecID"
-            tr.appendChild(th)
+        th = document.createElement('th');
+            th.setAttribute("class","d-none");
+            th.innerHTML = "GintRecID";
+            tr.appendChild(th);
         for (var j = 0; j < show_fields.length; j++) {
             th = document.createElement('th')
-            th.innerHTML = show_fields[j]
-            tr.appendChild(th)
+            th.innerHTML = show_fields[j];
+            tr.appendChild(th);
         }
         thead.appendChild(tr)
         
@@ -232,7 +335,16 @@
                 td.appendChild(btn) 
             tr.appendChild(td)*@
         tbody.appendChild(tr);
-        renderChart (json_data)
         } 
+
+        resetChart ();
+
+        var currentDT = new Date().toISOString();
+        if (json_data.length>0){ 
+            set_innerHTML ("response",  'Count = ' + json_data.length  + '; Type = ' + json_data[0].MOND_TYPE + '; returned: ' + currentDT)
+            renderChart (json_data, 0);
+        } else {
+            set_innerHTML ("response",'No records returned: ' + currentDT)
+        }
     }
     </script>

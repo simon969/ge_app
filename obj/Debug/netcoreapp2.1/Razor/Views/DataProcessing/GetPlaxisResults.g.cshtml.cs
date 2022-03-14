@@ -64,7 +64,7 @@ using ge_app.Models;
             WriteLiteral("    <div class=\"container\">\r\n        <h3 class=\"class=\"display-4\">Get Plaxis Results</h3>\r\n        <p>Create a query to connect to the Plaxis 2d or 3d Output Server and return a csv file</p>\r\n        ");
             EndContext();
             BeginContext(200, 581, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a6088a7dbc724a2290875c695ceabc14", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "589844b576074395aa78454a410f2b2e", async() => {
                 BeginContext(284, 490, true);
                 WriteLiteral(@"
             <div class=""row"">  
@@ -120,7 +120,7 @@ using ge_app.Models;
         ");
             EndContext();
             BeginContext(1800, 2862, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a10248a98404659a2b734fe4362cb72", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "58e2fe78b3cc429eaad1323d07569172", async() => {
                 BeginContext(1894, 1099, true);
                 WriteLiteral(@"
             <div class=""row"">  
@@ -145,7 +145,7 @@ using ge_app.Models;
                 WriteLiteral("pe=\"text\" class=\"form-control\" id=\"version\"> \r\n                            ");
                 EndContext();
                 BeginContext(2993, 60, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "37d5eb966c9a4eedb4e29ecd6794a4f8", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5076b54a31d4998b66c70de0019dce3", async() => {
                     BeginContext(3027, 17, true);
                     WriteLiteral("Plaxis2dConnectV2");
                     EndContext();
@@ -167,7 +167,7 @@ using ge_app.Models;
                 WriteLiteral("\r\n                            ");
                 EndContext();
                 BeginContext(3083, 56, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7fe7589720a4ba7a031d00373b338f4", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "28ee1b0bb44e434d89b83c21386f220a", async() => {
                     BeginContext(3115, 15, true);
                     WriteLiteral("Plaxis2dConnect");
                     EndContext();
@@ -189,7 +189,7 @@ using ge_app.Models;
                 WriteLiteral("\r\n                            ");
                 EndContext();
                 BeginContext(3169, 56, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b750eb8945b04b94be07e70761713a6f", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "db5476999e674df3bd1486effb49138b", async() => {
                     BeginContext(3201, 15, true);
                     WriteLiteral("Plaxis3dConnect");
                     EndContext();
@@ -255,7 +255,7 @@ using ge_app.Models;
             WriteLiteral(" \r\n           ");
             EndContext();
             BeginContext(4676, 2769, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "666747031d3447b18935e295705fec97", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "956f7a2ddb4c4e33b30e1213c49b9552", async() => {
                 BeginContext(4705, 2733, true);
                 WriteLiteral(@"
             <div class=""form-group"">
