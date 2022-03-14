@@ -6,8 +6,8 @@
     // const py_host = 'https://ge-py.azurewebsites.net';
     const py_host = 'http://emi-gis-ps.scottwilson.co.uk:8000';
     //const py_host = 'http://localhost:8000';
-    const gint_host = 'http://localhost:5000/api';
-    // const gint_host = 'http://emi-gis-ps.scottwilson.co.uk:80/ge_gint4/api';
+    // const gint_host = 'http://localhost:5000/api';
+    const gint_host = 'http://emi-gis-ps.scottwilson.co.uk:80/ge_gint4/api';
 
     var OAuth2Client_gINT = {
             client_id : '0oa6ftjshgwk9supA4x7',
