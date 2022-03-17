@@ -48,8 +48,8 @@
                         <input class="form-control" type="datetime-local" id="qryFromDT" name="qryFromDT" placeholder="...enter mond_type">
                     </div>
                     <div class="form-group">
-                        <label for="qryFromDT">Readings from DateTime</label>
-                        <input class="form-control" type="datetime-local" id="qryFromDT" name="qryFromDT" placeholder="...enter mond_type">
+                        <label for="qryToDT">Readings to DateTime</label>
+                        <input class="form-control" type="datetime-local" id="qryToDT" name="qryToDT" placeholder="...enter mond_type">
                     </div>
                     <div class="form-group">
                                 <label for="qryPage">Page No</label>
@@ -63,6 +63,8 @@
                                 <input class="button" type="button" value="Previous Page" onclick="previous_page()">  
                                 <input class="button" type="button" value="Get MOND Results" onclick="get_mond_results()">  
                                 <input class="button" type="button" value="Next Page" onclick="next_page()">  
+                                <a id="url_json" target="_blank" rel="noopener" >JSON</a>
+                                <a id="url_csv" target="_blank" rel="noopener">CSV</a>
                     </div>
                 </div>
             </div>   
@@ -74,7 +76,10 @@
                 <tbody id="mond_body"></tbody>
                 </table>
             </div>
+
             <p id="response"> </p>
+           
+
            <canvas id="mychart"></canvas>
     </div>  
     
@@ -255,6 +260,7 @@
         }
 
     }
+
     function previous_page() {
         var page = get_value("qryPage");
         if (page > 0) {
@@ -268,6 +274,7 @@
         set_value("qryPage", parseInt(page) + 1);
         get_mond_results();
     }
+
     function get_mond_results() {
         var projectid = get_value("qryProjectId");
         var pointid = get_value("qryPointId");
@@ -278,19 +285,38 @@
         var size = get_value("qrySize");
         dateformat = 'YYYY-MM-DDTHH:m:s';
 
+        var url_download = gint_host + '/mond/project/' + projectid + '/point/' + pointid + '/type/' + mond_type + '/download';
+        var add = '/?';
+        
+        if (from_dt) {
+            var d = new Date(from_dt)
+            url_download += add + 'from=' + d.toISOString();
+            add = "&";
+        } 
 
-        if (from_dt && to_dt) {
-            var url = gint_host + '/mond/project/' + projectid + '/point/' + pointid + '/type/' + mond_type + '?from=' + from_dt.format(dateformat) +'&to=' + to_dt.format(dateformat);
-        } else {
-            if (page && size) {
-                var url = gint_host + '/mond/project/' + projectid + '/point/' + pointid + '/type/' + mond_type + '/?size=' + size + '&page=' + page
-            } else {
-                var url = gint_host + '/mond/project/' + projectid + '/point/' + pointid + '/type/' + mond_type;
-            }
-        }
+        if (to_dt) {
+            var d = new Date(to_dt)
+            url_download += add + 'to=' + d.toISOString();
+            add = "&";
+        } 
+        
+        if (page && size) {   
+            url_download += add + 'size=' + size + '&page=' + page
+            add = "&"
+        }  
+        url = url_download.replace('/download','');
+        
+        var e = document.getElementById("url_csv");
+            url_csv = url_download + add + 'format=csv'
+            e.setAttribute ('href',url_csv);
+        
+        var e = document.getElementById("url_json");
+            url_json = url_download + add + 'format=json'
+            e.setAttribute ('href',url_json);
+            
         httpGetAsync(url,display_list);
     }
-
+   
     function display_list (response) {
         var show_fields = ['PointID','MOND_TYPE','ItemKey','MONG_DIS','DateTime','MOND_RDNG','MOND_REM']
         var json_data = JSON.parse(response);
@@ -331,20 +357,21 @@
                 btn = document.createElement ('button')
                 btn.setAttribute("class", "button")
                 btn.setAttribute("onclick", "update_mond('" + mond.gINTRecID + "')")
-                btn.innerHTML = "Update"
+                btn.innerHTML = "Update",
                 td.appendChild(btn) 
-            tr.appendChild(td)*@
+            tr.appendChild(td) *@
         tbody.appendChild(tr);
         } 
 
         resetChart ();
 
         var currentDT = new Date().toISOString();
+        
         if (json_data.length>0){ 
-            set_innerHTML ("response",  'Count = ' + json_data.length  + '; Type = ' + json_data[0].MOND_TYPE + '; returned: ' + currentDT)
+            set_innerHTML ("response",  'Records returned: Count = ' + json_data.length  + '; Type = ' + json_data[0].MOND_TYPE)
             renderChart (json_data, 0);
         } else {
-            set_innerHTML ("response",'No records returned: ' + currentDT)
+            set_innerHTML ("response",'No records returned')
         }
     }
     </script>
