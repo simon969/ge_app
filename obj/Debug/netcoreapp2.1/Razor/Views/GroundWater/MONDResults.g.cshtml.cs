@@ -75,7 +75,7 @@ using ge_app.Models;
             WriteLiteral("\r\n    <div class=\"container\">\r\n        <h4>Get MOND Results</h4>\r\n        ");
             EndContext();
             BeginContext(169, 3962, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0e050ffc4c6848a7b8c9f29a59fc1c5c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f50f1c2b70d04e859d2c3eddf4effbbd", async() => {
                 BeginContext(233, 908, true);
                 WriteLiteral(@"
             <div class=""row col-sm-12"">  
@@ -111,7 +111,7 @@ using ge_app.Models;
                             ");
                 EndContext();
                 BeginContext(2023, 55, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f7fe0b3ac1164ff49b1dfea7e2c2ddd9", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "abe1f3c15c594675b0b479faed062f2b", async() => {
                     BeginContext(2050, 19, true);
                     WriteLiteral("Individual Readings");
                     EndContext();
@@ -133,7 +133,7 @@ using ge_app.Models;
                 WriteLiteral("\r\n                            ");
                 EndContext();
                 BeginContext(2108, 42, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "52587508d38d48e7a76271552799e160", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a8e39778aa64f46928ebde3b162035d", async() => {
                     BeginContext(2132, 9, true);
                     WriteLiteral("Daily Max");
                     EndContext();
@@ -155,7 +155,7 @@ using ge_app.Models;
                 WriteLiteral("\r\n                            ");
                 EndContext();
                 BeginContext(2180, 42, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6e833e7c358c4565a595df138dd10a06", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bc356a3066c14671bb42c88ad1121f50", async() => {
                     BeginContext(2204, 9, true);
                     WriteLiteral("Daily Min");
                     EndContext();
@@ -244,7 +244,7 @@ using ge_app.Models;
     ");
             EndContext();
             BeginContext(4560, 52, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "09a11939173b4e248d345d37a9157ccd", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9558337f1ed64d06ac6356d4345560db", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

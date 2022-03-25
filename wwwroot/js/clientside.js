@@ -10,6 +10,8 @@
     // const gint_host = 'http://localhost:5000/api';
     const gint_host = 'http://emi-gis-ps.scottwilson.co.uk:80/ge_gint4/api';
     
+    // const repo_host = 'http://localhost:5000/api';
+     const repo_host = 'http://emi-gis-ps.scottwilson.co.uk:80/ge_repo/api';
   
 
     
