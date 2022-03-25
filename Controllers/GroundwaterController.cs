@@ -56,11 +56,30 @@ namespace ge_app.Controllers
         public async Task<IActionResult> MONDResults() {
 
             var token = await _tokenService.GetToken("gINT");
-            Response.Headers.Add ("Authorization",token);
+            Response.Headers.Add ("Authorization","Bearer "+ token);
             // Response.Headers.Add("Content-Security-Policy", "default-src 'self' https://*.okta.com/");
             // Response.Headers.Add ("Authorization",token);
             // Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            ProcessModel pm = new ProcessModel {
+                user = "simon.thomson2@aecom.com",
+                token = token
+            };
             return View();
+        }
+        public async Task<IActionResult> RepositoryData() {
+            var token = await _tokenService.GetToken("ge_repo");
+            Response.Headers.Add ("Authorization", "Bearer " + token);
+            ProcessModel pm = new ProcessModel {
+                user = "simon.thomson2@aecom.com",
+                token = token
+            };
+
+
+            // Response.Headers.Add("Content-Security-Policy", "default-src 'self' https://*.okta.com/");
+            // Response.Headers.Add ("Authorization",token);
+            // Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            return View(pm);
+
         }
     }
 }

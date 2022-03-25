@@ -16,7 +16,8 @@ namespace ge_app.Models
         public DateTime release_date {get;set;}
         public string status {get;set;}
         public string controllers {get;set;}
-    
+        public string token {get;set;}
+        public string user {get;set;}
     }
     public static class MyServer 
     {

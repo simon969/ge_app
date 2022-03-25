@@ -5,7 +5,7 @@
    
    <h3 class="display-4">Authentication and Authorisation</h3>
    <p>This Application has user authentication sign in provided by the Okta dev account <a href="https://dev-312326.okta.com/">https://dev-312326.okta.com/</a></p>
-   <p>The AIP authentication is via OAuth 2.0 with a client_id and client_secret, this is known as machine to machine authentication as it is independent of the user of the application. This is provided by the Okata dev account <a href="https://dev-312326-admin.okta.com/admin/dashboard">https://dev-312326-admin.okta.com/admin/dashboard</a>
+   <p>The API authentication is via OAuth 2.0 with a client_id and client_secret, this is known as machine to machine authentication as it is independent of the user of the application. This is provided by the Okata dev account <a href="https://dev-312326-admin.okta.com/admin/dashboard">https://dev-312326-admin.okta.com/admin/dashboard</a>
   to protect the internal API endpoint of the Bentley gINT database connection.<p>@Html.ActionLink("Records in gINT Database Point Table (gINTProjectID=4)", "gINTLocations", new { gINTProjectID = 4 })</p>  
-  <p>Machine to Machine AIP authentication has not been applied to the Node.js Express AIP and the Python Django AIP as these are more passive services, that have short term project data retention</p>
+  <p>Machine to Machine API authentication has not been applied to the Node.js Express API and the Python Django API as these are more passive services, that have short term project data retention</p>
  <p>No separate authorization groups have been established, if the machine or user is authenticated then they are authorised to carry out any tasks provided by the application or services</p>

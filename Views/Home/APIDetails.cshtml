@@ -22,7 +22,7 @@
     
     <p>This application provides the data input and handles the data response from the following services.</p>
        
-    <h4 class="display-5">Python AIP service </h4>
+    <h4 class="display-5">Python API service </h4>
     <p><a href="http://emi-gis-ps.scottwilson.co.uk:8000/">http://emi-gis-ps.scottwilson.co.uk:8000/</a></p>
     <p>This is a python application server running python 3.9 and the django framework. It has a local media folder for running python scripts and a local database for storage of task flow progress</p>
     <p>In this application the python API it is used by the following clients</p>  
@@ -30,14 +30,14 @@
         <li><p>@Html.ActionLink("Summary of AGS Files", "GetAGSSummary","DataProcessing")</p></li>
         <li><p>@Html.ActionLink("Export Plaxis Results", "GetPlaxisResults","DataProcessing")</p></li>
     </ul>
-    <h4 class="display-5">JavaScript AIP service </h4>  
+    <h4 class="display-5">JavaScript API service </h4>  
     <p><a href="http://emi-gis-ps.scottwilson.co.uk:3000/">http://emi-gis-ps.scottwilson.co.uk:3000/</a></p>
     <p>This is a javascript application server running Node.js and the express framework</p>
     <p>In this application the javascript API is used by the following clients</p>  
     <p>@Html.ActionLink("Undrained Bearing Resistance", "UndrainedBearingEC7", "ShallowFoundations")</p>
     <p>@Html.ActionLink("Drained Bearing Resistance", "DrainedBearingEC7", "ShallowFoundations") </p>
     
-    <h4 class="display-5">gINT Database AIP service </h4> 
+    <h4 class="display-5">gINT Database API service </h4> 
     <p><a href="http://emi-gis-ps.scottwilson.co.uk/ge_gint4/api/project">http://emi-gis-ps.scottwilson.co.uk/ge_gint4/api/project</a></p>
     <p><a href="http://emi-gis-ps.scottwilson.co.uk/ge_gint4/swagger/index.html">http://emi-gis-ps.scottwilson.co.uk/ge_gint4/swagger/index.html</a></p>
     <p>This is a C# application server running ASP.Net Core 2.1 framework protected by a @Html.ActionLink( "Okta Authentication","Index","ClientAPI")</p>
