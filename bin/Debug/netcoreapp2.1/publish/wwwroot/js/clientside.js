@@ -4,9 +4,9 @@
     // const host = 'http://localhost:3000/api';
     
     // const py_host = 'https://ge-py.azurewebsites.net';
-    // const py_host = 'http://emi-gis-ps.scottwilson.co.uk:8000';
+    const py_host = 'http://emi-gis-ps.scottwilson.co.uk:8000';
     
-    const py_host = 'http://localhost:8000';
+    // const py_host = 'http://localhost:8000';
     // const gint_host = 'http://localhost:5000/api';
     const gint_host = 'http://emi-gis-ps.scottwilson.co.uk:80/ge_gint4/api';
     

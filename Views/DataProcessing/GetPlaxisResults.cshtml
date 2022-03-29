@@ -85,45 +85,45 @@
                         <input class="form-control" readonly type="text" id="id">
                     </div>
                     <div class="form-group">
-                        <label for="get_conn">Connection</label>
-                        <input class="form-control" readonly type="text" id="get_conn">
+                        <label for="conn">Connection</label>
+                        <input class="form-control" readonly type="text" id="conn">
                     </div>
                     <div class="form-group">
-                        <label for="get_query">Query</label>
-                        <input class="form-control" readonly type="text" id="get_query">
+                        <label for="query">Query</label>
+                        <input class="form-control" readonly type="text" id="query">
                     </div>
                     <div class="form-group">
-                        <label for="get_files">Files</label>
-                        <input class="form-control" readonly type="text" id="get_files">
+                        <label for="files">Files</label>
+                        <input class="form-control" readonly type="text" id="files">
                     </div>
                 </div>
                 <div class="col-sm-6"> 
                     <div class="form-group">
                         <label for="createdDT">Created Datetime</label>
-                        <input class="form-control" readonly type="text" id="get_createdDT">
+                        <input class="form-control" readonly type="text" id="createdDT">
                     </div>
                     <div class="form-group">
                         <label for="completedDT">Completed Datetime</label>
-                        <input class="form-control" readonly type="text" id="get_completedDT">
+                        <input class="form-control" readonly type="text" id="completedDT">
                     </div> 
                     <div class="form-group">
                         <label for="owner">Owner</label>
-                        <input class="form-control" readonly type="text" id="get_owner">
+                        <input class="form-control" readonly type="text" id="owner">
                     </div> 
                     <div class="form-group">
-                        <label for="get_result">Results</label>
-                        <input class="form-control" readonly type="text" id="get_result">
+                        <label for="result">Results</label>
+                        <input class="form-control" readonly type="text" id="result">
                     </div> 
                 </div>
             </div>
             <div class="form-group">
-                <label for="get_progress">Progress</label>
-                <textarea class = "form-control" readonly id="get_progress"></textarea>
+                <label for="progress">Progress</label>
+                <textarea class = "form-control" readonly id="progress"></textarea>
             </div>   
             <div class="form-group">
                 <label for="download_list">Download Files</label>
                 <ul class="list-group" id="download_list"></ul>  
-            <button class="button" type="button" onclick="get_results()">Refresh Status</button>       
+            <button class="button" type="button" onclick="get_result()">Refresh Status</button>       
             </form>
     </div>
    
@@ -178,22 +178,22 @@
         var owner = get_value("owner")
         if (owner !=null) {
         var url = py_host + '/PlaxisTask/?owner=' + owner;
-        httpGetAsync(url,display_list)
+        httpGetAsync(url,display_list);
         }
     }
     function delete_task(id) {
         var url = py_host + '/PlaxisTask/' + id;
-        httpDelete(url,display_detail)
-        get_results()
+        httpDelete(url,display_detail);
+        get_results();
     }
     function get_result(id = null) {
         if (id==null) {
-            id = get_value("id")
+            id = get_value("id");
         }
         if (id !=null) {
         var url = py_host + '/PlaxisTask/' + id;
-        show_form('task_detail')
-        httpGetAsync(url,display_detail)
+        show_form('task_detail');
+        httpGetAsync(url,display_detail);
         }
     }
     function post_results() {
@@ -204,8 +204,8 @@
         var content = `{"conn":"${conn}","query":"${query}","owner":"${owner}"}`;
         var url = py_host + '/PlaxisTask/';
         console.log(content);
-        show_form('plaxis_get_form')
-        httpPostAsync(url, content, display_detail)
+        show_form('task_detail');
+        httpPostAsync(url, content, display_detail);
     }
 
     function display_list (response) {
@@ -220,90 +220,90 @@
         var task = json_data[i];
         tr = document.createElement('tr');
             if (task.completedDT!=null) {
-                tr.setAttribute("class",".table-success")
+                tr.setAttribute("class",".table-success");
             }
-            td = document.createElement('td')
-                td.setAttribute("class","d-none")
-                td.innerHTML = task.id
-            tr.appendChild(td)
+            td = document.createElement('td');
+                td.setAttribute("class","d-none");
+                td.innerHTML = task.id;
+            tr.appendChild(td);
             
-            td = document.createElement('td')
-            td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;")
-            td.innerHTML = task.conn
-            tr.appendChild(td)
+            td = document.createElement('td');
+            td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;");
+            td.innerHTML = task.conn;
+            tr.appendChild(td);
             
-            td = document.createElement('td')
+            td = document.createElement('td');
+            td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;");
+                td.innerHTML = task.query;
+            tr.appendChild(td);
+            td = document.createElement('td');
+                td.innerHTML = task.createdDT;
+            tr.appendChild(td);
+            td = document.createElement('td');
+                td.innerHTML = task.completedDT;
+            tr.appendChild(td);
+            td = document.createElement('td');
             td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;")
-                td.innerHTML = task.query
-            tr.appendChild(td)
-            td = document.createElement('td')
-                td.innerHTML = task.createdDT
-            tr.appendChild(td)
-            td = document.createElement('td')
-                td.innerHTML = task.completedDT
-            tr.appendChild(td)
-            td = document.createElement('td')
-            td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;")
-                td.innerHTML = task.files
-            tr.appendChild(td)
-            td = document.createElement('td')
-                td.innerHTML = task.results
-            tr.appendChild(td)
-            td = document.createElement('td')
-                del_btn = document.createElement ('button')
-                del_btn.setAttribute("class", "button")
-                del_btn.setAttribute("onclick", "get_result('" + task.id + "')")
-                del_btn.innerHTML = "Details"
-                td.appendChild(del_btn)
+                td.innerHTML = task.files;
+            tr.appendChild(td);
+            td = document.createElement('td');
+                td.innerHTML = task.results;
+            tr.appendChild(td);
+            td = document.createElement('td');
+                det_btn = document.createElement ('button');
+                det_btn.setAttribute("class", "button");
+                det_btn.setAttribute("onclick", "get_result('" + task.id + "')");
+                det_btn.innerHTML = "Details";
+                td.appendChild(det_btn);
                 
-                del_btn = document.createElement ('button')
-                del_btn.setAttribute("class", "button")
-                del_btn.setAttribute("onclick", "delete_task('" + task.id + "')")
-                del_btn.innerHTML = "Delete"
-                td.appendChild(del_btn)
+                del_btn = document.createElement ('button');
+                del_btn.setAttribute("class", "button");
+                del_btn.setAttribute("onclick", "delete_task('" + task.id + "')");
+                del_btn.innerHTML = "Delete";
+                td.appendChild(del_btn);
                 
-            tr.appendChild(td)
+            tr.appendChild(td);
         tbd.appendChild(tr);
         } 
     }
     
     function clear_detail() {
-            set_innerHTML("response",'')  
-            set_value("id",'') 
-            set_value("get_conn",'')
-            set_value("get_query",'')
-            set_value("get_createdDT",'')
-            set_value("get_completedDT",'')
-            set_value("get_result",'')
-            set_value("get_files",'')
-            set_value("get_progress",'')
+            set_innerHTML("response",'')  ;
+            set_value("id",'') ;
+            set_value("conn",'');
+            set_value("query",'');
+            set_value("createdDT",'');
+            set_value("completedDT",'');
+            set_value("result",'');
+            set_value("files",'');
+            set_value("progress",'');
             var lst =  document.getElementById("download_list");
             lst.innerHTML = "";
 
     }
     function display_detail(response) { 
-        set_innerHTML ("response",response)
+        set_innerHTML ("response",response);
         var resp = JSON.parse(response);
-        var id = resp.id
+        var id = resp.id;
         if (id!=null) { 
-            set_value("id",id) 
-            set_value("get_conn",resp.conn)
-            set_value("get_query",resp.query)
-            set_value("get_createdDT",resp.createdDT)
-            set_value("get_completedDT",resp.completedDT)
-            set_value("get_progress",resp.progress)
-            set_value("get_files",resp.files)
-            set_value("get_result",resp.result)
+            set_value("id",id); 
+            set_value("conn",resp.conn);
+            set_value("query",resp.query);
+            set_value("createdDT",resp.createdDT);
+            set_value("completedDT",resp.completedDT);
+            set_value("progress",resp.progress);
+            set_value("files",resp.files);
+            set_value("result",resp.result);
             var lst =  document.getElementById("download_list"); 
                 //clear existing list
                 lst.innerHTML = "";
             var i = 0;
             
             if (resp.files != null) {
-                files = resp.files.split(",")
+                files = resp.files.split(",");
                
             while(i < files.length) { 
-                var download_url = py_host + "/PlaxisTask/" + id + "/download/" + files[i]
+                var download_url = py_host + "/PlaxisTask/" + id + "/download/" + files[i];
                 li = document.createElement('li');
                 li.setAttribute("class", "list-group-item");
                 // Create anchor element.
@@ -315,10 +315,10 @@
                 // Set the title.
                 a.title = files[i]; 
                 // Set the href property.
-                a.href = download_url 
-                li.appendChild(a)
+                a.href = download_url; 
+                li.appendChild(a);
                 lst.appendChild(li);
-                i++
+                i++;
             }
             
             }
