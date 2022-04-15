@@ -34,10 +34,11 @@ namespace ge_app.Controllers
         }
         public async Task<IActionResult> gINTLocations(int gINTProjectID)
         {
-            var token = await _tokenService.GetToken();
+            var token = await _tokenService.GetToken("gINT");
+            Response.Headers.Add ("Authorization","Bearer "+ token);
            
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JwtBearerDefaults.AuthenticationScheme, token);
-            var res = await _httpClient.GetAsync($"http://localhost:5000/api/point/project/{gINTProjectID}");
+            var res = await _httpClient.GetAsync($"http://emi-gis-ps.scottwilson.co.uk/ge_gint4/api/project/{gINTProjectID}");
             if (res.IsSuccessStatusCode)
             {
                 var content = await res.Content.ReadAsStringAsync();

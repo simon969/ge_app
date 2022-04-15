@@ -1,0 +1,215 @@
+@model ge_app.Models.ProcessModel
+    
+@{
+    ViewData["Title"] = "Latex to PDF Output";
+}
+
+  <div class="container">
+    <!-- Content here -->
+    <h2>Latex to PDF Output</h2>
+     <form action="http://localhost:3000/ge_task/" method="get" id="task_list_form">
+            <div class="row">  
+                <div class="col-sm-6"> 
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="owner" name="owner" placeholder="...enter owner email">
+                    </div>
+                </div>
+                <div class="col-sm-6"> 
+                    <input class="button" type="button" value="Find" onclick="get_tasks()">
+                </div>
+            </div>   
+      </form>
+      <div class="table-wrapper-scroll-y plaxis_list-scrollbar">
+          <table class="table table-striped" id="task_table">
+              <thead>
+              <tr>
+                  <th class="d-none" scope="col">Id</th>
+                  <th class="col-5" scope="col">Created</th>
+                  <th class="col-6" scope="col">Files</th>
+                  <th class="col-1"  scope="col">Action</th>
+              </tr>
+              </thead>
+          <tbody id="task_body"></tbody>
+          </table>
+      </div>
+  
+    
+    <p>Convert Latex string to PDF</p>
+      <div class="form-group">
+      <label for="latex">Raw Latex</label>
+        <textarea id="latex" class = "form-control" name="latex" rows="12" cols="50"> </textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="filename"> Latex filename (*.tex)</label>
+        <input type="text" class="form-control" id="filename" name="filename">
+      </div>
+      <form id="latex_form" name="latex_form" enctype="multipart/form-data">
+          <div class="form-group">
+          <label for="host">Latex Files</label>
+          <input type="file" id="files" name="files" accept=".tex" multiple="multiple" onchange="update_file_list3('files','filelist')" >
+          </div>
+          <div class="form-group">
+          <ul class="list-group" id="filelist" > </ul>
+        </div>
+        <button class="button" type="button" onclick="populate_latex()" >Get Latext Sample</button>
+        <button class="button" type="button" onclick="post_latex()"> Post Body (Sample)</button>
+        <button class="button" type="button" onclick="post_latex_formData()"> Post FormData (Files and Sample)</button>
+    </form>
+        <div class="form-group">
+        <label for="response">Response from Latex to PDF server</label>
+        <textarea id="response" class = "form-control" name="response" placeholder="...response from latex to PDF server" rows="4" cols="50"> </textarea>
+      </div>
+    
+   
+  </div>
+
+<script type="text/javascript" >
+    
+     // var host = "http://localhost:3000/api";
+    
+    function get_tasks() {
+        let owner =$("#owner" ).val();
+        if (owner) {
+        var url = host + '/ge_task/?owner=' + owner;;
+        httpGetAsync(url,display_list);
+        }
+    }
+    
+    function delete_task(id) {
+        var url = host + '/ge_task/' + id;
+        httpDeleteAsync(url,display_result);
+        get_tasks();
+    }
+    function post_latex_formData() { 
+        let form = document.getElementById("latex_form");
+        let data = new FormData(form);
+        let filename  = $("#filename" ).val();
+        let latex  = $( "#latex" ).val();
+        //remove newline formating and escape \ character
+        let latex_esc = latex.replace(/\n/g,"\\n").replace(/\\/g,"\\\\");
+        let owner  = $( "#owner" ).val();
+       
+        data.append("owner", owner);
+        data.append("filename", filename);
+        data.append("latex",latex_esc);
+
+        let url = host + '/ge_task';
+        
+        // httpPostAsync(url, data, display_result,'multi-part/form-data');
+        // https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+        // Warning: When using FormData to submit POST requests using XMLHttpRequest or the Fetch_API with the multipart/form-data Content-Type 
+        // (e.g. when uploading Files and Blobs to the server), do not explicitly set the Content-Type header on the request. 
+        // Doing so will prevent the browser from being able to set the Content-Type header with the boundary expression it will use to delimit form fields in the request body.
+        
+        httpPostAsync(url, data, display_result,'');
+        get_tasks();
+    } 
+
+    function post_latex() { 
+          
+        let filename  = $("#filename" ).val();
+        let latex  = $( "#latex" ).val();
+        //remove newline formating and escape \ character
+        let latex_esc = latex.replace(/\n/g,"\\n").replace(/\\/g,"\\\\");
+        let owner  = $( "#owner" ).val();
+        let content = `{"filename":"${filename}","latex":"${latex_esc}","owner":"${owner}"}`;
+        let url = host + '/ge_task';
+
+        httpPostAsync(url, content, display_result);
+
+      }
+
+      function display_result(response) {
+        let resp = document.getElementById("response");
+        resp.innerHTML =  response;
+      }
+    
+      function populate_latex() {
+        
+        lt = []
+        
+        lt.push('\\documentclass{article}');
+        lt.push('\\begin{document}');
+        lt.push('Welcome to AECOM Ground Engineering Latex format reporting');
+        lt.push('\\begin{center}')
+        lt.push('Example 1: The following paragraph (given in quotes) is an'); 
+        lt.push('example of centred alignment using the center environment.');
+        lt.push('``La\\TeX{} is a document preparation system and document markup');
+        lt.push('language. \\LaTeX{} uses the \\TeX{} typesetting program for formatting'); 
+        lt.push('its output, and is itself written in the \\TeX{} macro language.'); 
+        lt.push('\\LaTeX{} is not the name of a particular (executable) typesetting program, but'); 
+        lt.push('refers to the suite of commands (\\TeX{} macros) which form the markup'); 
+        lt.push('conventions used to typeset \\LaTeX{} documents.');
+        lt.push('\\end{center}');
+        lt.push(new Date().toISOString());
+        lt.push('\\end{document}');
+        
+        $( "#filename" ).val("ge_file.tex");
+        $( "#latex" ).val( lt.join(''));
+              
+      }
+   
+    function display_list (response) {
+        var json_data = JSON.parse(response);
+        var tbd = document.getElementById("task_body");
+        tbd.innerText='';
+        tbd.innerHTML='';
+        tbd.childNodes = null;
+        $("#task_body").empty();
+        if (json_data.data) {
+          for (var i = 0; i < json_data.data.length; i++) {
+          var task = json_data.data[i];
+          tr = document.createElement('tr');
+              
+              td = document.createElement('td');
+                td.setAttribute("class","d-none");
+                td.innerHTML = task.Id;
+              tr.appendChild(td);
+              
+              td = document.createElement('td');
+                td.innerHTML = task.createdDT;
+              tr.appendChild(td);
+              
+              td = document.createElement('td');
+                td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;");
+                // td.innerHTML = task.files;
+                if (task.files != null) {
+                  let download_files = task.files.split(",");
+                  for (var j = 0; j < download_files.length; j++) { 
+                      let download_file = download_files[j];
+                      let download_url = host + "/ge_task/" + task.Id + "/download/" + download_file;
+                      let p = document.createElement('p')
+                      // Create anchor element.
+                      let a = document.createElement('a'); 
+                           // Set the title.
+                          a.title = download_file; 
+                          // Set the href property.
+                          a.href = download_url;
+                          // Create target _blank attribute to open in new window
+                          a.setAttribute("target","_blank");
+                          // Create the text node for anchor element.
+                          let link = document.createTextNode(download_file);
+                          // Append the text node to anchor element.
+                          a.appendChild(link); 
+                         
+                      p.append(a); 
+                      td.appendChild(p);
+                  }
+                }
+
+              tr.appendChild(td);
+              
+              td = document.createElement('td');
+                  del_btn = document.createElement ('button');
+                  del_btn.setAttribute("class", "button");
+                  del_btn.setAttribute("onclick", "delete_task('" + task.Id + "')");
+                  del_btn.innerHTML = "Delete";
+                td.appendChild(del_btn);
+                  
+              tr.appendChild(td);
+          tbd.appendChild(tr);
+          } 
+        }
+    }
+</script>

@@ -1,0 +1,18 @@
+﻿@using ge_app.Models
+
+@model IEnumerable<ge_app.Models.ProcessModel>
+
+@{
+    ViewData["Title"] = "Reporting Tools";
+}
+
+<div class="container">
+    
+    <h3 class="display-4">Reporting Tools</h3>
+
+    <p>The following reporting tools are available to assist in outputing results in useful formats</p>
+    
+    <h3>@Html.ActionLink("Latex to PDF Server", "Latex2PDFOutput")</h3>
+    <p>If calculation results are returned in latex formated text they can be convert to Portable Document Format (PDF)</p> 
+ 
+</div>

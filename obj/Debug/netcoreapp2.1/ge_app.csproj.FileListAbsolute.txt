@@ -50,3 +50,59 @@ C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Home\APIDetai
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index2.g.cshtml.cs
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\ClientAPI\Index.g.cshtml.cs
 C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\GroundWater\RepositoryData.g.cshtml.cs
+C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Reporting\Index.g.cshtml.cs
+C:\Users\thomsonsj\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Reporting\Latex2PDFOutput.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\bin\Debug\netcoreapp2.1\ge_app.deps.json
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\bin\Debug\netcoreapp2.1\ge_app.runtimeconfig.json
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\bin\Debug\netcoreapp2.1\ge_app.runtimeconfig.dev.json
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\bin\Debug\netcoreapp2.1\ge_app.dll
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\bin\Debug\netcoreapp2.1\ge_app.pdb
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\bin\Debug\netcoreapp2.1\ge_app.Views.dll
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\bin\Debug\netcoreapp2.1\ge_app.Views.pdb
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.csprojAssemblyReference.cache
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.csproj.CoreCompileInputs.cache
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.RazorAssemblyInfo.cache
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.RazorAssemblyInfo.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.AssemblyInfoInputs.cache
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.AssemblyInfo.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.TagHelpers.input.cache
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.TagHelpers.output.cache
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.RazorCoreGenerate.cache
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\ClientAPI\Index.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\DataProcessing\GetAGSSummary.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\DataProcessing\GetPlaxisResults.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\DataProcessing\Index.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\DeepFoundations\Index.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Employees\Create.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Employees\Delete.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Employees\Details.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Employees\Edit.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Employees\Index.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\GroundWater\Index.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\GroundWater\MONDResults.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\GroundWater\RepositoryData.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Home\APIDetails.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index2.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Home\Privacy.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Reporting\Index.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Reporting\Latex2PDFOutput.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\ShallowFoundations\DrainedBearingEC7.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\ShallowFoundations\EC7D1ic.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\ShallowFoundations\Index.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\ShallowFoundations\UndrainedBearingEC7.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Error.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Layout.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_LoginPartial.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_LoginPartial2.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\Tunnelling\Index.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\_ViewImports.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\Razor\Views\_ViewStart.g.cshtml.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.RazorTargetAssemblyInfo.cache
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.RazorTargetAssemblyInfo.cs
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.Views.pdb
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.dll
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.pdb
+C:\Users\thomsonsj\AECOM\ge_dev - Documents\apps\ge_app\obj\Debug\netcoreapp2.1\ge_app.csproj.CopyComplete

@@ -1,7 +1,7 @@
 
     //const host = 'https://ge-node.azurewebsites.net/api';
-    const host = 'http://emi-gis-ps.scottwilson.co.uk:3000/api';
-    // const host = 'http://localhost:3000/api';
+    // const host = 'http://emi-gis-ps.scottwilson.co.uk:3000/api';
+    const host = 'http://localhost:3000/api';
     
     // const py_host = 'https://ge-py.azurewebsites.net';
     const py_host = 'http://emi-gis-ps.scottwilson.co.uk:8000';
@@ -11,9 +11,10 @@
     const gint_host = 'http://emi-gis-ps.scottwilson.co.uk:80/ge_gint4/api';
     
     // const repo_host = 'http://localhost:5000/api';
-     const repo_host = 'http://emi-gis-ps.scottwilson.co.uk:80/ge_repo/api';
+    const repo_host = 'http://emi-gis-ps.scottwilson.co.uk:80/ge_repo/api';
   
-
+    var token = null;
+    var user = null;
     
     var OAuth2Client_gINT = {
             client_id : '0oa6ftjshgwk9supA4x7',
@@ -156,14 +157,14 @@
         formdata.append ('client_credentials',OAuthClient.client_credentials);
         formdata.append('scope', OAuthClient.scope); 
 
-        var xmlHttp = new XMLHttpRequest();
+        var xhr = new XMLHttpRequest();
         
-        xmlHttp.open("POST", OAuthClient.oauth2_url, false); // false for synchronous 
-        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlHttp.send(formdata);
+        xhr.open("POST", OAuthClient.oauth2_url, false); // false for synchronous 
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(formdata);
         
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            OAuthClient.token = xmlHttp.responseText;
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            OAuthClient.token = xhr.responseText;
             return OAuthClient.token;
         }
     }
@@ -188,65 +189,82 @@
 
     function httpGetAsync(theUrl, callback)
     {
-            var xmlHttp = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
             var token = get_value('token')
             var user = get_value ('user')
-            xmlHttp.onreadystatechange = function() { 
-                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                    callback(xmlHttp.responseText);
+            xhr.onreadystatechange = function() { 
+                if (xhr.readyState == 4 && xhr.status == 200)
+                    callback(xhr.responseText);
             }
             console.log(theUrl);
-            xmlHttp.open("GET", theUrl, true); // true for asynchronous
+            xhr.open("GET", theUrl, true); // true for asynchronous
             if (token) {
-                xmlHttp.setRequestHeader ('Authorization',`Bearer ${token}`)
+                xhr.setRequestHeader ('Authorization',`Bearer ${token}`)
             } 
             if (user) {
-                xmlHttp.setRequestHeader ("user",user)
+                xhr.setRequestHeader ("user",user)
             } 
-            // xmlHttp.setRequestHeader("Access-Control-Allow-Origin", "http://localhost:5002")
-            xmlHttp.send(null);
+            // xhr.setRequestHeader("Access-Control-Allow-Origin", "http://localhost:5002")
+            xhr.send(null);
     }
     // function httpGetAsync(theUrl, callback)
     // {
-    //         var xmlHttp = new XMLHttpRequest();
-    //         xmlHttp.onreadystatechange = function() { 
-    //             if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-    //                 callback(xmlHttp.responseText);
+    //         var xhr = new XMLHttpRequest();
+    //         xhr.onreadystatechange = function() { 
+    //             if (xhr.readyState == 4 && xhr.status == 200)
+    //                 callback(xhr.responseText);
     //         }
     //         console.log(theUrl);
-    //         xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-    //         xmlHttp.send(null);
+    //         xhr.open("GET", theUrl, true); // true for asynchronous 
+    //         xhr.send(null);
     // }
     
     function httpGet(theUrl)
     {
             var xmlHttp = new XMLHttpRequest();
             console.log(theUrl);
-            xmlHttp.open("GET", theUrl, false); // false for synchronous 
-            xmlHttp.send(null);
-            return xmlHttp.responseText;
+            xhr.open("GET", theUrl, false); // false for synchronous 
+            xhr.send(null);
+            return xhr.responseText;
     }
     function httpPost(theUrl, body)
     {
-            var xmlHttp = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
             console.log(theUrl);
-            xmlHttp.open("POST", theUrl, false); // false for synchronous 
-            xmlHttp.send(body);
-            return xmlHttp.responseText;
+            xhr.open("POST", theUrl, false); // false for synchronous 
+            if (token) {
+                xhr.setRequestHeader ('Authorization',`Bearer ${token}`)
+            } 
+            if (user) {
+                xhr.setRequestHeader ("user",user)
+            } 
+            xhr.send(body);
+            return xhr.responseText;
     }
-    function httpDelete(theUrl, body)
+    function httpDelete(theUrl)
     {
-            var xmlHttp = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
             console.log(theUrl);
-            xmlHttp.open("DELETE", theUrl, false); // false for synchronous 
-           
-            xmlHttp.send(body);
-            return xmlHttp.responseText;
+            xhr.open("DELETE", theUrl, false); // false for synchronous 
+            xhr.send(null);
+            return xhr.responseText;
     }
+    function httpDeleteAsync(theUrl, callback)
+    {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() { 
+                if (xhr.readyState == XMLHttpRequest.DONE && callbackk)
+                    callback(xhr.responseText);
+            }
+            console.log(theUrl);
+            xhr.open("DELETE", theUrl, true); // true for asynchronous 
+            xhr.send(null);
+    }
+    
     function httpPostAsync(url, body, callback, content_type='application/json') {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() { 
-            if (xhr.readyState == XMLHttpRequest.DONE) {
+            if (xhr.readyState == XMLHttpRequest.DONE && callback) {
                     callback(xhr.responseText);
                     // var status = xhr.status;
                     // if (status === 0 || (status >= 200 && status < 400)) {
@@ -265,7 +283,13 @@
             
             try {
             xhr.open("POST", url, true); // true for asynchronous 
-            // xmlHttp.setRequestHeader("X-CSRFToken", csrftoken);
+            if (token) {
+                xhr.setRequestHeader ('Authorization',`Bearer ${token}`)
+            } 
+            if (user) {
+                xhr.setRequestHeader ("user",user)
+            } 
+            // xhr.setRequestHeader("X-CSRFToken", csrftoken);
             if (content_type!="") {
                 xhr.setRequestHeader('Accept', content_type);
                 xhr.setRequestHeader('Content-Type', content_type);
@@ -368,4 +392,16 @@
       function parseISODate(str) {
         return DateTime.fromISO(str);
       }
- 
+
+      function open_pdf (latex_code) {
+      var pdftex = new PDFTeX();
+    //   var latex_code = "" +
+    //     "\\documentclass{article}" +
+    //     "\\begin{document}" +
+    //     "\\LaTeX is great!" +
+    //     "$E = mc^2$" +
+    //     "\\end{document}";
+      
+      pdftex.compile(latex_code)
+            .then(function(pdf) { window.open(pdf) })
+      }

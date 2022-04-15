@@ -151,12 +151,17 @@
       <label for="response">D.4 Drained Conditions (intermediate results eq D.2)</label>
       <textarea id="response" class = "form-control" name="response" placeholder="...intermediate results drained resistance" rows="4" cols="50"> </textarea>
     </div>
+    <div class="form-group" id ="fg_report" >
+      <label for="result">D.4 Drained Conditions (eq D.2) Report</label>
+      <textarea id="report" class = "form-control" name="report" placeholder="...report formated results" rows="4" cols="50"> </textarea>
+     </div>
     <button  onclick="calc()" class="btn btn-primary">Calculate</button>
     <button  onclick="populate(3,6,18,10,28,30,20,100,50,90,0)" class="btn btn-primary">Test</button>
     
   </div>
-  <script type="text/javascript" src="js/ClientSide.js"> </script>
+  <script type="text/javascript" src="../js/clientside.js"> </script>
 <script type="text/javascript" >
+    var resps = [];
     function calc() { 
           // var host = "https://ge-app.azurewebsites.net/api";
           // var host = "http://localhost:3000/api";
@@ -171,7 +176,8 @@
           var alpha_rad =  radians(get_value("alpha_deg"));
           var surcharge =  get_value("surcharge");
           var density =  get_value("density");
-          var url = host + `/EC7_Bearing/calc_EC7_D2?breadth=${Breadth}&length=${Length}&area=${Area}&hload=${HLoad}&vload=${VLoad}&cohesion=${cohesion}&phi_rad=${phi_rad}&htheta_rad=${Htheta_rad}&alpha_rad=${alpha_rad}&surcharge=${surcharge}&density=${density}`
+          
+          var url = host + `/EC7_Bearing/calc_EC7_D2?breadth=${Breadth}&length=${Length}&area=${Area}&hload=${HLoad}&vload=${VLoad}&cohesion=${cohesion}&phi_rad=${phi_rad}&htheta_rad=${Htheta_rad}&alpha_rad=${alpha_rad}&surcharge=${surcharge}&density=${density}&report='latex'`
           
           httpGetAsync(url, display_result)
         
@@ -179,7 +185,7 @@
         
       function display_result(response) {
           set_innerHTML ("response",response);
-          var resps = JSON.parse(response);
+          resps = JSON.parse(response);
           var resp = resps[0];
           set_innerHTML ("nc", resp["nc"])
           set_innerHTML ("nq", resp["nq"])
@@ -234,5 +240,5 @@
         set_innerHTML("response","")
         set_value ("result","")
     }
-   
+
 </script>

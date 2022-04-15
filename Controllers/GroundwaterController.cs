@@ -64,7 +64,7 @@ namespace ge_app.Controllers
                 user = "simon.thomson2@aecom.com",
                 token = token
             };
-            return View();
+            return View(pm);
         }
         public async Task<IActionResult> RepositoryData() {
             var token = await _tokenService.GetToken("ge_repo");
