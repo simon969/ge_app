@@ -1,0 +1,338 @@
+@model ge_app.Models.ProcessModel
+    
+@{
+    ViewData["Title"] = "JSON to PDF Output";
+}
+
+  <div class="container">
+    <!-- Content here -->
+    <h2>JSON Data to PDF Output</h2>
+    <p> Create a latex file from JSON formated data and latex macro file and convert to a PDF</p>
+     <form action="http://localhost:3000/ge_task/" method="get" id="task_list_form">
+            <div class="row">  
+                <div class="col-sm-6"> 
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="owner" name="owner" placeholder="...enter owner email">
+                    </div>
+                </div>
+                <div class="col-sm-6"> 
+                    <input class="button" type="button" value="Find" onclick="get_tasks()">
+                </div>
+            </div>   
+      </form>
+      <div class="table-wrapper-scroll-y plaxis_list-scrollbar">
+          <table class="table table-striped" id="task_table">
+              <thead>
+              <tr>
+                  <th class="d-none" scope="col">Id</th>
+                  <th class="col-2" scope="col">Details</th>
+                  <th class="col-3" scope="col">Tex files</th>
+                  <th class="col-3" scope="col">Aux files</th>
+                  <th class="col-3" scope="col">PDF files</th>
+                  <th class="col-1"  scope="col">Action</th>
+              </tr>
+              </thead>
+          <tbody id="task_body"></tbody>
+          </table>
+      </div>
+  
+    
+    <p>Convert JSON string to PDF</p>
+      <div class="form-group">
+      <label for="json_data">JSON data</label>
+        <textarea id="json_data" class = "form-control" name="json_data" placeholder="...JSON formated values" rows="12" cols="50"></textarea>
+      </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="type"> Description</label>
+              <input type="text" class="form-control" id="description" name="description">
+            </div>
+            <div class="form-group">
+              <label for="filename"> Latex filename (*.tex)</label>
+              <input type="text" class="form-control" id="filename" name="filename">
+            </div> 
+            <div class="form-group">
+              <label for="type"> Latex content type</label>
+              <select type="text" class="form-control" id="type" name="type">
+                <option value="normal">Normal</option>
+                <option value="macro">Macro</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6"> 
+            <div class="form-group">
+              <label for="filename">Latex Template </label>
+              <select type="text" class="form-control" id="latex_template" name="latex_template">
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="type">Data class</label>
+              <input type="text" class="form-control" id="dataclass" name="dataclass">
+            </div>
+            <div class="form-group">
+              <label for="type"> Expiration date</label>
+              <input type="text" class="form-control" id="expires" name="expires">
+            </div>
+          </div> 
+        </div>
+       <form id="latex_form" name="latex_form" enctype="multipart/form-data">
+        <button class="button" type="button" onclick="get_templates()" >Get Templates</button>
+        <button class="button" type="button" onclick="populate_json()" >Get Data Sample</button>
+        <button class="button" type="button" onclick="post_latex()"> Post Body (Sample)</button>
+        <button class="button" type="button" onclick="reset_inputs()">Reset Form</button>
+        <button class="button" type="button" onclick="post_latex_formData()"> Post FormData (Files and Sample)</button>
+        </form>
+        <div class="form-group">
+        <label for="response">Response from Latex to PDF server</label>
+        <textarea id="response" class = "form-control" name="response" placeholder="...response from latex to PDF server" rows="4" cols="50"></textarea>
+      </div>
+    
+   
+  </div>
+
+<script type="text/javascript" >
+    
+     // var host = "http://localhost:3000/api";
+    
+    function get_tasks() {
+        let owner =$("#owner" ).val();
+        if (owner) {
+        var url = host + '/ge_task/?owner=' + owner;
+        httpGetAsync(url,display_list);
+        }
+    }
+    function get_templates() {
+
+        var url = host + '/ge_task/?type=macro';
+        httpGetAsync(url,display_templates);
+
+    }
+    function display_templates(res) {
+      var json_data = JSON.parse(res);
+      var select = document.getElementById("latex_template");
+      if (json_data.data) {
+          for (var i = 0; i < json_data.data.length; i++) {
+            var task = json_data.data[i];
+            // let value = { Id: task.Id, filename: task.filename };  
+            op = document.createElement('option');
+            op.setAttribute("value",task.Id);
+            op.innerHTML = task.description
+            select.appendChild(op);
+          }
+      }
+    }
+    function delete_task(id) {
+        var url = host + '/ge_task/' + id;
+        httpDeleteAsync(url,display_result);
+        get_tasks();
+    }
+    function post_latex_formData() { 
+        let form = document.getElementById("latex_form");
+        let data = new FormData(form);
+        let filename  = $("#filename" ).val();
+        let json_data  = $( "#json_data" ).val();
+        let latex_template =  $( "#latex_template" ).val();
+        let owner  = $( "#owner" ).val();
+        let type  = $( "#type" ).val();
+        let dataclass  = $( "#dataclass" ).val();
+        let expires  = $( "#expires" ).val();
+        let description = $( "#description").val();
+
+        data.append("type", type);
+        data.append("dataclass", dataclass);
+        data.append("expires", expires);
+        data.append("owner", owner);
+        data.append("filename", filename);
+        data.append("json_data",json_data);
+        data.append("description", description);
+        data.append("latex_template", latex_template);
+        let url = host + '/ge_task';
+        
+        // httpPostAsync(url, data, display_result,'multi-part/form-data');
+        // https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+        // Warning: When using FormData to submit POST requests using XMLHttpRequest or the Fetch_API with the multipart/form-data Content-Type 
+        // (e.g. when uploading Files and Blobs to the server), do not explicitly set the Content-Type header on the request. 
+        // Doing so will prevent the browser from being able to set the Content-Type header with the boundary expression it will use to delimit form fields in the request body.
+        
+        httpPostAsync(url, data, display_result,'');
+        // reset_inputs();
+   
+    } 
+    function reset_inputs() {
+        $( "#description" ).val("");
+        $( "#filename" ).val("");
+        $( "#json_data" ).val("");
+        $( "#files" ).val("");
+        $( "#filelist" ).empty(); 
+        $( "#dataclass").val("");
+        $( "#expires").val("");
+        $( "#type").val("");
+    }
+
+    function post_latex() { 
+          
+        let filename  = $("#filename" ).val();
+        let json_data  = $( "#json_data" ).val();
+        let owner  = $( "#owner" ).val();
+        let latex_template =  $( "#latex_template" ).val();
+        let type = $("#type").val();
+        let expires = $("#expires").val();
+        let dataclass = $ ("#dataclass").val();
+        let description = $ ("#description").val();
+        // let content = `{"filename":"${filename}","description":"${description}","latex_template":"${latex_template}","owner":"${owner}","type":"${type}","expires":"${expires}","dataclass":"${dataclass}","json_data":${json_data}}`;
+        let content = {"filename": filename,
+                        "description": description,
+                        "latex_template": latex_template,
+                        "owner": owner,
+                        "type": type,
+                        "expires": expires,
+                        "dataclass": dataclass,
+                        "json_data": json_data
+                        }
+        let content2 = JSON.stringify(content);
+        let url = host + '/ge_task';
+
+        // httpPostAsync(url, content, display_result,'application/x-www-form-urlencoded');
+        httpPostAsync(url, content2, display_result);
+        reset_inputs();
+      }
+
+      function display_result(response) {
+        let resp = document.getElementById("response");
+        resp.innerHTML =  response;
+        get_tasks();
+      }
+    
+      function populate_json() {
+        
+        var date = new Date();
+        var data2 = {"message":"success",
+                          "data":[
+                          {"breadth":3,
+                          "length":6,
+                          "area":18,
+                          "hload":0,
+                          "alpha_rad":0,
+                          "surcharge":10,
+                          "cu":75,
+                          "nc":5.14159,
+                          "bc":1,
+                          "sc":1.1,
+                          "ic":1,
+                          "q_nc":424.181175,
+                          "q_ult":434.181175
+                          }
+                          ]
+                      }
+        var data = {"breadth":3,
+                    "length":6,
+                    "area":18,
+                    "hload":0,
+                    "alpha_rad":0,
+                    "surcharge":10,
+                    "cu":75,
+                    "nc":5.14159,
+                    "bc":1,
+                    "sc":1.1,
+                    "ic":1,
+                    "q_nc":424.181175,
+                    "q_ult":434.181175
+                    }              
+        $( "#description").val("EC7 D1 example from macro");
+        $( "#filename" ).val("ge_file.tex");
+        $( "#json_data" ).val(JSON.stringify(data));
+        $( "#type").val("normal");
+        $( "#dataclass").val("EC7_D1");
+        $( "#expires").val(date.setDate(date.getDate() + 7));
+      
+      }
+    function add_download_links(id, files, td) {
+       for (var j = 0; j < files.length; j++) { 
+                      let download_file = files[j];
+                      let download_url = host + "/ge_task/" + id + "/download/" + download_file;
+                      let p = document.createElement('p')
+                      // Create anchor element.
+                      let a = document.createElement('a'); 
+                           // Set the title.
+                          a.title = download_file; 
+                          // Set the href property.
+                          a.href = download_url;
+                          // Create target _blank attribute to open in new window
+                          a.setAttribute("target","_blank");
+                          // Create the text node for anchor element.
+                          let link = document.createTextNode(download_file);
+                          // Append the text node to anchor element.
+                          a.appendChild(link); 
+                          p.append(a); 
+                      td.appendChild(p);
+        }
+    }
+    function display_list (response) {
+        var json_data = JSON.parse(response);
+        var tbd = document.getElementById("task_body");
+        tbd.innerText='';
+        tbd.innerHTML='';
+        tbd.childNodes = null;
+        $("#task_body").empty();
+        if (json_data.data) {
+          for (var i = 0; i < json_data.data.length; i++) {
+          var task = json_data.data[i];
+          tr = document.createElement('tr');
+              
+              td = document.createElement('td');
+                td.setAttribute("class","d-none");
+                td.innerHTML = task.Id;
+              tr.appendChild(td);
+              
+              td = document.createElement('td');
+                let p1 = document.createElement('p');
+                    p1.innerHTML = task.createdDT
+                      td.appendChild(p1);
+                let p2 = document.createElement('p');
+                    p2.innerHTML = task.type;
+                      td.appendChild(p2);
+                let p3 = document.createElement('p');    
+                    p3.innerHTML = task.description;
+                      td.appendChild(p3);
+              tr.appendChild(td);
+              
+              if (task.files != null) {
+                  let download_files = task.files.split(",");
+                  let sel_files = [];
+                  
+                  // Add input tex files
+                  sel_files = download_files.filter(name => name.includes('.tex'))
+                  td = document.createElement('td');
+                  td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;");
+                  add_download_links (task.Id, sel_files,td);
+                  tr.appendChild(td);
+                  
+                  // Add intermediate files
+                  sel_files = download_files.filter(name => !name.includes('.tex') &&
+                                                               !name.includes('.pdf')) 
+                  td = document.createElement('td');
+                  td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;");
+                  add_download_links (task.Id, sel_files,td);
+                  tr.appendChild(td);
+                  
+                  // Add output pdf files
+                  sel_files = download_files.filter(name => name.includes('.pdf'))
+                  td = document.createElement('td');
+                  td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;");
+                  add_download_links (task.Id, sel_files,td);
+                  tr.appendChild(td);
+              }
+                td = document.createElement('td');
+                  del_btn = document.createElement ('button');
+                  del_btn.setAttribute("class", "button");
+                  del_btn.setAttribute("onclick", "delete_task('" + task.Id + "')");
+                  del_btn.innerHTML = "Delete";
+                td.appendChild(del_btn);
+                  
+              tr.appendChild(td);
+          tbd.appendChild(tr);
+          } 
+        }
+    }
+</script>

@@ -88,7 +88,7 @@
           var Area =  get_value("Area");
           var HLoad =  get_value("HLoad");
           var Cu =  get_value("Cu");
-          var url = host + `/EC7_Bearing/calc_EC7_D1_ic?area=${Area}&hload=${HLoad}&cu=${Cu}`
+          var url = host + `/EC7_Bearing/calc_EC7_D1/param/ic?area=${Area}&hload=${HLoad}&cu=${Cu}`
           
           httpGetAsync(url, display_result)
           
@@ -96,8 +96,9 @@
         
     function display_result(response) {
           set_innerHTML ("response",response)
-          var data= JSON.parse(response)
-          renderChart (data)
+          var res = JSON.parse(response)
+          
+          renderChart (res.data)
     }
     
     function renderChart (data) {
@@ -130,13 +131,13 @@
     
     function populate(Area, HLoad, Cu) {
         
-        set_value("Area",Area);
-        set_value("HLoad",HLoad);
-        set_value("Cu",Cu);
+        $("#Area").val(Area);
+        $("#HLoad").val(HLoad);
+        $("#Cu").val(Cu);
     
         //reset results
         
-        set_innerHTML("response","")
+        $("#response").html("");
     }
    
 </script>

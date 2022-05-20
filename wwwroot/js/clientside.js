@@ -1,7 +1,7 @@
 
     //const host = 'https://ge-node.azurewebsites.net/api';
-    // const host = 'http://emi-gis-ps.scottwilson.co.uk:3000/api';
-    const host = 'http://localhost:3000/api';
+    const host = 'http://emi-gis-ps.scottwilson.co.uk:3000/api';
+    // const host = 'http://localhost:3000/api';
     
     // const py_host = 'https://ge-py.azurewebsites.net';
     const py_host = 'http://emi-gis-ps.scottwilson.co.uk:8000';
@@ -130,6 +130,7 @@
     function update_file_list3(file, filelist) {
         var x = document.getElementById(file);
         var lst = document.getElementById(filelist);
+        lst.innerHTML = '';
         if ('files' in x) {
             if (x.files.length > 0) {
                 for (var i = 0; i < x.files.length; i++) {
@@ -253,12 +254,15 @@
     {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() { 
-                if (xhr.readyState == XMLHttpRequest.DONE && callbackk)
+                if (xhr.readyState == XMLHttpRequest.DONE && callback)
                     callback(xhr.responseText);
             }
             console.log(theUrl);
             xhr.open("DELETE", theUrl, true); // true for asynchronous 
             xhr.send(null);
+    }
+    function httpPostAsyncFormData(url, body, callback) {
+        return httpPostAsync(url, body, callback,'');
     }
     
     function httpPostAsync(url, body, callback, content_type='application/json') {

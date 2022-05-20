@@ -24,8 +24,10 @@
               <thead>
               <tr>
                   <th class="d-none" scope="col">Id</th>
-                  <th class="col-5" scope="col">Created</th>
-                  <th class="col-6" scope="col">Files</th>
+                  <th class="col-2" scope="col">Details</th>
+                  <th class="col-3" scope="col">Tex files</th>
+                  <th class="col-3" scope="col">Aux files</th>
+                  <th class="col-3" scope="col">PDF files</th>
                   <th class="col-1"  scope="col">Action</th>
               </tr>
               </thead>
@@ -37,28 +39,55 @@
     <p>Convert Latex string to PDF</p>
       <div class="form-group">
       <label for="latex">Raw Latex</label>
-        <textarea id="latex" class = "form-control" name="latex" rows="12" cols="50"> </textarea>
+        <textarea id="latex" class = "form-control" name="latex" placeholder="...latex formated text" rows="12" cols="50"></textarea>
       </div>
-      
-      <div class="form-group">
-        <label for="filename"> Latex filename (*.tex)</label>
-        <input type="text" class="form-control" id="filename" name="filename">
-      </div>
-      <form id="latex_form" name="latex_form" enctype="multipart/form-data">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="type"> Description</label>
+              <input type="text" class="form-control" id="description" placeholder="...description of task" name="description">
+            </div>
+            <div class="form-group">
+              <label for="filename"> Latex filename (*.tex)</label>
+              <input type="text" class="form-control" id="filename" placeholder="...file name (*.tex)" name="filename">
+            </div> 
+            <div class="form-group">
+              <label for="type"> Latex content type</label>
+              <select type="text" class="form-control" id="type" name="type">
+                <option value="normal">Normal</option>
+                <option value="macro">Macro</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="type"> Data class </label>
+              <input type="text" class="form-control" id="dataclass" placeholder="...data class name (for macro identification)" name="dataclass">
+            </div>
+            <div class="form-group">
+              <label for="type"> Expiration date</label>
+              <input type="text" class="form-control" id="expires" placeholder="...expiration date of task" name="expires">
+            </div>
+          </div>
+        </div>
+
+       <form id="latex_form" name="latex_form" enctype="multipart/form-data">
           <div class="form-group">
-          <label for="host">Latex Files</label>
-          <input type="file" id="files" name="files" accept=".tex" multiple="multiple" onchange="update_file_list3('files','filelist')" >
+            <label for="host">Latex Files</label>
+            <input type="file" id="files" name="files" accept=".tex" multiple="multiple" onchange="update_file_list3('files','filelist')" >
           </div>
           <div class="form-group">
-          <ul class="list-group" id="filelist" > </ul>
-        </div>
+            <ul class="list-group" id="filelist" > </ul>
+          </div>
+     
         <button class="button" type="button" onclick="populate_latex()" >Get Latext Sample</button>
         <button class="button" type="button" onclick="post_latex()"> Post Body (Sample)</button>
+        <button class="button" type="button" onclick="reset_inputs()">Reset Form</button>
         <button class="button" type="button" onclick="post_latex_formData()"> Post FormData (Files and Sample)</button>
     </form>
         <div class="form-group">
         <label for="response">Response from Latex to PDF server</label>
-        <textarea id="response" class = "form-control" name="response" placeholder="...response from latex to PDF server" rows="4" cols="50"> </textarea>
+        <textarea id="response" class = "form-control" name="response" placeholder="...response from latex to PDF server" rows="4" cols="50"></textarea>
       </div>
     
    
@@ -71,7 +100,7 @@
     function get_tasks() {
         let owner =$("#owner" ).val();
         if (owner) {
-        var url = host + '/ge_task/?owner=' + owner;;
+        var url = host + '/ge_task/?owner=' + owner;
         httpGetAsync(url,display_list);
         }
     }
@@ -86,13 +115,22 @@
         let data = new FormData(form);
         let filename  = $("#filename" ).val();
         let latex  = $( "#latex" ).val();
-        //remove newline formating and escape \ character
+        //remove newline formating and and escape \ character
         let latex_esc = latex.replace(/\n/g,"\\n").replace(/\\/g,"\\\\");
         let owner  = $( "#owner" ).val();
-       
+
+        let type  = $( "#type" ).val();
+        let dataclass  = $( "#dataclass" ).val();
+        let expires  = $( "#expires" ).val();
+        let description = $( "#description").val();
+        
+        data.append("type", type);
+        data.append("dataclass", dataclass);
+        data.append("expires", expires);
         data.append("owner", owner);
         data.append("filename", filename);
         data.append("latex",latex_esc);
+        data.append("description", description);
 
         let url = host + '/ge_task';
         
@@ -103,32 +141,57 @@
         // Doing so will prevent the browser from being able to set the Content-Type header with the boundary expression it will use to delimit form fields in the request body.
         
         httpPostAsync(url, data, display_result,'');
-        get_tasks();
+        reset_inputs();
+   
     } 
-
+    function reset_inputs() {
+        $( "#filename" ).val("");
+        $( "#latex" ).val("");
+        $( "#files" ).val("");
+        $( "#filelist" ).empty(); 
+    }
+   
     function post_latex() { 
           
         let filename  = $("#filename" ).val();
         let latex  = $( "#latex" ).val();
-        //remove newline formating and escape \ character
+        //remove newline formating and add escaped \ character
         let latex_esc = latex.replace(/\n/g,"\\n").replace(/\\/g,"\\\\");
         let owner  = $( "#owner" ).val();
-        let content = `{"filename":"${filename}","latex":"${latex_esc}","owner":"${owner}"}`;
+        
+        let type  = $( "#type" ).val();
+        let dataclass  = $( "#dataclass" ).val();
+        let expires  = $( "#expires" ).val();
+        let description = $( "#description").val();
+
+        // let content = `{"filename":"${filename}","latex":"${latex_esc}","owner":"${owner}","type":"","dataclass":"${dataclass}","expires":"${expires}"","description":"${description}"}`;
+        let content = {"filename": filename,
+                        "description": description,
+                        "latex": latex_esc,
+                        "owner": owner,
+                        "type": type,
+                        "expires": expires,
+                        "dataclass": dataclass
+                        }
+        let content2 = JSON.stringify(content);
         let url = host + '/ge_task';
 
-        httpPostAsync(url, content, display_result);
-
+        httpPostAsync(url, content2, display_result);
+        reset_inputs();
       }
 
       function display_result(response) {
         let resp = document.getElementById("response");
         resp.innerHTML =  response;
+        get_tasks();
       }
     
       function populate_latex() {
         
         lt = []
         
+        var date = new Date();
+
         lt.push('\\documentclass{article}');
         lt.push('\\begin{document}');
         lt.push('Welcome to AECOM Ground Engineering Latex format reporting');
@@ -142,14 +205,38 @@
         lt.push('refers to the suite of commands (\\TeX{} macros) which form the markup'); 
         lt.push('conventions used to typeset \\LaTeX{} documents.');
         lt.push('\\end{center}');
-        lt.push(new Date().toISOString());
+        lt.push(date.toISOString());
         lt.push('\\end{document}');
         
         $( "#filename" ).val("ge_file.tex");
+        $( "#description" ).val("example aecom latex reporting") 
         $( "#latex" ).val( lt.join(''));
-              
+        $( "#type").val("normal");
+        $( "#dataclass").val("none");
+        $( "#expires").val(date.setDate(date.getDate() + 7));
+      
       }
-   
+    function add_download_links(id, files, td) {
+       for (var j = 0; j < files.length; j++) { 
+                      let download_file = files[j];
+                      let download_url = host + "/ge_task/" + id + "/download/" + download_file;
+                      let p = document.createElement('p')
+                      // Create anchor element.
+                      let a = document.createElement('a'); 
+                           // Set the title.
+                          a.title = download_file; 
+                          // Set the href property.
+                          a.href = download_url;
+                          // Create target _blank attribute to open in new window
+                          a.setAttribute("target","_blank");
+                          // Create the text node for anchor element.
+                          let link = document.createTextNode(download_file);
+                          // Append the text node to anchor element.
+                          a.appendChild(link); 
+                          p.append(a); 
+                      td.appendChild(p);
+        }
+    }
     function display_list (response) {
         var json_data = JSON.parse(response);
         var tbd = document.getElementById("task_body");
@@ -168,39 +255,44 @@
               tr.appendChild(td);
               
               td = document.createElement('td');
-                td.innerHTML = task.createdDT;
+                let p1 = document.createElement('p');
+                    p1.innerHTML = task.createdDT
+                      td.appendChild(p1);
+                let p2 = document.createElement('p');
+                    p2.innerHTML = task.type;
+                      td.appendChild(p2);
+                let p3 = document.createElement('p');    
+                    p3.innerHTML = task.description;
+                      td.appendChild(p3);
               tr.appendChild(td);
               
-              td = document.createElement('td');
-                td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;");
-                // td.innerHTML = task.files;
-                if (task.files != null) {
+              if (task.files != null) {
                   let download_files = task.files.split(",");
-                  for (var j = 0; j < download_files.length; j++) { 
-                      let download_file = download_files[j];
-                      let download_url = host + "/ge_task/" + task.Id + "/download/" + download_file;
-                      let p = document.createElement('p')
-                      // Create anchor element.
-                      let a = document.createElement('a'); 
-                           // Set the title.
-                          a.title = download_file; 
-                          // Set the href property.
-                          a.href = download_url;
-                          // Create target _blank attribute to open in new window
-                          a.setAttribute("target","_blank");
-                          // Create the text node for anchor element.
-                          let link = document.createTextNode(download_file);
-                          // Append the text node to anchor element.
-                          a.appendChild(link); 
-                         
-                      p.append(a); 
-                      td.appendChild(p);
-                  }
-                }
-
-              tr.appendChild(td);
-              
-              td = document.createElement('td');
+                  let sel_files = [];
+                  
+                  // Add input tex files
+                  sel_files = download_files.filter(name => name.includes('.tex'))
+                  td = document.createElement('td');
+                  td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;");
+                  add_download_links (task.Id, sel_files,td);
+                  tr.appendChild(td);
+                  
+                  // Add intermediate files
+                  sel_files = download_files.filter(name => !name.includes('.tex') &&
+                                                               !name.includes('.pdf')) 
+                  td = document.createElement('td');
+                  td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;");
+                  add_download_links (task.Id, sel_files,td);
+                  tr.appendChild(td);
+                  
+                  // Add output pdf files
+                  sel_files = download_files.filter(name => name.includes('.pdf'))
+                  td = document.createElement('td');
+                  td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;");
+                  add_download_links (task.Id, sel_files,td);
+                  tr.appendChild(td);
+              }
+                td = document.createElement('td');
                   del_btn = document.createElement ('button');
                   del_btn.setAttribute("class", "button");
                   del_btn.setAttribute("onclick", "delete_task('" + task.Id + "')");

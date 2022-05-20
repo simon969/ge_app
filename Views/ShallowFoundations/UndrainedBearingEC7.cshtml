@@ -12,54 +12,76 @@
     
     <div class="row">
    
-    <div class="col-sm-6"> 
-      <div class="form-group" id="fg_B">
-        <label for="Breadth">Breadth</label>
-        <input type="text" class="form-control" id="Breadth" placeholder="...effective foundation breadth (m)" >
-        <!-- <p class="help-block">effective breadth of the footing</p> -->
-      </div>
-      <div class="form-group" id="fg_L">
-        <label for="Length">Length</label>
-        <input type="text" class="form-control" id="Length" placeholder="...effective foundation length (m)">
-        <!-- <p class="help-block">effective length of the footing</p> -->
-      </div>
-    </div>
-    <div class="col-sm-6"> 
-      <div class="form-group" id="fg_a">
-        <label for="a">Area</label>
-        <input type="text" class="form-control" id="Area" placeholder="...effective foundation area">
-        <!-- <p class="help-block">effective area of the footing (Length x Breadth)</p> -->
-      </div>
-      <div class="form-group" id="fg_H">
-        <label for="HLoad">Horizontal Load</label>
-        <input type="text" class="form-control" id="HLoad" placeholder="...horizontal load">
-        <!-- <p class="help-block">applied horizontal load</p> -->
-      </div>
-    </div>
+        <div class="col-sm-6"> 
+          <div class="form-group" id="fg_B">
+            <label for="Breadth">Breadth</label>
+            <input type="text" class="form-control" id="Breadth" placeholder="...effective foundation breadth (m)" >
+            <!-- <p class="help-block">effective breadth of the footing</p> -->
+          </div>
+          <div class="form-group" id="fg_L">
+            <label for="Length">Length</label>
+            <input type="text" class="form-control" id="Length" placeholder="...effective foundation length (m)">
+            <!-- <p class="help-block">effective length of the footing</p> -->
+          </div>
+        </div>
+        <div class="col-sm-6"> 
+          <div class="form-group" id="fg_a">
+            <label for="a">Area</label>
+            <input type="text" class="form-control" id="Area" placeholder="...effective foundation area">
+            <!-- <p class="help-block">effective area of the footing (Length x Breadth)</p> -->
+          </div>
+          <div class="form-group" id="fg_H">
+            <label for="HLoad">Horizontal Load</label>
+            <input type="text" class="form-control" id="HLoad" placeholder="...horizontal load">
+            <!-- <p class="help-block">applied horizontal load</p> -->
+          </div>
+        </div>
     </div>
     <div class="row">
-    <div class="col-sm-6">
-        <div class="form-group" id="fg_cu">
-          <label for="c">Undrained shear strength</label>
-          <input type="text" class="form-control" id="Cu" placeholder="...undrained shear strength">
-          <!-- <p class="help-block">undrained shear strength</p> -->
-        </div>
-        <div class="form-group" id = "fg_alpha_deg">
-          <label for="alpha_deg">Angle of inclination of base of foundation</label>
-          <input type="text" class="form-control" id="alpha_deg" placeholder="...alpha (degrees)">
-          <!-- <p class="help-block">alpha angle in degrees</p> -->
-        </div>
+      <div class="col-sm-6">
+          <div class="form-group">
+            <label for="c">Undrained shear strength</label>
+            <input type="text" class="form-control" id="Cu" placeholder="...undrained shear strength">
+            <!-- <p class="help-block">undrained shear strength</p> -->
+          </div>
+          <div class="form-group">
+            <label for="alpha_deg">Angle of inclination of base of foundation</label>
+            <input type="text" class="form-control" id="alpha_deg" placeholder="...alpha (degrees)">
+            <!-- <p class="help-block">alpha angle in degrees</p> -->
+          </div>
+      </div>
+      <div class="col-sm-6">
+          <div class="form-group">
+            <label for="surcharge">Total surcharge pressure</label>
+            <input type="text" class="form-control" id="surcharge" placeholder="...total surcharge pressure at formation level">
+            <!-- <p class="help-block">surcharge at base of footing</p> -->
+          </div>
+          <div class="form-group">
+            <label for="owner">Owner</label>
+            <input type="text" class="form-control" id="owner" placeholder="...email">
+            <!-- <p class="help-block">surcharge at base of footing</p> -->
+          </div>
+      </div>
     </div>
-    <div class="col-sm-6">
-        <div class="form-group" id = "fg_q">
-          <label for="surcharge">Total surcharge pressure</label>
-          <input type="text" class="form-control" id="surcharge" placeholder="...total surcharge pressure at formation level">
-          <!-- <p class="help-block">surcharge at base of footing</p> -->
+    <div class="row">
+       <div class="col-sm-6">
+          <div class="form-group">
+            <label for="latex_template">Report Template</label>
+            <select class="form-control" id="latex_template" name="latex_template">
+            </select>
+            <!-- <p class="help-block">surcharge at base of footing</p> -->
+          </div>
         </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="options">Options</label>
+            <input type="text" class="form-control" id="options" placeholder="a4, landscape">
+            <!-- <p class="help-block">surcharge at base of footing</p> -->
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
-
-      <table class="table table-striped">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Factor</th>
@@ -128,77 +150,154 @@
     </div>
     <button  onclick="calc()" class="btn btn-primary">Calculate</button>
     <button  onclick="populate(3,6,18,0,75,0,10,0)" class="btn btn-primary">Test</button>
-    
+    <button  onclick="get_templates()" type="button"  class="btn btn-primary">Get Templates</button>
+    <button  onclick="post_json()" class="btn btn-primary">Create PDF</button>
+    <a id="pdf_link" class="btn btn-primary">View PDF</a>
   </div>
 
 <script type="text/javascript" >
+    
+    var calc_resp = null;
+
     function calc() { 
-          //var host = "https://ge-app.azurewebsites.net/api";
-          // var host = "http://localhost:3000/api";
-          var B =  get_value("Breadth");
-          var L = get_value("Length");
-          var a =  get_value("Area");
-          var H =  get_value("HLoad");
-          var Cu =  get_value("Cu");
-          var alpha_rad =  radians(get_value("alpha_deg"));
-          var q =  get_value("surcharge");
-          var url = host + `/EC7_Bearing/calc_EC7_D1?breadth=${B}&length=${L}&area=${a}&hload=${H}&cu=${Cu}&alpha_rad=${alpha_rad}&surcharge=${q}`;
+          var B =  $("#Breadth").val();
+          var L = $("#Length").val();
+          var a =  $("#Area").val();
+          var H =  $("#HLoad").val();
+          var Cu =  $("#Cu").val();
+          var alpha_rad =  radians($("#alpha_deg").val());
+          var q =  $("#surcharge").val();
+          
+          var url = host + `/EC7_Bearing/calc_EC7_D1?breadth=${B}&length=${L}&area=${a}&hload=${H}&cu=${Cu}&alpha_rad=${alpha_rad}&surcharge=${q}`
+          
           console.log(url)
           httpGetAsync(url, display_result)
       }
+      
+      function post_json() { 
+        if (calc_resp) {
+          calc_resp.description = "ec7 bearing calculation from json data";
+          calc_resp.checked = "owner"
+          let json_data = JSON.stringify(calc_resp);
+          let template  = $( "#latex_template" ).val();
+          let owner  = $( "#owner" ).val();
+          let dataclass = "ec7_d1"
+          let filename = "ge_data.tex"
+          let description ="ec7 bearing calculation from json data";
+          let content = `{"template":"${template}","filename:"${filename}","description":"${description}","owner":"${owner}"}`;
+          // let content = `{"template":"${template}","json_data":"${json_data}","filename:"${filename}","description":"${description}","owner":"${owner}"}`;
+          let url = host + '/ge_task';
+          httpPostAsync(url, content, display_pdf_link,'application/json');
+        }
+      }
+      
+      function display_pdf_link (response) {
+        let resp = JSON.parse(response);
+        let task = resp.data;
+        if (task) {
+          let a = document.getElementById("pdf_link");
+          let download_file = task.files.split(",").filter(name=>name.includes(".pdf"));
+          let download_url = host + "/ge_task/" + task.Id + "/download/" + download_file;
+                            // Set the title.
+                            // a.title = download_file; 
+                            // Set the href property.
+                            a.href = download_url;
+                            // Create target _blank attribute to open in new window
+                            a.setAttribute("target","_blank");
+                            // Create the text node for anchor element.
+                            // let link = document.createTextNode(download_file);
+                            // Append the text node to anchor element.
+                            // a.appendChild(link); 
+        
+        }
+      }
+      function get_templates() { 
+        let url = host + '/ge_task/?type=macro';
+        httpGetAsync(url, display_templates);
+      }
+           
+      function display_templates(response, callback) {
+      var json_data = JSON.parse(response);
+      var select = document.getElementById("latex_template");
+      if (json_data.data) {
+          for (var i = 0; i < json_data.data.length; i++) {
+            var task = json_data.data[i];
+            // let value = { Id: task.Id, filename: task.filename };  
+            op = document.createElement('option');
+            op.setAttribute("value",task.Id);
+            op.innerHTML = task.description
+            select.appendChild(op);
+          }
+      }
+    }
+      function display_result(response, callback) {
+          
+          $("#response").html(response)
+          calc_resp = JSON.parse(response);
+          if (calc_resp.data) {
+              let data = calc_resp.data[0];
+              $('#nc').html(data["nc"]);
+              $('#nq').html(data["nq"]);
+              $('#ng').html(data["ng"]);
+              
+              $('#bc').html(data["bc"]);
+              $('#bq').html(data["bq"]);
+              $('#bg').html(data["bg"]);
+              
+              $('#sc').html(data["sc"]);
+              $('#sq').html(data["sq"]);
+              $('#sg').html(data["sg"]);
+              
+              $('#ic').html(data["ic"]);
+              $('#iq').html(data["iq"]);
+              $('#ig').html(data["ig"]);
+              
+              $('#q_nc').html(data["q_nc"]);
+              
+              $("#latex").val(data["latex"]);
+              
+              $("#result").val(data["q_ult"]);
 
-      function display_result(response) {
-          set_innerHTML ("response",response)
-          var resps = JSON.parse(response);
-          var resp = resps[0];
-          set_innerHTML ("nc", resp["nc"])
-          set_innerHTML ("nq", resp["nq"])
-          set_innerHTML ("ng", resp["ng"])
-          set_innerHTML ("bc", resp["bc"])
-          set_innerHTML ("bq", resp["bq"])
-          set_innerHTML ("bg", resp["bg"])
-          set_innerHTML ("sc", resp["sc"])
-          set_innerHTML ("sq", resp["sq"])
-          set_innerHTML ("sg", resp["sg"])
-          set_innerHTML ("ic", resp["ic"])
-          set_innerHTML ("iq", resp["iq"])
-          set_innerHTML ("ig", resp["ig"])
-          set_innerHTML ("q_nc", resp["q_nc"])
-          set_innerHTML ("q_ng", resp["q_ng"])
-          set_innerHTML ("q_nq", resp["q_nq"])
-          set_value ("result",resp["q_ult"])
+              if (callback) {
+                  callback(calc_resp);
+              }
+          }
       }
     
     function populate(B, L, a, H, cu, alpha_deg, q) {
         
-        set_value("Breadth",B);
-        set_value("Length",L);
-        set_value("Area",a);
-        set_value("HLoad",H);
-        set_value("Cu",cu);
-        set_value("alpha_deg", alpha_deg);
-        set_value("surcharge", q);
+        $("#Breadth").val(B);
+        $("#Length").val(L);
+        $("#Area").val(a);
+        $("#HLoad").val(H);
+        $("#Cu").val(cu);
+        $("#alpha_deg").val( alpha_deg);
+        $("#surcharge").val( q);
            
-        
         //reset results 
-        set_value("result", "");
-        set_innerHTML("response","")
+        $("#result").val("");
+        $("#response").html("")
         
-        set_innerHTML ("nc", "")
-        set_innerHTML ("nq", "")
-        set_innerHTML ("ng", "")
-        set_innerHTML ("bc", "")
-        set_innerHTML ("bq", "")
-        set_innerHTML ("bg", "")
-        set_innerHTML ("sc", "")
-        set_innerHTML ("sq", "")
-        set_innerHTML ("sg", "")
-        set_innerHTML ("ic", "")
-        set_innerHTML ("iq", "")
-        set_innerHTML ("ig", "")
-        set_innerHTML ("q_nc", "")
-        set_innerHTML ("q_ng", "")
-        set_innerHTML ("q_nq", "")
+        $("#nc").html( "")
+        $("#bc").html( "")
+        $("#sc").html( "")
+        $("#ic").html( "")
+        $("#q_nc").html( "")
+       
+        $("#nq").html( "")
+        $("#bq").html( "")
+        $("#sq").html( "")
+        $("#iq").html( "")
+        $("#q_nq").html( "")
+        
+        $("#latex").html( "")
+        
+        $("#ng").html( "")
+        $("#bg").html( "")
+        $("#sg").html( "")
+        $("#ig").html( "")
+        $("#q_ng").html( "")
+      
        
     }
    

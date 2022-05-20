@@ -48,7 +48,9 @@ namespace ge_app.Controllers
        public IActionResult Latex2PDFOutput() {
            return View();
        }
-       
+        public IActionResult JSON2PDFOutput() {
+           return View();
+       }
 }
 }
 
