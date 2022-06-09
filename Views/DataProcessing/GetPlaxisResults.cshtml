@@ -46,6 +46,17 @@
                         <label for="password">Password</label>
                         <input type="text" class="form-control" id="password" name="password" placeholder="...password">
                     </div>
+                    <div class="form-group">
+                        <label for="filename">output filenames</label>
+                        <select type="text" class="form-control" id="filename"> 
+                            <option value="%host_%result.csv">host_result.csv</option>
+                            <option value="%host_%radom_%result.csv">host_random_result.csv</option>
+                            <option value="%host_%datetime_%result.csv">host_datetime_result.csv</option>
+                            <option value="%datetime_%result.csv">datetime_result.csv</option>
+                            <option value="%random_%result.csv">random_result.csv</option>
+                            <option value="%result.csv">result.csv</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="col-sm-6"> 
                     <div class="form-group">
@@ -58,13 +69,21 @@
                     </div>
                     <div class="form-group">
                         <label for="results">results</label>
-                        <input type="text" class="form-control" id="results" placeholder="...version">
+                        <select type="text" class="form-control" id="results" multiple="true" size="5"> 
+                            <option value="Plates">Plates</option>
+                            <option value="EmbeddedBeams">EmbeddedBeams</option>
+                            <option value="Interfaces">Interfaces</option>
+                            <option value="FixedEndAnchors">FixedEndAnchors</option>
+                            <option value="NodeToNodeAnchors">NodeToNodeAnchors</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="phases">phases</label>
                         <input type="text" class="form-control" id="phases" placeholder="...phases">
                     </div>
+                   
                     </div>
+
             </div>
             <input type="hidden" class="form-control" id="query" name="query" placeholder="...query">
             <input type="hidden" class="form-control" id="conn" name="conn" placeholder="...conn">
@@ -130,10 +149,10 @@
     <script type="text/javascript">
     
     function update_JSONfields() {
-        var qry = "{'version':'" + get_value("version") + "','phases':'" + get_value("phases") + "','results':'" + get_value("results") + "'}"
-        set_value("query", qry);
-        var con = "{'host':'"+ get_value("host") + "','port':" + get_value("port") + ",'password':'" + get_value("password") + "'}"
-        set_value("conn", con);
+        var qry = "{'version':'" + $("#version").val() + "','phases':'" + $("#phases").val() + "','results':'" + $("#results").val() + "','filename':'" + $("#filename").val() + "'}";
+        $("#query").val(qry);
+        var con = "{'host':'"+ $("#host").val() + "','port':" + $("#port").val() + ",'password':'" + $("#password").val() + "'}";
+        $("#conn").val(con);
     }
     function show_form(s) {
         var create = document.getElementById("plaxis_post_form");
@@ -150,12 +169,12 @@
 
     }
     function populate_post(host, port, password, version, results, phases) {
-        set_value("host",host);
-        set_value("port",port);
-        set_value("password",password);
-        set_value("version",version);
-        set_value ("phases",phases);
-        set_value("results",results);
+        $("#host").val(host);
+        $("#port").val(port);
+        $("#password").val(password);
+        $("#version").val(version);
+        $("#phases").val(phases);
+        $("#results").val(results);
      }
     
     function init_form() {
@@ -175,7 +194,7 @@
 
     function get_results() {
         init_form();
-        var owner = get_value("owner")
+        var owner = $("#owner").val();
         if (owner !=null) {
         var url = py_host + '/PlaxisTask/?owner=' + owner;
         httpGetAsync(url,display_list);
@@ -188,7 +207,7 @@
     }
     function get_result(id = null) {
         if (id==null) {
-            id = get_value("id");
+            id = $("#id").val();
         }
         if (id !=null) {
         var url = py_host + '/PlaxisTask/' + id;
@@ -198,9 +217,9 @@
     }
     function post_results() {
         update_JSONfields();
-        var conn =  get_value("conn");
-        var query =  get_value("query");
-        var owner =  get_value("owner");
+        var conn =  $("#conn").val();
+        var query =  $("#query").val();
+        var owner =  $("#owner").val();
         var content = `{"conn":"${conn}","query":"${query}","owner":"${owner}"}`;
         var url = py_host + '/PlaxisTask/';
         console.log(content);
@@ -269,14 +288,14 @@
     
     function clear_detail() {
             set_innerHTML("response",'')  ;
-            set_value("id",'') ;
-            set_value("conn",'');
-            set_value("query",'');
-            set_value("createdDT",'');
-            set_value("completedDT",'');
-            set_value("result",'');
-            set_value("files",'');
-            set_value("progress",'');
+            $("#id").val('');
+            $("#conn").val('');
+            $("#query").val('');
+            $("#createdDT").val('');
+            $("#completedDT").val('');
+            $("#result").val('');
+            $("#files").val('');
+            $("#progress").val('');
             var lst =  document.getElementById("download_list");
             lst.innerHTML = "";
 
@@ -286,14 +305,14 @@
         var resp = JSON.parse(response);
         var id = resp.id;
         if (id!=null) { 
-            set_value("id",id); 
-            set_value("conn",resp.conn);
-            set_value("query",resp.query);
-            set_value("createdDT",resp.createdDT);
-            set_value("completedDT",resp.completedDT);
-            set_value("progress",resp.progress);
-            set_value("files",resp.files);
-            set_value("result",resp.result);
+            $("#id").val(id); 
+            $("#conn").val(resp.conn);
+            $("#query").val(resp.query);
+            $("#createdDT").val(resp.createdDT);
+            $("#completedDT").val(resp.completedDT);
+            $("#progress").val(resp.progress);
+            $("#files").val(resp.files);
+            $("#result").val(resp.result);
             var lst =  document.getElementById("download_list"); 
                 //clear existing list
                 lst.innerHTML = "";

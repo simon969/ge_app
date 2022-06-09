@@ -26,10 +26,10 @@
                         @* <input class="form-control" type="text" id="qryMOND_TYPE" name="qryMOND_TYPE" placeholder="...enter mond_type"> *@
                     </div>
                     <div class="form-group">
-                        <label for="qryPointId">Location (PointId) </label>
+                        <label for="qryPointID_DIS">Location (PointId) </label>
                         <button class="button" type="button" onclick="get_pointsbymond()">Load Points</button>
                         </label>
-                        <select class="form-control" type="text" id="qryPointId" name="qryPointId"> 
+                        <select class="form-control" type="text" id="qryPointID_DIS" name="qryPointID_DIS"> 
                         
                         </select>
                     </div>
@@ -245,14 +245,14 @@
     
     function display_points(response) {
         var json_data = JSON.parse(response);
-        var sel = document.getElementById("qryPointId");
+        var sel = document.getElementById("qryPointID_DIS");
         sel.innerHTML = ""
         for (var i = 0; i < json_data.length; i++) {
             var point = json_data[i];
             op = document.createElement('option');
-            op.setAttribute("value",point.PointID)
+            op.setAttribute("value",point.PointID + ',' + point.MONG_DIS)
             if (point.count) { 
-                op.innerHTML = point.PointID + ' (' + point.count + ': ' + point.FromDT + '-' + point.ToDT + ')'
+                op.innerHTML = point.PointID + '_' + point.MONG_DIS + 'm (' + point.count + ': ' + point.FromDT + '-' + point.ToDT + ')'
             } else {
                 op.innerHTML = point.PointID  
             }
@@ -270,22 +270,25 @@
     }
     
     function next_page() {
-        var page = get_value("qryPage");
-        set_value("qryPage", parseInt(page) + 1);
+        var page = $("#qryPage").val();
+        $("#qryPage").val(parseInt(page) + 1);
         get_mond_results();
     }
 
     function get_mond_results() {
-        var projectid = get_value("qryProjectId");
-        var pointid = get_value("qryPointId");
-        var mond_type = get_value("qryMondType");
-        var from_dt = get_value("qryFromDT");
-        var to_dt = get_value("qryToDT");
-        var page = get_value("qryPage");
-        var size = get_value("qrySize");
+        var projectid = $("#qryProjectId").val();
+        var location = $("#qryPointID_DIS").val();
+        var loca = location.split(',');
+        var pointid = loca[0];
+        var dist = loca[1];    
+        var mond_type = $("#qryMondType").val();
+        var from_dt = $("#qryFromDT").val();
+        var to_dt = $("#qryToDT").val();
+        var page = $("#qryPage").val();
+        var size = $("#qrySize").val();
         dateformat = 'YYYY-MM-DDTHH:m:s';
 
-        var url_download = gint_host + '/mond/project/' + projectid + '/point/' + pointid + '/type/' + mond_type + '/download';
+        var url_download = gint_host + '/mond/project/' + projectid + '/point/' + pointid + '/dist/' + dist +'/type/' + mond_type + '/download';
         var add = '/?';
         
         if (from_dt) {

@@ -141,14 +141,14 @@
     <script type="text/javascript">
     
     function update_JSONfields() {
-        var task = "{'version':'" + get_value("version") + "','actions':'" + get_value("actions") +"','results':'" + get_value("results") + "'}"
-        set_value("task", task);
+        let task = "{'version':'" + $("#version").val() + "','actions':'" + $("#actions").val() +"','results':'" + $("#results").val() + "'}"
+        $("#task" ).val(task);goo
     }
     function populate(owner, version, actions, results) {
-        set_value("owner",owner);
-        set_value("version",version);
-        set_value("actions",actions);
-        set_value("results",results);
+        $( "#owner" ).val(owner);
+        $( "#version").val(version);
+        $( "#actions").val(actions);
+        $( "#results").val(results);
         update_JSONfields()
     }
     function show_form(s) {
@@ -196,7 +196,7 @@
     
     function get_results() {
         init_form();
-        var owner = get_value("owner");
+        var owner = $("#owner").val();
         if (owner !=null) {
         var url = py_host + '/AGSTask/?owner=' + owner;
         httpGetAsync(url,display_list)
@@ -204,7 +204,7 @@
     }
     function get_result(id = null) {
         if (id==null) {
-            id = get_value("id")
+            id = $("#id").val();
         }
         if (id !=null) {
         var url = py_host + '/AGSTask/' + id;
@@ -224,33 +224,32 @@
         var form = document.getElementById("ags_post_form");
         var data = new FormData(form);
         update_JSONfields()
-        var task = get_value("task");
-        var owner = get_value("owner");
-        var content = `{"task":"${task}","owner":"${owner}"}`;
-        data.append("owner", owner)
+        var task = $("#task").val();
+        var owner = $("#owner").val();
+        data.append("owner", owner);
+        data.append("task", task);
         var url = py_host + '/AGSTask/';
         console.log(data);
-        // httpPostAsync(url,data,display_result,'multi-part/form-data')
         clear_detail();
         show_form('task_detail');
         httpPostAsync(url,data,display_detail,'')
-        // httpPostAsync(url,content,display_result)
-        }
+    
+    }
     function display_detail(response) { 
         console.log(response);
         set_innerHTML("response",response)
         var resp = JSON.parse(response);
         var id = resp.id
         if (id!=null) { 
-            set_value("id",id) 
-            set_value("get_task",resp.task)
-            set_value("get_files",resp.files)
-            set_value("get_result",resp.result)
-            set_value("get_createdDT",resp.createdDT)
-            set_value("get_completedDT",resp.completedDT)
-            set_value("get_progress",resp.progress)
-            set_value("get_status",resp.status)
-            set_value("get_owner",resp.owner)
+            $("#id").val(id); 
+            $("#get_task").val(resp.task);
+            $("#get_files").val(resp.files)
+            $("#get_result").val(resp.result)
+            $("#get_createdDT").val(resp.createdDT)
+            $("#get_completedDT").val(resp.completedDT)
+            $("#get_progress").val(resp.progress)
+            $("#get_status").val(resp.status)
+            $("#get_owner").val(resp.owner)
             
             var lst =  document.getElementById("download_list");
               //clear existing list
@@ -285,14 +284,14 @@
 
     function clear_detail() {
             set_innerHTML("response",'') 
-            set_value("id",'') 
-            set_value("get_task",'')
-            set_value("get_createdDT",'')
-            set_value("get_completedDT",'')
-            set_value("get_result",'')
-            set_value("get_files",'')
-            set_value("get_progress",'')
-            set_value("get_status",'')
+            $("#id").val(''); 
+            $("#get_task").val('');
+            $("#get_createdDT").val('');
+            $("#get_completedDT").val('');
+            $("#get_result").val('');
+            $("#get_files").val('');
+            $("#get_progress").val('');
+            $("#get_status").val('');
             var lst =  document.getElementById("download_list");
             lst.innerHTML = "";
 

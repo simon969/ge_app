@@ -72,7 +72,7 @@ using ge_app.Models;
             WriteLiteral("\r\n  <div class=\"container\">\r\n    <!-- Content here -->\r\n    <h2>JSON Data to PDF Output</h2>\r\n    <p> Create a latex file from JSON formated data and latex macro file and convert to a PDF</p>\r\n     ");
             EndContext();
             BeginContext(293, 572, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a30369c8270f4b6797fda7be474a3b98", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "346b143d663a491e93f797fd4e13f951", async() => {
                 BeginContext(372, 486, true);
                 WriteLiteral(@"
             <div class=""row"">  
@@ -146,7 +146,7 @@ using ge_app.Models;
                 ");
             EndContext();
             BeginContext(2494, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e7abfb2524214d2ca1824cd3d6b6f612", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "84756b84c6da46c38acc4eebd1f44f2c", async() => {
                 BeginContext(2517, 6, true);
                 WriteLiteral("Normal");
                 EndContext();
@@ -168,7 +168,7 @@ using ge_app.Models;
             WriteLiteral("\r\n                ");
             EndContext();
             BeginContext(2550, 36, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6b3c76a800594696819c89c31fce3517", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6a67ac9119154ab5990171f293fe51ab", async() => {
                 BeginContext(2572, 5, true);
                 WriteLiteral("Macro");
                 EndContext();
@@ -210,7 +210,7 @@ using ge_app.Models;
        ");
             EndContext();
             BeginContext(3369, 591, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7c4020ab3b4e45af9b6732c86c3de32e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8461c2271e1a4a3aa28ffbe9e6136b2e", async() => {
                 BeginContext(3439, 514, true);
                 WriteLiteral(@"
         <button class=""button"" type=""button"" onclick=""get_templates()"" >Get Templates</button>

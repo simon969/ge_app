@@ -87,7 +87,7 @@ using ge_app.Models;
             WriteLiteral("label for=\"chart_select\">Select chart</label>\r\n      <select class=\"form-control\" id=\"chart_select\">\r\n        ");
             EndContext();
             BeginContext(1234, 68, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cc5e401cdd374fa4a4a400241f14ff64", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "07cc90bd1acb44bbb189d629a3cd3fe0", async() => {
                 BeginContext(1259, 34, true);
                 WriteLiteral("Load Inclination Factor (ic) vs Cu");
                 EndContext();
@@ -109,7 +109,7 @@ using ge_app.Models;
             WriteLiteral("\r\n        ");
             EndContext();
             BeginContext(1312, 84, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "567b4061ac8848a68295c4673a7127fe", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f047e61f998a4f6e9a05224d4ac15a3f", async() => {
                 BeginContext(1340, 47, true);
                 WriteLiteral("Load Inclination Factor (ic) vs Horizontal Load");
                 EndContext();
@@ -131,7 +131,7 @@ using ge_app.Models;
             WriteLiteral("\r\n        ");
             EndContext();
             BeginContext(1406, 72, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a4c1697386134c478a37612ae16cedb3", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9df44a259ac64668afbe412e3596629b", async() => {
                 BeginContext(1433, 36, true);
                 WriteLiteral("Load Inclination Factor (ic) vs Area");
                 EndContext();
