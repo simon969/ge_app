@@ -72,7 +72,7 @@ using ge_app.Models;
             WriteLiteral("\r\n  <div class=\"container\">\r\n    <!-- Content here -->\r\n    <h2>Latex to PDF Output</h2>\r\n     ");
             EndContext();
             BeginContext(191, 572, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a69ef0eba28463cb85f9f6d2bbd4ce2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb03bf4d67834d38bf64807120f5e9c8", async() => {
                 BeginContext(270, 486, true);
                 WriteLiteral(@"
             <div class=""row"">  
@@ -146,7 +146,7 @@ using ge_app.Models;
                 ");
             EndContext();
             BeginContext(2452, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4e9209da4627459c99533e5d6be04e7a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "92540f5570cb41ae8849891d37049cb6", async() => {
                 BeginContext(2475, 6, true);
                 WriteLiteral("Normal");
                 EndContext();
@@ -168,7 +168,7 @@ using ge_app.Models;
             WriteLiteral("\r\n                ");
             EndContext();
             BeginContext(2508, 36, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "113a69a978814d23a35bbf28ab4926eb", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "40466ce4bc0c43b38e435b31c4f76b36", async() => {
                 BeginContext(2530, 5, true);
                 WriteLiteral("Macro");
                 EndContext();
@@ -206,7 +206,7 @@ using ge_app.Models;
        ");
             EndContext();
             BeginContext(3187, 859, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "238a4eb146f148f79882ed85a2096422", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8392d628f48e4e1e887fff6a3bdb5715", async() => {
                 BeginContext(3257, 782, true);
                 WriteLiteral(@"
           <div class=""form-group"">

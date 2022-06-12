@@ -76,7 +76,7 @@ using ge_app.Models;
             WriteLiteral("</p> \r\n  <a onclick=\"document.getElementById(\'logout_form\').submit();\" style=\"cursor: pointer;\">Log out</a> </li>\r\n  <li class=\"nav-link text-dark\">\r\n  ");
             EndContext();
             BeginContext(264, 89, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ea783ac0fb344edda6580fe45f735e70", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c65efa0af1304b3bb40385c8a07e2e6d", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper>();
@@ -112,7 +112,7 @@ else
             WriteLiteral("  <li class=\"nav-link text-dark\" >");
             EndContext();
             BeginContext(406, 57, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2660a2b2aa6c4d6fb2e6dea2810d0750", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "380bf6d0f6d9401f8eaaeb8549b0e534", async() => {
                 BeginContext(453, 6, true);
                 WriteLiteral("Log in");
                 EndContext();

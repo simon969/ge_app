@@ -15,6 +15,7 @@
                         <button class="button" type="button" onclick="get_projects()">Load Projects</button>
                         </label>
                         <select class="form-control" type="text" id="qryProjectId" name="qryProjectId"> 
+                            <option value="ALL_PROJECTS">All Projects</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -37,8 +38,10 @@
                         <label for="qryInterval">Reading Interval</label>
                         <select class="form-control" type="text" id="qryInterval" name="qryInterval">
                             <option value="individual">Individual Readings</option>
-                            <option value="day_max">Daily Max</option>
-                            <option value="day_min">Daily Min</option>
+                            <option value="daily_max">Daily Max</option>
+                            <option value="daily_min">Daily Min</option>
+                            <option value="hourly_max">Hourly Max</option>
+                            <option value="hourly_min">Hourly Min</option>
                         </select>
                     </div>
                 </div>
@@ -142,7 +145,7 @@
     }
     function renderChart (data, index) {
 
-      var chart_select = get_value("chart_select");
+     // var chart_select = get_value("chart_select");
       var new_data = []
       
       for (let i = 0; i < data.length; i++) {
@@ -191,48 +194,62 @@
         for (var i = 0; i < json_data.length; i++) {
             var project = json_data[i];
             op = document.createElement('option');
-            op.setAttribute("value",project.gINTProjectID)
-            op.innerHTML = project.PROJ_NAME 
-            sel.appendChild(op)
+            op.setAttribute("value",project.gINTProjectID);
+            op.innerHTML = project.PROJ_NAME ;
+            sel.appendChild(op);
         }
+
+        // Add all project option
+        op = document.createElement('option');
+        op.setAttribute("value","ALL_PROJECTS");
+        op.innerHTML = "All Projects" ;
+        sel.appendChild(op);
     }
+
     function get_mondtypes() {
-        var projectid = get_value("qryProjectId");
-        var url = gint_host + '/mond/uniquetypes/project/'+ projectid;
-        httpGetAsync(url,display_mondtypes)
+        var projectid = $("#qryProjectId").val();  
+        var url = "";
+        if (projectid == "ALL_PROJECTS") { 
+            url  = gint_host + '/mond/uniquetypes';
+        } else {
+            url = gint_host + '/mond/uniquetypes/project/'+ projectid;
+        }
+        httpGetAsync(url,display_mondtypes);
     }
     function display_mondtypes(response) {
         var json_data = JSON.parse(response);
         var sel = document.getElementById("qryMondType");
-        sel.innerHTML = ""
+        sel.innerHTML = "";
         for (var i = 0; i < json_data.length; i++) {
             var type = json_data[i];
             op = document.createElement('option');
-            op.setAttribute("value",type.MOND_TYPE)
-            op.innerHTML = type.MOND_TYPE + ' (' + type.count + ')' 
-            sel.appendChild(op)
+            op.setAttribute("value",type.MOND_TYPE);
+            op.innerHTML = type.MOND_TYPE + ' (' + type.count + ')'; 
+            sel.appendChild(op);
         }
 
     }
     function get_pointsbymond() {
-        var projectid = get_value("qryProjectId");
-        var mondtype = get_value("qryMondType");
-        var url = gint_host + '/mond/uniquetypes/project/'+ projectid + '/type/' + mondtype;
+        var projectid = $("#qryProjectId").val();
+        var mondtype = $("#qryMondType").val();
+        var url = ""
 
-        // test_OktaCORS()
-        // if (!OAuth2Client_gINT.token) {
-        //    get_token (OAuth2Client_gINT)
-        // }
-        // httpGetAsync(url,display_points, OAuth2Client_gINT.token)
-        
+        if (projectid == "ALL_PROJECTS") {
+            url = gint_host + '/mond/uniquetypes/type/' + mondtype;
+        } else {
+            url = gint_host + '/mond/uniquetypes/project/'+ projectid + '/type/' + mondtype;
+        }
+
         httpGetAsync(url,display_points)
         
     }
 
     function get_points() {
-        var projectid = get_value("qryProjectId");
+        var projectid = $("#qryProjectId").val();
+        if (projectid) {
         var url = gint_host + '/point/project/' + projectid;
-
+        }
+        
         // test_OktaCORS()
         // if (!OAuth2Client_gINT.token) {
         //    get_token (OAuth2Client_gINT)
@@ -250,7 +267,7 @@
         for (var i = 0; i < json_data.length; i++) {
             var point = json_data[i];
             op = document.createElement('option');
-            op.setAttribute("value",point.PointID + ',' + point.MONG_DIS)
+            op.setAttribute("value",point.gINTProjectID + ',' + point.PointID + ',' + point.MONG_DIS)
             if (point.count) { 
                 op.innerHTML = point.PointID + '_' + point.MONG_DIS + 'm (' + point.count + ': ' + point.FromDT + '-' + point.ToDT + ')'
             } else {
@@ -276,16 +293,18 @@
     }
 
     function get_mond_results() {
-        var projectid = $("#qryProjectId").val();
         var location = $("#qryPointID_DIS").val();
         var loca = location.split(',');
-        var pointid = loca[0];
-        var dist = loca[1];    
+        var projectid = loca[0];
+        var pointid = loca[1];
+        var dist = loca[2];    
         var mond_type = $("#qryMondType").val();
         var from_dt = $("#qryFromDT").val();
         var to_dt = $("#qryToDT").val();
         var page = $("#qryPage").val();
         var size = $("#qrySize").val();
+        var interval  =$("#qryInterval").val();
+
         dateformat = 'YYYY-MM-DDTHH:m:s';
 
         var url_download = gint_host + '/mond/project/' + projectid + '/point/' + pointid + '/dist/' + dist +'/type/' + mond_type + '/download';
@@ -306,7 +325,13 @@
         if (page && size) {   
             url_download += add + 'size=' + size + '&page=' + page
             add = "&"
+        } 
+
+        if (interval) {   
+            url_download += add + 'interval=' + interval
+            add = "&"
         }  
+
         url = url_download.replace('/download','');
         
         var e = document.getElementById("url_csv");
@@ -321,7 +346,7 @@
     }
    
     function display_list (response) {
-        var show_fields = ['PointID','MOND_TYPE','ItemKey','MONG_DIS','DateTime','MOND_RDNG','MOND_REM']
+        var show_fields = ['PointID','MOND_TYPE','ItemKey','MOND_REF','MONG_DIS','DateTime','MOND_RDNG','MOND_REM']
         var json_data = JSON.parse(response);
         var thead = document.getElementById("mond_head");
         thead.innerHTML = "";
