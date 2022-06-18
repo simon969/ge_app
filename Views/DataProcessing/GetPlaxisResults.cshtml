@@ -5,32 +5,42 @@
             <div class="row">  
                 <div class="col-sm-6"> 
                     <div class="form-group">
-                        <input class="form-control" type="text" id="owner" name="owner" placeholder="...enter owner email">
+                      <input class="form-control" type="text" id="owner" name="owner" placeholder="...enter owner email">  
                     </div>
                 </div>
                 <div class="col-sm-6"> 
-                    <input class="button" type="button" value="Find" onclick="get_results()">
+                    <input class="button" type="button" value="Find" onclick="get_results()"> 
                 </div>
+                
             </div>   
         </form>
-            <div class="table-wrapper-scroll-y plaxis_list-scrollbar">
-                <table class="table table-striped" id="task_table">
-                    <thead>
-                    <tr>
-                        <th class="d-none" scope="col">Id</th>
-                        <th class="col-3" scope="col">Connection</th>
-                        <th class="col-4" scope="col">Query</th>
-                        <th class="col-1" scope="col">Created</th>
-                        <th class="col-1" scope="col">Completed</th>
-                        <th class="col-1"  scope="col">Status</th>
-                        <th class="col-1"  scope="col">Action</th>
-                    </tr>
-                    </thead>
-                <tbody id="task_body"></tbody>
-                </table>
+       <div class="row">  
+            <div class="col-sm-12"> 
+                <div class="table-wrapper-scroll-y plaxis_list-scrollbar">
+                    <table class="table table-striped" id="task_table">
+                        <thead>
+                        <tr>
+                            <th class="d-none" scope="col">Id</th>
+                            <th class="col-3" scope="col">Connection</th>
+                            <th class="col-4" scope="col">Query</th>
+                            <th class="col-1" scope="col">Created</th>
+                            <th class="col-1" scope="col">Connected</th>
+                            <th class="col-1"  scope="col">Status</th>
+                            <th class="col-1"  scope="col">Action</th>
+                        </tr>
+                        </thead>
+                    <tbody id="task_body"></tbody>
+                    </table>
+                </div>
             </div>
-        <button class="button" onclick="show_form('task_detail')"> Task Details</button>    
-        <button class="button" onclick="show_form('create_task')"> Create New Task</button>
+        </div>    
+        <div class="row">  
+            <div class="col-sm-6"> 
+                   <div class="form-group">
+                    <button class="button" onclick="show_form('create_task')"> Create New Task</button>
+                    </div>
+            </div>
+        </div>
         <form action="http://localhost:8000/PlaxisTask/" method="post" id ="plaxis_post_form" hidden >
             <div class="row">  
                 <div class="col-sm-6"> 
@@ -47,10 +57,10 @@
                         <input type="text" class="form-control" id="password" name="password" placeholder="...password">
                     </div>
                     <div class="form-group">
-                        <label for="filename">output filenames</label>
+                        <label for="filename">Output filenames structure</label>
                         <select type="text" class="form-control" id="filename"> 
                             <option value="%host_%result.csv">host_result.csv</option>
-                            <option value="%host_%radom_%result.csv">host_random_result.csv</option>
+                            <option value="%host_%random_%result.csv">host_random_result.csv</option>
                             <option value="%host_%datetime_%result.csv">host_datetime_result.csv</option>
                             <option value="%datetime_%result.csv">datetime_result.csv</option>
                             <option value="%random_%result.csv">random_result.csv</option>
@@ -85,14 +95,15 @@
                     </div>
 
             </div>
-            <input type="hidden" class="form-control" id="query" name="query" placeholder="...query">
-            <input type="hidden" class="form-control" id="conn" name="conn" placeholder="...conn">
-            <input type="submit" value="Create New">
-        <button type="button" onclick="populate_post('UKCRD1PC40002',10000,'vPQ?G?Ua3~5whK+W','Plaxis2dConnectV2','Plates EmbeddedBeams','All')">UKCRD1PC40002</button>
-        <button type="button" onclick="populate_post('UKCRDLFP0B8Y2',10000,'5g^zi8kaH5sS2fW4','Plaxis3dConnect','Plates EmbeddedBeams','Phase_51')">UKCRDLFP0B8Y2 Plaxis3d</button>
-        <button type="button" onclick="populate_post('UKCRDLFP0B8Y2',10001,'LFgQ=CC1ZAVCuRmx','Plaxis2dConnect','Plates,EmbeddedBeams,Interfaces,FixedEndAnchors,NodeToNodeAnchors','Phase_19')">UKCRDLFP0B8Y2 Plaxis2d</button>
-        </form> 
-           <form id ="plaxis_get_form" >
+        <button type="button" class="button" onclick="post_results()"> Post New Task</button>
+        @* <input type="submit" value="Post New">
+           <button type="button" onclick="populate_post('UKCRD1PC40002',10000,'vPQ?G?Ua3~5whK+W','Plaxis2dConnectV2','Plates EmbeddedBeams','All')">UKCRD1PC40002</button>
+           <button type="button" onclick="populate_post('UKCRDLFP0B8Y2',10000,'5g^zi8kaH5sS2fW4','Plaxis3dConnect','Plates EmbeddedBeams','Phase_51')">UKCRDLFP0B8Y2 Plaxis3d</button>
+           <button type="button" onclick="populate_post('UKCRDLFP0B8Y2',10001,'LFgQ=CC1ZAVCuRmx','Plaxis2dConnect','Plates,EmbeddedBeams,Interfaces,FixedEndAnchors,NodeToNodeAnchors','Phase_19')">UKCRDLFP0B8Y2 Plaxis2d</button>
+       *@ 
+       </form> 
+      
+        <form id ="plaxis_get_form" >
             <div class="form-group">
                 <label for="response">Task Response</label>
                 <textarea class="form-control" readonly id="response" rows="4"></textarea>
@@ -111,10 +122,6 @@
                         <label for="query">Query</label>
                         <input class="form-control" readonly type="text" id="query">
                     </div>
-                    <div class="form-group">
-                        <label for="files">Files</label>
-                        <input class="form-control" readonly type="text" id="files">
-                    </div>
                 </div>
                 <div class="col-sm-6"> 
                     <div class="form-group">
@@ -125,14 +132,10 @@
                         <label for="completedDT">Completed Datetime</label>
                         <input class="form-control" readonly type="text" id="completedDT">
                     </div> 
-                    <div class="form-group">
-                        <label for="owner">Owner</label>
-                        <input class="form-control" readonly type="text" id="owner">
-                    </div> 
-                    <div class="form-group">
-                        <label for="result">Results</label>
-                        <input class="form-control" readonly type="text" id="result">
-                    </div> 
+                     <div class="form-group">
+                        <label for="files">Files</label>
+                        <input class="form-control" readonly type="text" id="files">
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -142,13 +145,17 @@
             <div class="form-group">
                 <label for="download_list">Download Files</label>
                 <ul class="list-group" id="download_list"></ul>  
-            <button class="button" type="button" onclick="get_result()">Refresh Status</button>       
-            </form>
+            </div>
+        </form>
     </div>
    
     <script type="text/javascript">
     
     function update_JSONfields() {
+        if ($("#phases").val() == '') $("#phases").val('All');
+        if ($("#results").val() == '') {
+            $("#results").val(['Plates','EmbeddedBeams','Interfaces','FixedEndAnchors','NodeToNodeAnchors']);
+        }
         var qry = "{'version':'" + $("#version").val() + "','phases':'" + $("#phases").val() + "','results':'" + $("#results").val() + "','filename':'" + $("#filename").val() + "'}";
         $("#query").val(qry);
         var con = "{'host':'"+ $("#host").val() + "','port':" + $("#port").val() + ",'password':'" + $("#password").val() + "'}";
@@ -226,9 +233,25 @@
         show_form('task_detail');
         httpPostAsync(url, content, display_detail);
     }
+    
+    function display_detail_get_results(resp) {
+        
+        display_detail(resp);
 
-    function display_list (response) {
-        var json_data = JSON.parse(response);
+        var json_data = JSON.parse(resp);
+        var id = json_data.id;
+        
+        if (id!=null) { 
+            var owner = $("#owner").val();
+            if (owner !=null) {
+            var url = py_host + '/PlaxisTask/?owner=' + owner;
+            httpGetAsync(url,display_list);
+            }
+        }
+    }
+    
+    function display_list (resp) {
+        var json_data = JSON.parse(resp);
         var tbd = document.getElementById("task_body");
         tbd.innerText='';
         tbd.innerHTML='';
@@ -259,14 +282,18 @@
                 td.innerHTML = task.createdDT;
             tr.appendChild(td);
             td = document.createElement('td');
-                td.innerHTML = task.completedDT;
+                td.innerHTML = task.is_connected
             tr.appendChild(td);
             td = document.createElement('td');
-            td.setAttribute("style","word-wrap: break-word;min-width: 160px;max-width: 160px;")
-                td.innerHTML = task.files;
-            tr.appendChild(td);
-            td = document.createElement('td');
-                td.innerHTML = task.results;
+                if (task.completedDT) {
+                    td.innerHTML = "SUCCESS";
+                } 
+                if (!task.completedDT && task.is_connected == true) {
+                    td.innerHTML = "PROCESSING";
+                }
+                if (!task.completedDT && task.is_connected == false) {
+                    td.innerHTML = "FAIL";
+                }
             tr.appendChild(td);
             td = document.createElement('td');
                 det_btn = document.createElement ('button');
@@ -310,7 +337,8 @@
             $("#query").val(resp.query);
             $("#createdDT").val(resp.createdDT);
             $("#completedDT").val(resp.completedDT);
-            $("#progress").val(resp.progress);
+
+            $("#progress").val(resp.progress.replace(new RegExp('/r/n', 'g'),'\r\n'));
             $("#files").val(resp.files);
             $("#result").val(resp.result);
             var lst =  document.getElementById("download_list"); 
